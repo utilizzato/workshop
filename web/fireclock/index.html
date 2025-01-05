@@ -1,0 +1,85 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MZYLFBCEWB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-MZYLFBCEWB');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fire clock</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body onload = "onload_func()">
+    <button id="night-mode-toggle">☽☀</button>
+
+    <div class="container">
+        <h1 id="ttt"></h1>
+        
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="segment" id="days-passed-segment">
+                    <span class="percentage" id="percentage-days-passed"></span>
+                </div>
+                <div class="segment" id="weekends-and-holidays-segment">
+                    <span class="percentage" id="percentage-weekends-and-holidays"></span>
+                </div>
+                <div class="segment" id="pto-and-sick-segment">
+                    <span class="percentage" id="percentage-pto-and-sick"></span>
+                </div>
+                <div class="segment" id="wfh-segment">
+                    <span class="percentage" id="percentage-wfh"></span>
+                </div>
+                <div class="segment" id="office-segment">
+                    <span class="percentage" id="percentage-office"></span>
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="stats">
+            <div class="days-passed"><span id="days-passed"></span> <br></div>
+            <div class="weekends-and-holidays"><span id="weekends-and-holidays"></span> <br></div>
+            <div class="pto-and-sick"><span id="pto-and-sick"></span> <br></div>
+            <div class="wfh"><span id="wfh"></span> <br></div>
+            <div class="office"><span id="office"></span> </div>
+        </div>
+        <br>
+
+        <form id="input-form">
+            <label for="start-date">start date</label>
+            <input type="date" id="start-date" name="start-date" value="" oninput="calc()">
+            
+            <label for="current-date">current date</label>
+            <input type="date" id="current-date" name="current-date" value="" oninput="calc()">
+            
+            <label for="end-date">end date</label>
+            <input type="date" id="end-date" name="end-date" value="" oninput="calc()">
+            
+            <label for="pto-per-year">pto per year</label>
+            <input type="number" id="pto-per-year" name="pto-per-year" value="" oninput="calc()">
+            
+            <label for="holiday-per-year">holidays per year</label>
+            <input type="number" id="holiday-per-year" name="holiday-per-year" value="" oninput="calc()">
+
+            <label for="sick-per-year">sick days per year</label>
+            <input type="number" id="sick-per-year" name="sick-per-year" value="" oninput="calc()">
+
+            <label for="wfh-per-week">work from home days per week</label>
+            <input type="number" id="wfh-per-week" name="wfh-per-week" value="" oninput="calc()">
+        </form>
+
+    </div>
+    <button id="save-parameters">save parameters in browser cache</button>
+    <script src="script.js"></script>
+</body>
+</html>
