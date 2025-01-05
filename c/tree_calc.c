@@ -202,7 +202,7 @@ bool tree_truth_value(byte* tree_p)
     return ret;
 }
 
-int main()
+int tree_calc_main()
 {
     // creating basic trees
     byte* L = tree_create_leaf();

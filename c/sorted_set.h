@@ -47,3 +47,13 @@ void walk_in_order(struct sorted_set_s* sorted_set_p, void (*fnc)(byte*));
 void walk_in_reverse(struct sorted_set_s* sorted_set_p, void (*fnc)(byte*));
 
 void sorted_set_test(void);
+
+static bool is_match_u64(byte* a, byte* b)
+{
+    return *((u64*) a) == *((u64*) b);
+}
+
+static bool is_less_u64(byte* a, byte* b)
+{
+    return *((u64*) a) < *((u64*) b);
+}
