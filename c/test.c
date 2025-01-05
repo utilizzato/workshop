@@ -3,6 +3,7 @@
 #include "sudoku_solver.h"
 #include "sorted_set.h"
 #include "queue.h"
+#include "balancer.h"
 
 int main()
 {
@@ -11,5 +12,6 @@ int main()
     sudoku_test();
     sorted_set_test();
     queue_test();
+    balancer_test();
     return 0;
 }

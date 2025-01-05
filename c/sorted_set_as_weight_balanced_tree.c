@@ -380,16 +380,6 @@ void walk_in_reverse(struct sorted_set_s* sorted_set_p, void (*fnc)(byte*))
 
 // ******* 3) test *******
 
-static bool is_match_u64(byte* a, byte* b)
-{
-    return *((u64*) a) == *((u64*) b);
-}
-
-static bool is_less_u64(byte* a, byte* b)
-{
-    return *((u64*) a) < *((u64*) b);
-}
-
 static void pre_order_u64_helper(struct binary_node_struct* node_p, struct stack_s* elm_stack_p, struct stack_s* tree_size_stack_p)
 {
     if(node_p == NIL)

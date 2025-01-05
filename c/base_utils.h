@@ -9,6 +9,7 @@
 
 typedef uint64_t u64;
 typedef uint32_t u32;
+typedef int64_t i64;
 
 // a byte pointer could point to any generic/unknown data type
 typedef uint8_t byte;
