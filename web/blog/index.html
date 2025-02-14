@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Blog Example</title>
+    
+    <!-- MathJax Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+
+    <!-- External CSS for styling -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        article {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        article h2 {
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        article p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .math-equation {
+            background-color: #fafafa;
+            padding: 15px;
+            border-left: 5px solid #333;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            article h2 {
+                font-size: 2rem;
+            }
+
+            article p {
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Zilch</h1>
+        <!--<p>Where Math Meets the Web</p>-->
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <article>
+            <h2>Stochastic Dodgeball</h2>
+            Joint with Haran Pilpel. <br><br>
+
+            We consider the following stochastic model for the game of dodgeball, raised by Yoav Katz and Reem Waxman: <br><br>
+            
+            <b>Game description.</b> There are \( n \) players, initally all <em>free</em>. 
+            The game ends when only one free player remains. 
+            Untill then, at each turn, two free players \( A \) and \( B \) are chosen at random 
+            and \( A \) <em>captures</em> \( B\), leading to all of \( B \)'s captives to become free (and rejoin the game). <br><br>
+            
+            We are interested in the game's expected number of turns.
+            By disregarding the identities of the players, we may represent a state of the game simply as a partition of \( n \). 
+            Namely, if there are \( \ell \) free players, then the partition has \( \ell \) parts of sizes corresponding to the number of captives each free player holds (plus one to account for the free player). 
+            To get a feeling for the game, the reader is instructed to determine the Markov chain representing the game for \( n= 4\), where there are only five states. <br><br>
+
+            <b>Theorem.</b> For \( \lambda = (\lambda_1,\dots) \)  a partition of \( n\) representing a starting state of the game, the expected number of turns for the game to end equals 
+            \( 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \).
+            In particular, for the starting state where all the \( n\)  players are free, the game's expected lifetime is \( 2^{n-1}-1\)  turns. <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Let \( E(\lambda) \) denote the expected number of turns for the game to end, and \( F(\lambda) = 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \).
+            
+            As long as \(\lambda\)  is not the terminal state \((n)\), suppose
+            two free players \(a,b\)  are chosen, and let \(\lambda^{ab}\)  and \(\lambda^{ba}\)
+            be the new states depending on whether \(a\)  captures \(b\)  or \(b\)
+            captures \(a\). 
+            
+            Then we have \(\dfrac{F(\lambda^{ab})+F(\lambda^{ba})}{2}=F(\lambda)-1\).
+            In particular, if \(\lambda'\)  represents the (random) state following
+            \(\lambda\), then \(\mathbf{E}F(\lambda')=F(\lambda)-1\). 
+            The only functions satisfying this condition are those of the form \(F(\lambda)=E(\lambda)+c\),
+            where \(c\)  is some constant.
+            But \(F(\lambda)\)  and \(E(\lambda)\)  both vanish on the terminal state \((n)\),
+            and so \(F(\lambda)=E(\lambda)\)  as claimed. 
+            <br><br>
+
+            The proof shows, in fact, that the distribution with
+            which we choose the pair \(\{A,B\}\) of free players to compete for
+            each turn has no influence on the expected number of turns for the
+            game to end (even though it completely changes the Markov chain describing the game), 
+            as long as the odds of \(A\) capturing \(B\) and those
+            of \(B\) capturing \(A\) are the same. 
+            </details> 
+
+            
+            
+        </article>
+
+        <!--
+        <article>
+            <h2>Integral of Gaussian Function</h2>
+            <p>The Gaussian function appears frequently in statistics and physics. Here's an integral that involves it:</p>
+            <div class="math-equation">
+                \[
+                \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+                \]
+            </div>
+            <p>This is a key result in probability theory, and it shows up in various areas of mathematics and physics.</p>
+        </article>
+    -->
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <!--<p>&copy; 2025 <a href="#">My LaTeX Blog</a> | All rights reserved.</p>-->
+    </footer>
+
+</body>
+</html>
