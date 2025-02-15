@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="../OIG1.jfif" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaTeX Blog Example</title>
+    <title>Zilch</title>
     
     <!-- MathJax Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
@@ -95,6 +96,23 @@
             }
         }
 
+        a {
+            color: #1E90FF; /* Blue link color */
+            text-decoration: none; /* Optional: removes underline */
+        }
+
+        a:visited {
+            color: #1E90FF; /* Ensure visited links remain blue */
+        }
+
+        a:hover {
+            color: #1E90FF; /* Optional: keeps blue color on hover */
+        }
+
+        a:active {
+            color: #1E90FF; /* Optional: keeps blue color when clicked */
+        }
+
     </style>
 </head>
 <body>
@@ -102,7 +120,7 @@
     <!-- Header Section -->
     <header>
         <h1>Zilch</h1>
-        <!--<p>Where Math Meets the Web</p>-->
+        <!--<p>sub</p>-->
     </header>
 
     <!-- Main Content Section -->
@@ -152,9 +170,53 @@
             as long as the odds of \(A\) capturing \(B\) and those
             of \(B\) capturing \(A\) are the same. 
             </details> 
+        </article>
 
+
+
+
+        <article>
+            <h2>Swapping Labels on a Tree</h2>
+            Joint with Nadav Trumer. <br><br>
+
+            The first problem on the second day of Iran's 2014 team selection test for the international mathematical olympiad <a href="https://artofproblemsolving.com/community/c6h619482p3697731">read</a>: <br><br>
+
+            <b>Problem.</b> Consider a tree with \(n\) vertices labeled \(1,\dots,n\). 
+            By <em>acting</em> on an edge we mean swapping the labels of its endpoints.
+            By acting once on each edge, in some order of the edges, 
+            we create a permutation of the labels. Show that this permutation is a full \(n\) cycle. <br><br>
+
+
+            <details>
+            <summary><b>Solution.</b></summary> By induction on the tree, for example by considering the last edge acted upon.
+            </details> <br>
+
+            We are interested in the number of possible permutations achievable through the above process.
+            To get a feeling for the problem, the reader is instructed to work out the cases of a star and some small paths. <br><br>
             
-            
+            <b>Theorem.</b> Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). For each enumeration of the \(n-1\) edges of \(T\), we form a permutation of \(1,\dots,n\) by sequentially swapping the labels of the endpoints of each edge. The number of distinct permutations thus formed is equal to \(\prod_v d_v!\), where \(d_v\) is the degree of vertex \(v\) in \(T\). <br><br>
+
+            <details>
+                <summary><b>Proof.</b></summary> 
+                Suppose that for each vertex \(v\), we are supplied with the order by which we acted on the \(d_v\) edges meeting \(v\). Then we may construct the output permutation as follows: for each vertex \(v_1\), let \(v_1v_2\) be the first edge meeting \(v_1\) on which we acted, let \(v_2v_3\) be the first edge meeting \(v_2\) on which we acted after acting on \(v_1v_2\), and so on, until \(v_{r-1}v_{r}\) was the last edge meeting \(v_{r}\) on which we acted. Then \(v_1\) is mapped to \(v_r\) by the permutation, and since \(v_1\) was generic we may indeed construct the output permutation. On the other hand, suppose that we are supplied with the output permutation (for some enumeration of the edges). Then we may determine, for each vertex \(v\), the order by which we acted on the \(d_v\) edges meeting \(v\). To see this, let \(r=d_v\), let \(e_1,\dots,e_r\) be the edges meeting \(v\) by the ordering in which we act on them, let \(T_1,\dots,T_r\) be the trees of \(T-v\), and \(e_i=vw_i\) with \(w_i\in T_i\). Then \(v\) is mapped by the permutation inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps to \(T_2\), all of \(T_2\)'s vertices are kept inside \(T_2\), except for one which maps to \(T_3\) and so on, until lastly all of \(T_r\)'s vertices are kept inside \(T_r\), except for one which maps to \(v\). So, the order \(e_1,\dots,e_r\) may indeed be determined by the output permutation. It follows from the above bijection that the number of feasible outcome permutations is equal to \(\prod_v d_v!\) as claimed.
+
+            </details> <br>
+    
+            In fact, we have a criterion for feasibility of a permutation. <br><br>
+
+
+            <b>Theorem.</b> 
+            Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). Then a permutation of \(\{1,\dots,n\}\) is feasible (namely can be formed by swapping the labels of the endpoints of each edge of \(T\) in some order) if, and only if, for each vertex \(v\) there is an enumeration \(T_1,\dots,T_r\) of the trees of \(T-v\) (for \(r=d_v\)) such that \(v\) is mapped inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps to \(T_2\), and so on, until lastly all of \(T_r\)'s vertices are kept inside \(T_r\) except for one which maps to \(v\).
+            <br><br>
+
+
+            <details>
+                <summary><b>Proof.</b></summary> 
+                As noted above, necessity follows by considering the order by which we acted on the edges meeting \(v\). For sufficiency, let \(\pi\) be a permutation which satisfies the above property. For each vertex \(v\), we consider the first edge in the path from \(v\) to \(\pi(v)\). By the pigeonhole principle, we have an edge \(vw\) specified by both \(v\) and \(w\). Finding such an edge, we swap it first. We see that for the two trees formed by removing this edge, the relabeling that remains to perform on each of them also satisfies the above property, and so by recursion we may continue and  construct a sequence of edge swaps forming \(\pi\).
+
+            </details> <br>
+
+
         </article>
 
         <!--
