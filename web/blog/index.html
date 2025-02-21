@@ -12,7 +12,7 @@
     <!-- External CSS for styling -->
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Georgia, serif;
             line-height: 1.6;
             background-color: #f4f4f4;
             margin: 0;
@@ -113,6 +113,8 @@
             color: #1E90FF; /* Optional: keeps blue color when clicked */
         }
 
+        .qed{float: right; display: inline;}
+
     </style>
 </head>
 <body>
@@ -160,7 +162,7 @@
             The only functions satisfying this condition are those of the form \(F(\lambda)=E(\lambda)+c\),
             where \(c\)  is some constant.
             But \(F(\lambda)\)  and \(E(\lambda)\)  both vanish on the terminal state \((n)\),
-            and so \(F(\lambda)=E(\lambda)\)  as claimed. 
+            and so \(F(\lambda)=E(\lambda)\)  as claimed. <div class="qed">◼</div>
             <br><br>
 
             The proof shows, in fact, that the distribution with
@@ -169,7 +171,7 @@
             game to end (even though it completely changes the Markov chain describing the game), 
             as long as the odds of \(A\) capturing \(B\) and those
             of \(B\) capturing \(A\) are the same. 
-            </details> 
+            </details> <br>
         </article>
 
 
@@ -198,8 +200,17 @@
 
             <details>
                 <summary><b>Proof.</b></summary> 
-                Suppose that for each vertex \(v\), we are supplied with the order by which we acted on the \(d_v\) edges meeting \(v\). Then we may construct the output permutation as follows: for each vertex \(v_1\), let \(v_1v_2\) be the first edge meeting \(v_1\) on which we acted, let \(v_2v_3\) be the first edge meeting \(v_2\) on which we acted after acting on \(v_1v_2\), and so on, until \(v_{r-1}v_{r}\) was the last edge meeting \(v_{r}\) on which we acted. Then \(v_1\) is mapped to \(v_r\) by the permutation, and since \(v_1\) was generic we may indeed construct the output permutation. On the other hand, suppose that we are supplied with the output permutation (for some enumeration of the edges). Then we may determine, for each vertex \(v\), the order by which we acted on the \(d_v\) edges meeting \(v\). To see this, let \(r=d_v\), let \(e_1,\dots,e_r\) be the edges meeting \(v\) by the ordering in which we act on them, let \(T_1,\dots,T_r\) be the trees of \(T-v\), and \(e_i=vw_i\) with \(w_i\in T_i\). Then \(v\) is mapped by the permutation inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps to \(T_2\), all of \(T_2\)'s vertices are kept inside \(T_2\), except for one which maps to \(T_3\) and so on, until lastly all of \(T_r\)'s vertices are kept inside \(T_r\), except for one which maps to \(v\). So, the order \(e_1,\dots,e_r\) may indeed be determined by the output permutation. It follows from the above bijection that the number of feasible outcome permutations is equal to \(\prod_v d_v!\) as claimed.
-
+                Suppose that for each vertex \(v\), we are supplied with the order by which we acted on the \(d_v\) edges meeting \(v\).
+                Then we may construct the output permutation as follows: for each vertex \(v_1\), let \(v_1v_2\) be the first edge meeting \(v_1\) on which we acted, 
+                let \(v_2v_3\) be the first edge meeting \(v_2\) on which we acted after acting on \(v_1v_2\), and so on, until \(v_{r-1}v_{r}\) was the last edge 
+                meeting \(v_{r}\) on which we acted. Then \(v_1\) is mapped to \(v_r\) by the permutation, and since \(v_1\) was generic we may indeed construct the 
+                output permutation. On the other hand, suppose that we are supplied with the output permutation (for some enumeration of the edges). Then we may determine, 
+                for each vertex \(v\), the order by which we acted on the \(d_v\) edges meeting \(v\). To see this, let \(r=d_v\), let \(e_1,\dots,e_r\) be the edges 
+                meeting \(v\) by the ordering in which we act on them, let \(T_1,\dots,T_r\) be the trees of \(T-v\), and \(e_i=vw_i\) with \(w_i\in T_i\). Then \(v\) is 
+                mapped by the permutation inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps to \(T_2\), all of \(T_2\)'s vertices 
+                are kept inside \(T_2\), except for one which maps to \(T_3\) and so on, until lastly all of \(T_r\)'s vertices are kept inside \(T_r\), except for one which 
+                maps to \(v\). So, the order \(e_1,\dots,e_r\) may indeed be determined by the output permutation. 
+                It follows from the above bijection that the number of feasible outcome permutations is equal to \(\prod_v d_v!\) as claimed. <div class="qed">◼</div>
             </details> <br>
     
             In fact, we have a criterion for feasibility of a permutation. <br><br>
@@ -212,13 +223,20 @@
 
             <details>
                 <summary><b>Proof.</b></summary> 
-                As noted above, necessity follows by considering the order by which we acted on the edges meeting \(v\). For sufficiency, let \(\pi\) be a permutation which satisfies the above property. For each vertex \(v\), we consider the first edge in the path from \(v\) to \(\pi(v)\). By the pigeonhole principle, we have an edge \(vw\) specified by both \(v\) and \(w\). Finding such an edge, we swap it first. We see that for the two trees formed by removing this edge, the relabeling that remains to perform on each of them also satisfies the above property, and so by recursion we may continue and  construct a sequence of edge swaps forming \(\pi\).
-
+                As noted above, necessity follows by considering the order by which we acted on the edges 
+                meeting \(v\). For sufficiency, let \(\pi\) be a permutation which satisfies the above property. 
+                For each vertex \(v\), we consider the first edge in the path from \(v\) to \(\pi(v)\). By the pigeonhole 
+                principle, we have an edge \(vw\) specified by both \(v\) and \(w\). Finding such an edge, we swap it first. 
+                We see that for the two trees formed by removing this edge, the relabeling that remains to perform on each of 
+                them also satisfies the above property, and so by recursion we may continue and  construct a sequence of edge 
+                swaps forming \(\pi\). <div class="qed">◼</div>
             </details> <br>
 
 
         </article>
 
+
+        
         <!--
         <article>
             <h2>Integral of Gaussian Function</h2>
