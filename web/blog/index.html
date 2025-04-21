@@ -137,14 +137,14 @@
         
             <details>
                 <summary><b>Proof.</b></summary>
-                We fix a pair of points \(p, q\) distanced \(d\) apart, 
+                We fix a pair of points \(p, q\) distanced \(\gamma\) apart, 
                 and average \(f\) on balls of radius \(r\) around each of them. 
                 As \(r\) tends to infinity, the symmetric difference of the balls becomes negligble. <br><br>
 
                 \( \lvert f(p)-f(q) \rvert = \)
                 \( \dfrac{\lvert \int_{B_r(p)} f - \int_{B_r(q)} f\rvert}{\text{vol}(B_r)} \le \)
                 \( \dfrac{2\lVert f\rVert_\infty \text{vol}(B_r(p)\setminus B_r(q))}{\text{vol}(B_r)} \le \)
-                \( \dfrac{2\lVert f\rVert_\infty \text{vol}(B_r(p)\setminus B_{r-d}(p))}{\text{vol}(B_r)} = \)
+                \( \dfrac{2\lVert f\rVert_\infty \text{vol}(B_r(p)\setminus B_{r-\gamma}(p))}{\text{vol}(B_r)} = \)
                 \( O(r^{-1}) \) as \(r\uparrow \infty \).
                 <div class="qed">◼</div>
                 </details> <br>
