@@ -2,262 +2,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Zilch</title>
     <link rel="icon" href="../OIG1.jfif" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zilch</title>
-    
+
     <!-- MathJax Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
 
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- External CSS for styling -->
-    <style>
-        body {
-            font-family: 'STIX Two Text', serif;
-            line-height: 1.8;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 12px 0;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 3rem;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        article {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        article h2 {
-            font-size: 2.5rem;
-            color: #333;
-        }
-
-        article p {
-            font-size: 1.2rem;
-            color: #555;
-        }
-
-        .math-equation {
-            background-color: #fafafa;
-            padding: 15px;
-            border-left: 5px solid #333;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 1.3rem;
-            color: #333;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #333;
-            color: white;
-        }
-
-        footer a {
-            color: #ffd700;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-
-            article h2 {
-                font-size: 2rem;
-            }
-
-            article p {
-                font-size: 1rem;
-            }
-        }
-
-        a {
-            color: #1E90FF; /* Blue link color */
-            text-decoration: none; /* Optional: removes underline */
-        }
-
-        a:visited {
-            color: #1E90FF; /* Ensure visited links remain blue */
-        }
-
-        a:hover {
-            color: #1E90FF; /* Optional: keeps blue color on hover */
-        }
-
-        a:active {
-            color: #1E90FF; /* Optional: keeps blue color when clicked */
-        }
-
-        .qed{float: right; display: inline;}
-
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <!-- Header Section -->
     <header>
         <h1>Zilch</h1>
-        <!--<p>sub</p>-->
     </header>
 
     <!-- Main Content Section -->
     <div class="container">
 
+
         <article>
             <h2>Bounded Harmonic Functions</h2>
-            <b>Theorem.</b> Let \( f:\mathbf{R}^d\to \mathbf{R}\) be a bounded harmonic function. Then \( f\) is constant. <br><br>
+            <b>Theorem.</b> Let \( f:\mathbf{R}^d\to \mathbf{R}\) be a bounded harmonic function. 
+            Then \( f\) is constant. <br><br>
         
             <details>
-                <summary><b>Proof.</b></summary>
-                We fix a pair of points \(p, q\) distanced \(\gamma\) apart, 
-                and average \(f\) on balls of radius \(r\) around each of them. 
-                As \(r\) tends to infinity, the symmetric difference of the balls becomes negligble. <br><br>
+            <summary><b>Proof.</b></summary>
+            We fix a pair of points \(p, q\) distanced \(\gamma\) apart, and average \(f\) on 
+            balls of radius \(r\) around each of them. As \(r\) tends to infinity, the symmetric 
+            difference of the balls becomes negligble. <br><br>
 
-                \( \lvert f(p)-f(q) \rvert = \)
-                \( \dfrac{\lvert \int_{B_r(p)} f - \int_{B_r(q)} f\rvert}{\text{vol}(B_r)} \le \)
-                \( \dfrac{2\lVert f\rVert_\infty \text{vol}(B_r(p)\setminus B_r(q))}{\text{vol}(B_r)} \le \)
-                \( \dfrac{2\lVert f\rVert_\infty \text{vol}(B_r(p)\setminus B_{r-\gamma}(p))}{\text{vol}(B_r)} = \)
-                \( O(r^{-1}) \) as \(r\uparrow \infty \).
-                <div class="qed">◼</div>
-                </details> <br>
+            \( \lvert f(p)-f(q) \rvert = \)
+            \( \dfrac{\lvert \int_{B_r(p)} f - \int_{B_r(q)} f\rvert}{\text{vol}(B_r)} \le \)
+            \( \dfrac{2\lVert f\rVert_\infty \text{vol}(B_r(p)\setminus B_r(q))}{\text{vol}(B_r)} \le \)
+            \( \dfrac{2\lVert f\rVert_\infty \text{vol}(B_r(p)\setminus B_{r-\gamma}(p))}{\text{vol}(B_r)} = \)
+            \( O(r^{-1}) \) as \(r\uparrow \infty \).
+            <div class="qed">◼</div>
+            </details> <br>
 
-                <b>Theorem.</b> Let \( f:\mathbf{Z}^d\to \mathbf{R}\) be a bounded harmonic function. Then \( f\) is constant. <br><br>
-        
-                <details>
-                <summary><b>Proof 1.</b></summary>
-                Suppose for the sake of contradiction that \(f(0) \lt f(e_1) \), and set \( g(x) = f(x+e_1) - f(x) \). Then \( g \) is also bounded and harmonic, 
-                and \( S:=\sup g \gt 0\). For given \( \varepsilon \), fix \( x_\varepsilon \) with \( g(x_\varepsilon) \ge S-\varepsilon \). 
-                Then any neighbour of \( x_\varepsilon \) has value at least \( S-2d\varepsilon\) under \( g \). 
-                More generally, if \( y\) has distance \( k\) from \( x_\varepsilon \) then \( g(y)\ge S-(2d)^k\varepsilon \).
-                Thus \( f(x_\varepsilon + ke_1) - f(x_\varepsilon) = g(x_\varepsilon) + g(x_\varepsilon + e_1) +\dots+ g(x_\varepsilon + (k-1)e_1) \ge kS - k(2d)^k\varepsilon \) 
-                can be made arbitrarily large by appropriatly specifing \( k \) and \( \varepsilon \), a contradiction.
-                <div class="qed">◼</div>
-                </details> <br>
-
-                <details>
-                <summary><b>Proof 2.</b></summary>
-                    Fix \( p,q\in\mathbf{Z}^{d} \). 
-                    Consider the lazy symmetric random walks \( X_{n},Y_{n} \) in \( \mathbf{Z}^{d} \) 
-                    starting respectively at \( p,q \), and evolving as follows. 
-                    Each time we draw a random step \( s=\pm e_{i} \). If \( X_{n},Y_{n}\) agree in the \(i\)-th 
-                    coordinate, let them both take the step \(s\), or both stay in place, with equal probability \(\frac{1}{2}\). 
-                    If not, pick one of them randomly to take the step \(s\), and the other to stay in place. 
-                    Since \(\mathbf{Z}\) is recurrent, we have \(\lim_{n}\Pr(X_{n}=Y_{n})=1\). Thus 
-                    \(\lvert f(p)-f(q)\rvert = \)
-                    \(\lvert f(X_{0})-f(Y_{0})\rvert=\)
-                    \(\lvert \mathbf{E} f(X_{n})-f(Y_{n})\rvert \le\)
-                    \(\mathbf{E}\lvert f(X_{n})-f(Y_{n})\rvert \le\)
-                    \(2\lVert f\rVert_{\infty}\Pr(X_{n}\neq Y_{n})\to0\) as desired.
-                    Alternatively, using martingale theory we have \( f(p)=\mathbf{E} f(X_{T})=\mathbf{E} f(Y_{T})=f(q) \).
-                <div class="qed">◼</div>
-                </details> <br> 
-
-                <details>
-                <summary><b>Proof 3.</b></summary>
-                    Let \(S_{1},S_{2},S_{3},\dots\) be i.i.d random steps. 
-                    Set \(X_{n}=f(S_{1}+\dots+S_{n})-f(S_{1}+\dots+S_{n-1})\) 
-                    and \(Y_{n}=f(S_{1}+\dots+S_{n})-f(S_{2}+\dots+S_{n})\). 
-                    Then \(\mathbf{E} X_{i}X_{j}=0\) for \(i\neq j\), and 
-                    \(X_{n}, Y_{n}\) have the same distribution, and so 
-                    \(\mathbf{E}(f(S_{1}+\dots+S_{n})-f(0))^{2}=\)
-                    \(\mathbf{E}(X_{1}+\dots+X_{n})^{2}=\)
-                    \(\mathbf{E} X_{1}^{2}+\dots+X_{n}^{2}=\)
-                    \(\mathbf{E} Y_{1}^{2}+\dots+Y_{n}^{2}\). 
-                    On the other hand, 
-                    \(\mathbf{E} Y_{n-1}(Y_{n}-Y_{n-1})=0\)
-                    \(\implies\mathbf{E} Y_{n}^{2}=\mathbf{E} Y_{n-1}^{2}+\mathbf{E}(Y_{n}-Y_{n-1})^{2}\)
-                    \(\implies\mathbf{E} Y_{n}^{2}\) is increasing so 
-                    \(4\lVert f\rVert_{\infty}^{2}\ge\)
-                    \(\mathbf{E}(f(S_{1}+\dots+S_{n})-f(0))^{2}\ge\)
-                    \(n\mathbf{E} Y_{1}^{2}\) for all \(n\) 
-                    \(\implies Y_{1}\equiv 0\) is constant \(\implies f\) is constant (around \(0\)).
-                <div class="qed">◼</div>
-                </details> <br> 
+            <b>Theorem.</b> Let \( f:\mathbf{Z}^d\to \mathbf{R}\) be a bounded harmonic function. 
+            Then \( f\) is constant. <br><br>
     
-                
+            <details>
+            <summary><b>Proof 1.</b></summary>
+            Suppose for the sake of contradiction that \( f(0) \lt f(e_1) \), and set 
+            \( g(x) = f(x+e_1) - f(x) \). Then \( g \) is also bounded and harmonic, and 
+            \( S:=\sup g \gt 0\). For given \( \varepsilon \), fix \( x_\varepsilon \) with 
+            \( g(x_\varepsilon) \ge S-\varepsilon \). 
+            Then any neighbour of \( x_\varepsilon \) has value at least \( S-2d\varepsilon\) 
+            under \( g \). More generally, if \( y\) has distance \( k\) from \( x_\varepsilon \) 
+            then \( g(y)\ge S-(2d)^k\varepsilon \). Thus 
+            \( f(x_\varepsilon + ke_1) - f(x_\varepsilon) = \)
+            \( g(x_\varepsilon) + g(x_\varepsilon + e_1) +\dots+ g(x_\varepsilon + (k-1)e_1) \ge \)
+            \( kS - k(2d)^k\varepsilon \) 
+            can be made arbitrarily large by appropriatly specifing \( k \) and \( \varepsilon \), 
+            a contradiction.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <details>
+            <summary><b>Proof 2.</b></summary>
+            Fix \( p,q\in\mathbf{Z}^{d} \). 
+            Consider the lazy symmetric random walks \( X_{n},Y_{n} \) in \( \mathbf{Z}^{d} \) 
+            starting respectively at \( p,q \), and evolving as follows. Each time we draw a 
+            random step \( s=\pm e_{i} \). If \( X_{n},Y_{n}\) agree in the \(i\)-th coordinate, 
+            we draw a coin to decide if whether both walks take the step \(s\), or both stay in 
+            place. If \( X_{n},Y_{n}\) disagree in the \(i\)-th coordinate, we draw a coin to 
+            decide which of the walks takes the step \(s\), with the other staying in place. Since 
+            \(\mathbf{Z}\) is recurrent, we have \(\lim_{n}\Pr(X_{n}=Y_{n})=1\). Thus 
+            \(\lvert f(p)-f(q)\rvert = \)
+            \(\lvert \mathbf{E} f(X_{n})-f(Y_{n})\rvert \le\)
+            \(\mathbf{E}\lvert f(X_{n})-f(Y_{n})\rvert \le\)
+            \(2\lVert f\rVert_{\infty}\Pr(X_{n}\neq Y_{n})\to0\) as desired.
+            Alternatively, using martingale theory we have 
+            \( f(p)=\mathbf{E} f(X_{T})=\mathbf{E} f(Y_{T})=f(q) \).
+            <div class="qed">◼</div>
+            </details> <br> 
+
+            <details>
+            <summary><b>Proof 3.</b></summary>
+            Let \(S_{1},S_{2},S_{3},\dots\) be i.i.d random steps. Set 
+            \(X_{n}=f(S_{1}+\dots+S_{n})-f(S_{1}+\dots+S_{n-1})\) 
+            and \(Y_{n}=f(S_{1}+\dots+S_{n})-f(S_{2}+\dots+S_{n})\). 
+            Then \(\mathbf{E} X_{i}X_{j}=0\) for \(i\neq j\), and \(X_{n}, Y_{n}\) have the same 
+            distribution, and so 
+            \(\mathbf{E}(f(S_{1}+\dots+S_{n})-f(0))^{2}=\)
+            \(\mathbf{E}(X_{1}+\dots+X_{n})^{2}=\)
+            \(\mathbf{E} X_{1}^{2}+\dots+X_{n}^{2}=\)
+            \(\mathbf{E} Y_{1}^{2}+\dots+Y_{n}^{2}\). 
+            On the other hand, 
+            \(\mathbf{E} Y_{n-1}(Y_{n}-Y_{n-1})=0\)
+            \(\implies\mathbf{E} Y_{n}^{2}=\mathbf{E} Y_{n-1}^{2}+\mathbf{E}(Y_{n}-Y_{n-1})^{2}\)
+            \(\implies\mathbf{E} Y_{n}^{2}\) is increasing so 
+            \(4\lVert f\rVert_{\infty}^{2}\ge\)
+            \(n\mathbf{E} Y_{1}^{2}\) for all \(n\) 
+            \(\implies Y_{1}\equiv 0\) is constant \(\implies f\) is constant (around \(0\)).
+            <div class="qed">◼</div>
+            </details> <br> 
         </article>
+
 
 
         <article>
             <h2>An Overkill Proof of the FTA</h2>
-            Let \(f(z)=z^{d}+ a_1 z^{d-1} + \dots + a_d\) be a monic non-constant polynomial. We wish to show that \(f\) has a zero. <br><br>
-            We fix a lattice and its corresponding Weierstrass elliptic function \(\wp\). 
-            Then \(f\circ \wp = \wp^{d}+ a_1 \wp^{d-1} + \dots + a_d\) is clearly elliptic of order \(2d \gt 0\) and so has a zero. Hence \(f\) has a zero.
+            Let \(f(z)=z^{d}+ a_1 z^{d-1} + \dots + a_d\) be a monic non-constant polynomial. We 
+            wish to show that \(f\) has a zero. <br><br>
+            We fix a lattice and its corresponding Weierstrass elliptic function \(\wp\). Then 
+            \(f\circ \wp = \wp^{d}+ a_1 \wp^{d-1} + \dots + a_d\) is clearly elliptic of order 
+            \(2d \gt 0\) and so has a zero. Hence \(f\) has a zero.
         </article>
+
 
 
         <article>
             <h2>Stochastic Dodgeball</h2>
             Joint with Haran Pilpel. <br><br>
 
-            We consider the following stochastic model for the game of dodgeball, raised by Yoav Katz and Reem Waxman: <br><br>
+            We consider the following stochastic model for the game of dodgeball, raised by Yoav 
+            Katz and Reem Waxman: <br><br>
             
             <b>Game description.</b> There are \( n \) players, initally all <em>free</em>. 
             The game ends when only one free player remains. 
             Untill then, at each turn, two free players \( A \) and \( B \) are chosen at random 
-            and \( A \) <em>captures</em> \( B\), leading to all of \( B \)'s captives to become free (and rejoin the game). <br><br>
+            and \( A \) <em>captures</em> \( B\), leading to all of \( B \)'s captives to become 
+            free (and rejoin the game). <br><br>
             
-            We are interested in the game's expected number of turns.
-            By disregarding the identities of the players, we may represent a state of the game simply as a partition of \( n \). 
-            Namely, if there are \( \ell \) free players, then the partition has \( \ell \) parts of sizes corresponding to the number of captives each free player holds (plus one to account for the free player). 
-            To get a feeling for the game, the reader is instructed to determine the Markov chain representing the game for \( n= 4\), where there are only five states. <br><br>
+            We are interested in the game's expected number of turns. By disregarding the 
+            identities of the players, we may represent a state of the game simply as a partition 
+            of \( n \). Namely, if there are \( \ell \) free players, then the partition has 
+            \( \ell \) parts of sizes corresponding to the number of captives each free player 
+            holds (plus one to account for the free player). To get a feeling for the game, the 
+            reader is instructed to determine the Markov chain representing the game for 
+            \( n= 4\), where there are only five states. <br><br>
 
-            <b>Theorem.</b> For \( \lambda = (\lambda_1,\dots) \)  a partition of \( n\) representing a starting state of the game, the expected number of turns for the game to end equals 
-            \( 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \).
-            In particular, for the starting state where all the \( n\)  players are free, the game's expected lifetime is \( 2^{n-1}-1\)  turns. <br><br>
+            <b>Theorem.</b> For \( \lambda = (\lambda_1,\dots) \)  a partition of \( n\) 
+            representing a starting state of the game, the expected number of turns for the game 
+            to end equals \( 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \). In particular, for the 
+            starting state where all the \( n\)  players are free, the game's expected lifetime is 
+            \( 2^{n-1}-1\)  turns. <br><br>
 
             <details>
             <summary><b>Proof.</b></summary>
-            Let \( E(\lambda) \) denote the expected number of turns for the game to end, and \( F(\lambda) = 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \).
-            
-            As long as \(\lambda\)  is not the terminal state \((n)\), suppose
-            two free players \(a,b\)  are chosen, and let \(\lambda^{ab}\)  and \(\lambda^{ba}\)
-            be the new states depending on whether \(a\)  captures \(b\)  or \(b\)
-            captures \(a\). 
-            
-            Then we have \(\dfrac{F(\lambda^{ab})+F(\lambda^{ba})}{2}=F(\lambda)-1\).
-            In particular, if \(\lambda'\)  represents the (random) state following
-            \(\lambda\), then \(\mathbf{E}F(\lambda')=F(\lambda)-1\). 
-            The only functions satisfying this condition are those of the form \(F(\lambda)=E(\lambda)+c\),
-            where \(c\)  is some constant.
-            But \(F(\lambda)\)  and \(E(\lambda)\)  both vanish on the terminal state \((n)\),
-            and so \(F(\lambda)=E(\lambda)\)  as claimed. <div class="qed">◼</div>
+            Let \( E(\lambda) \) denote the expected number of turns for the game to end, and 
+            \( F(\lambda) = 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \). As long as \(\lambda\) is 
+            not the terminal state \((n)\), suppose two free players \(a,b\)  are chosen, and let 
+            \(\lambda^{ab}\)  and \(\lambda^{ba}\) be the new states depending on whether \(a\) 
+            captures \(b\)  or \(b\) captures \(a\). Then we have 
+            \(\dfrac{F(\lambda^{ab})+F(\lambda^{ba})}{2}=F(\lambda)-1\). In particular, if 
+            \(\lambda'\)  represents the (random) state following \(\lambda\), then 
+            \(\mathbf{E}F(\lambda')=F(\lambda)-1\). The only functions satisfying this condition 
+            are those of the form \(F(\lambda)=E(\lambda)+c\), where \(c\)  is some constant. But 
+            \(F(\lambda)\)  and \(E(\lambda)\)  both vanish on the terminal state \((n)\), and so 
+            \(F(\lambda)=E(\lambda)\)  as claimed. <div class="qed">◼</div>
             <br><br>
 
-            The proof shows, in fact, that the distribution with
-            which we choose the pair \(\{A,B\}\) of free players to compete for
-            each turn has no influence on the expected number of turns for the
-            game to end (even though it completely changes the Markov chain describing the game), 
-            as long as the odds of \(A\) capturing \(B\) and those
-            of \(B\) capturing \(A\) are the same. 
+            The proof shows, in fact, that the distribution with which we choose the pair 
+            \(\{A,B\}\) of free players to compete for each turn has no influence on the expected 
+            number of turns for the game to end (even though it completely changes the Markov 
+            chain describing the game), as long as the odds of \(A\) capturing \(B\) and those of 
+            \(B\) capturing \(A\) are the same. 
             </details> <br>
         </article>
 
@@ -267,79 +176,85 @@
             <h2>Swapping Labels on a Tree</h2>
             Joint with Nadav Trumer. <br><br>
 
-            The first problem on the second day of Iran's 2014 team selection test for the international mathematical olympiad <a href="https://artofproblemsolving.com/community/c6h619482p3697731">read</a>: <br><br>
+            The first problem on the second day of Iran's 2014 team selection test for the 
+            international mathematical olympiad 
+            <a href="https://artofproblemsolving.com/community/c6h619482p3697731">read</a>: 
+            <br><br>
 
-            <b>Problem.</b> Consider a tree with \(n\) vertices labeled \(1,\dots,n\). 
-            By <em>acting</em> on an edge we mean swapping the labels of its endpoints.
-            By acting once on each edge, in some order of the edges, 
-            we create a permutation of the labels. Show that this permutation is a full \(n\) cycle. <br><br>
-
+            <b>Problem.</b> Consider a tree with \(n\) vertices labeled \(1,\dots,n\). By 
+            <em>acting</em> on an edge we mean swapping the labels of its endpoints. By acting 
+            once on each edge, in some order of the edges, we create a permutation of the labels. 
+            Show that this permutation is a full \(n\) cycle. <br><br>
 
             <details>
-            <summary><b>Solution.</b></summary> By induction on the tree, for example by considering the last edge acted upon.
+            <summary><b>Solution.</b></summary> 
+            By induction on the tree, for example by considering the last edge acted upon.
             </details> <br>
 
-            We are interested in the number of possible permutations achievable through the above process.
-            To get a feeling for the problem, the reader is instructed to work out the cases of a star and some small paths. <br><br>
+            We are interested in the number of possible permutations achievable through the above 
+            process. To get a feeling for the problem, the reader is instructed to work out the 
+            cases of a star and some small paths. <br><br>
             
-            <b>Theorem.</b> Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). For each enumeration of the \(n-1\) edges of \(T\), we form a permutation of \(1,\dots,n\) by sequentially swapping the labels of the endpoints of each edge. The number of distinct permutations thus formed is equal to \(\prod_v d_v!\), where \(d_v\) is the degree of vertex \(v\) in \(T\). <br><br>
+            <b>Theorem.</b> Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). For each 
+            enumeration of the \(n-1\) edges of \(T\), we form a permutation of \(1,\dots,n\) by 
+            sequentially swapping the labels of the endpoints of each edge. The number of distinct 
+            permutations thus formed is equal to \(\prod_v d_v!\), where \(d_v\) is the degree of 
+            vertex \(v\) in \(T\). <br><br>
 
             <details>
-                <summary><b>Proof.</b></summary> 
-                Suppose that for each vertex \(v\), we are supplied with the order by which we acted on the \(d_v\) edges meeting \(v\).
-                Then we may construct the output permutation as follows: for each vertex \(v_1\), let \(v_1v_2\) be the first edge meeting \(v_1\) on which we acted, 
-                let \(v_2v_3\) be the first edge meeting \(v_2\) on which we acted after acting on \(v_1v_2\), and so on, until \(v_{r-1}v_{r}\) was the last edge 
-                meeting \(v_{r}\) on which we acted. Then \(v_1\) is mapped to \(v_r\) by the permutation, and since \(v_1\) was generic we may indeed construct the 
-                output permutation. On the other hand, suppose that we are supplied with the output permutation (for some enumeration of the edges). Then we may determine, 
-                for each vertex \(v\), the order by which we acted on the \(d_v\) edges meeting \(v\). To see this, let \(r=d_v\), let \(e_1,\dots,e_r\) be the edges 
-                meeting \(v\) by the ordering in which we act on them, let \(T_1,\dots,T_r\) be the trees of \(T-v\), and \(e_i=vw_i\) with \(w_i\in T_i\). Then \(v\) is 
-                mapped by the permutation inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps to \(T_2\), all of \(T_2\)'s vertices 
-                are kept inside \(T_2\), except for one which maps to \(T_3\) and so on, until lastly all of \(T_r\)'s vertices are kept inside \(T_r\), except for one which 
-                maps to \(v\). So, the order \(e_1,\dots,e_r\) may indeed be determined by the output permutation. 
-                It follows from the above bijection that the number of feasible outcome permutations is equal to \(\prod_v d_v!\) as claimed. <div class="qed">◼</div>
+            <summary><b>Proof.</b></summary> 
+            Suppose that for each vertex \(v\), we are supplied with the order by which we acted 
+            on the \(d_v\) edges meeting \(v\). Then we may construct the output permutation as 
+            follows: for each vertex \(v_1\), let \(v_1v_2\) be the first edge meeting \(v_1\) on 
+            which we acted, let \(v_2v_3\) be the first edge meeting \(v_2\) on which we acted 
+            after acting on \(v_1v_2\), and so on, until \(v_{r-1}v_{r}\) was the last edge 
+            meeting \(v_{r}\) on which we acted. Then \(v_1\) is mapped to \(v_r\) by the 
+            permutation, and since \(v_1\) was generic we may indeed construct the output 
+            permutation. On the other hand, suppose that we are supplied with the output 
+            permutation (for some enumeration of the edges). Then we may determine, for each 
+            vertex \(v\), the order by which we acted on the \(d_v\) edges meeting \(v\). To see 
+            this, let \(r=d_v\), let \(e_1,\dots,e_r\) be the edges meeting \(v\) by the ordering 
+            in which we act on them, let \(T_1,\dots,T_r\) be the trees of \(T-v\), and 
+            \(e_i=vw_i\) with \(w_i\in T_i\). Then \(v\) is mapped by the permutation inside 
+            \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps 
+            to \(T_2\), all of \(T_2\)'s vertices are kept inside \(T_2\), except for one which 
+            maps to \(T_3\) and so on, until lastly all of \(T_r\)'s vertices are kept inside 
+            \(T_r\), except for one which maps to \(v\). So, the order \(e_1,\dots,e_r\) may 
+            indeed be determined by the output permutation. It follows from the above bijection 
+            that the number of feasible outcome permutations is equal to \(\prod_v d_v!\) as 
+            claimed. <div class="qed">◼</div>
             </details> <br>
     
             In fact, we have a criterion for feasibility of a permutation. <br><br>
 
-
             <b>Theorem.</b> 
-            Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). Then a permutation of \(\{1,\dots,n\}\) is feasible (namely can be formed by swapping the labels of the endpoints of each edge of \(T\) in some order) if, and only if, for each vertex \(v\) there is an enumeration \(T_1,\dots,T_r\) of the trees of \(T-v\) (for \(r=d_v\)) such that \(v\) is mapped inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps to \(T_2\), and so on, until lastly all of \(T_r\)'s vertices are kept inside \(T_r\) except for one which maps to \(v\).
+            Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). Then a permutation of 
+            \(\{1,\dots,n\}\) is feasible (namely can be formed by swapping the labels of the 
+            endpoints of each edge of \(T\) in some order) if, and only if, for each vertex \(v\) 
+            there is an enumeration \(T_1,\dots,T_r\) of the trees of \(T-v\) (for \(r=d_v\)) such 
+            that \(v\) is mapped inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) 
+            except for one which maps to \(T_2\), and so on, until lastly all of \(T_r\)'s 
+            vertices are kept inside \(T_r\) except for one which maps to \(v\).
             <br><br>
 
-
             <details>
-                <summary><b>Proof.</b></summary> 
-                As noted above, necessity follows by considering the order by which we acted on the edges 
-                meeting \(v\). For sufficiency, let \(\pi\) be a permutation which satisfies the above property. 
-                For each vertex \(v\), we consider the first edge in the path from \(v\) to \(\pi(v)\). By the pigeonhole 
-                principle, we have an edge \(vw\) specified by both \(v\) and \(w\). Finding such an edge, we swap it first. 
-                We see that for the two trees formed by removing this edge, the relabeling that remains to perform on each of 
-                them also satisfies the above property, and so by recursion we may continue and  construct a sequence of edge 
-                swaps forming \(\pi\). <div class="qed">◼</div>
+            <summary><b>Proof.</b></summary> 
+            As noted above, necessity follows by considering the order by which we acted on the 
+            edges meeting \(v\). For sufficiency, let \(\pi\) be a permutation which satisfies the 
+            above property. For each vertex \(v\), we consider the first edge in the path from 
+            \(v\) to \(\pi(v)\). By the pigeonhole principle, we have an edge \(vw\) specified by 
+            both \(v\) and \(w\). Finding such an edge, we swap it first. We see that for the two 
+            trees formed by removing this edge, the relabeling that remains to perform on each of 
+            them also satisfies the above property, and so by recursion we may continue and 
+            construct a sequence of edge swaps forming \(\pi\). <div class="qed">◼</div>
             </details> <br>
-
-
         </article>
 
 
-        
-        <!--
-        <article>
-            <h2>Integral of Gaussian Function</h2>
-            <p>The Gaussian function appears frequently in statistics and physics. Here's an integral that involves it:</p>
-            <div class="math-equation">
-                \[
-                \int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
-                \]
-            </div>
-            <p>This is a key result in probability theory, and it shows up in various areas of mathematics and physics.</p>
-        </article>
-    -->
     </div>
 
     <!-- Footer Section -->
     <footer>
-        <!--<p>&copy; 2025 <a href="#">My LaTeX Blog</a> | All rights reserved.</p>-->
     </footer>
 
 </body>
