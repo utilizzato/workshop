@@ -102,3 +102,17 @@ a:active {
 }
 
 .qed{float: right; display: inline;}
+
+/* Night mode styles */
+.night-mode{
+    background-color: #0b0b0b; /* Dark background */
+}
+
+.night-mode article{
+    background-color: black; /* Dark background */
+    color: #ffffff; /* Light text */
+}
+
+.night-mode article h2{
+    color: white;
+}
