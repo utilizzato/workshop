@@ -22,6 +22,7 @@
     <header>
         <h1>Zilch</h1>
     </header>
+    <button id="night-mode-toggle">☽☀</button>
 
     <!-- Main Content Section -->
     <div class="container">
@@ -154,18 +155,17 @@
             <summary><b>Proof 3.</b></summary>
             Let \(S_{1},S_{2},S_{3},\dots\) be i.i.d random steps. Set 
             \(X_{n}=f(S_{1}+\dots+S_{n})-f(S_{1}+\dots+S_{n-1})\) 
-            and \(Y_{n}=f(S_{1}+\dots+S_{n})-f(S_{2}+\dots+S_{n})\). 
-            Then \(\mathbf{E} X_{i}X_{j}=0\) for \(i\neq j\), and \(X_{n}, Y_{n}\) have the same 
-            distribution, and so 
+            and \(Y_{n}=f(S_{1}+\dots+S_{n})-f(S_{2}+\dots+S_{n})\).
+            Clearly \(X_{n}\) and \(Y_{n}\) have the same distribution. Now, we have 
+            \(\mathbf{E} X_{i}X_{j}=0\) for \(i\neq j\), while 
+            \(\mathbf{E} Y_{n-1}(Y_{n}-Y_{n-1})=0\) 
+            \(\implies\mathbf{E} Y_{n}^{2}=\mathbf{E} Y_{n-1}^{2}+\mathbf{E}(Y_{n}-Y_{n-1})^{2}\)
+            \(\implies\mathbf{E} Y_{n}^{2}\) is increasing. Thus
             \(\mathbf{E}(f(S_{1}+\dots+S_{n})-f(0))^{2}=\)
             \(\mathbf{E}(X_{1}+\dots+X_{n})^{2}=\)
             \(\mathbf{E} X_{1}^{2}+\dots+X_{n}^{2}=\)
-            \(\mathbf{E} Y_{1}^{2}+\dots+Y_{n}^{2}\). 
-            On the other hand, 
-            \(\mathbf{E} Y_{n-1}(Y_{n}-Y_{n-1})=0\)
-            \(\implies\mathbf{E} Y_{n}^{2}=\mathbf{E} Y_{n-1}^{2}+\mathbf{E}(Y_{n}-Y_{n-1})^{2}\)
-            \(\implies\mathbf{E} Y_{n}^{2}\) is increasing so 
-            \(4\lVert f\rVert_{\infty}^{2}\ge\)
+            \(\mathbf{E} Y_{1}^{2}+\dots+Y_{n}^{2}\)
+            \(\implies 4\lVert f\rVert_{\infty}^{2}\ge\)
             \(n\mathbf{E} Y_{1}^{2}\) for all \(n\) 
             \(\implies Y_{1}\equiv 0\) is constant \(\implies f\) is constant (around \(0\)).
             <div class="qed">◼</div>
@@ -323,4 +323,9 @@
     </footer>
 
 </body>
+<script>
+document.getElementById('night-mode-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('night-mode');
+});
+</script>
 </html>
