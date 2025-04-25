@@ -27,7 +27,72 @@
     <div class="container">
 
 
-        <article>
+        <article id="random-points-on-the-sphere">
+            <h2>Random Geometry</h2>
+            <b>Problem.</b> Let \(m\) affine hyperplanes in general position be given in Euclidean 
+            \(d\)-dimensional space. Determine the number of regions do they devide the space into.
+            <br><br>
+            
+            <details>
+            <summary><b>Solution.</b></summary>
+            Let \(R_{m,d}\) denote the answer. Clearly \(R_{m,1}=m+1\). To determine 
+            \(R_{m,2}\), we count the number of new regions formed by the \(m\)-th line 
+            \(R_{m,2}-R_{m-1,2}\). Each region we had in the last step either remained intact 
+            or was split in two by the \(m\)-th line. This number of regions is precisely the 
+            number of regions that the \(m\)-th line is now divided into, i.e. 
+            \(R_{m-1,1}=m\). Thus \(R_{m,2}={m\choose 2}+m+1\). The same argument applies in 
+            all dimensions, and we have \(R_{m,d}=\sum_{j=0}^{d}{m\choose j}\).
+            </details> <br>
+
+            <b>Problem.</b> Let \(p_1,\dots,p_m\) be independent, uniformly random points on the 
+            unit sphere in \(\mathbf{R}^d\). What is the probability \(p_{m,d}\) of the following 
+            (equivalent) events to occur: <br>
+            i. The origin does not belong to the convex hull of \(p_1,\dots,p_m\). <br>
+            ii. There exists a half-sphere containing \(p_1,\dots,p_m\). <br>
+            iii. The half-spheres centered at \(p_1,\dots,p_m\) all intersect. <br>
+            iv. The half-spheres centered at \(p_1,\dots,p_m\) do not cover the unit sphere. <br>
+            v. The polyhedron \(\{x\in\mathbf{R}^d:x\cdot p_j\le1, j=1,\dots,m\}\) is unbounded.
+            <br><br>
+        
+            <details>
+            <summary><b>Solution.</b></summary>
+            For \(d=1\) we clealry have \(p_{m,1}=\frac{1}{2^{m-1}}\). The case \(d=2\) is already 
+            interesting, and may be solved as follows. For each point \(p\) in the unit circle, we 
+            consider the half-circle \(J_p\) going counterclockwise from \(p\) to its antipodal 
+            point. Let \(A_i\) denote the event that \(J_{p_i}\) contains \(p_1,\dots,p_m\). Then 
+            it's easy to see that the \(A_i\) are disjoint and their union is the desired event. 
+            Clearly \(\text{Pr}(A_i)=\frac{1}{2^{m-1}}\), so \(p_{m,2}=\frac{m}{2^{m-1}}\). The 
+            idea for the next dimensions will be not to generate the random points 
+            \(p_1,\dots,p_m\) but instead to first generate random antipodal point pairs 
+            \(\pm p_1,\dots,\pm p_m\), and then count the number of sign combinations contributng 
+            to our event. Now, the point pair \(\pm p\) is equivalent to the splitting of the 
+            sphere into the two half-spheres centered at \(\pm p\), so we have \(m\) random such 
+            splits, and we're interested in the number of choices of half-spheres that all 
+            intersect, i.e. in the number of regions we've devide the sphere into. This number, 
+            \(S_{m,d}\), is independent of the random choices of antipodal pairs, and similarly to 
+            before we have \(S_{m,d}=2R_{m-1,d-1}\). Thus 
+            \(p_{m,d}=\frac{\sum_{j=0}^{d-1}{m-1\choose j}}{2^{m-1}}\).
+            </details> <br>
+
+            <b>Problem.</b> Let \(X\) denote the number of points drawn from a sphere until their 
+            convex hull contains the sphere's center. Determine \(\mathbf{E}[X]\) and 
+            \(\text{Var}[X]\). <br><br>
+
+            <details>
+            <summary><b>Solution.</b></summary>
+            We have \(\text{Pr}(X>m)=p_{m,d}\) so 
+            \(\mathbf{E}[X]=\)
+            \(1+\sum_{m\ge 1}p_{m,d}=\)
+            \(1+\sum_{j=0}^{d-1}\sum_{m\ge1}\frac{{m-1\choose j}}{2^{m-1}}\). Now we recall that 
+            \(\sum_{n=0}^{\infty} {n\choose k}x^n=\frac{x^k}{(1-x)^{k+1}}\) so finally 
+            \(\mathbf{E}[X]=2d+1\). <br>
+            The variance calculation is similar, 
+            \(\mathbf{E}[X^2]=1+\sum_{m\ge1}(2m+1)p_{m,d}\) yields \(\text{Var}[X]=2d\).
+            </details> <br>
+        </article>
+
+
+        <article id="bounded-harmonic-functions">
             <h2>Bounded Harmonic Functions</h2>
             <b>Theorem.</b> Let \( f:\mathbf{R}^d\to \mathbf{R}\) be a bounded harmonic function. 
             Then \( f\) is constant. <br><br>
@@ -109,7 +174,7 @@
 
 
 
-        <article>
+        <article id="an-overkill-proof-of-the-fta">
             <h2>An Overkill Proof of the FTA</h2>
             Let \(f(z)=z^{d}+ a_1 z^{d-1} + \dots + a_d\) be a monic non-constant polynomial. We 
             wish to show that \(f\) has a zero. <br><br>
@@ -120,7 +185,7 @@
 
 
 
-        <article>
+        <article id="stochastic-dodgeball">
             <h2>Stochastic Dodgeball</h2>
             Joint with Haran Pilpel. <br><br>
 
@@ -172,7 +237,7 @@
 
 
 
-        <article>
+        <article id="swapping-labels-on-a-tree">
             <h2>Swapping Labels on a Tree</h2>
             Joint with Nadav Trumer. <br><br>
 
