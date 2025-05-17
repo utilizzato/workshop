@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Zilch</title>
+    <link rel="icon" href="../OIG1.jfif" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MathJax Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- External CSS for styling -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Zilch</h1>
+    </header>
+    <button id="night-mode-toggle">☽☀</button>
+
+    <!-- Main Content Section -->
+    <div class="container">
+
+
+        <article id="metric-spaces">
+            <h2>Metric Spaces - Fundamental Theorems</h2>
+
+            <b>Fact.</b> Let \(M\) be a complete metric space, and let 
+            \(C_{1}\supseteq C_{2}\supseteq C_{3}\supseteq\dots\) be a decreasing chain of 
+            non-empty closed subsets of \(M\) with \( \text{diam}(C_{n})\longrightarrow 0\). Then 
+            \(\bigcap_{n=1}^{\infty}C_{n}=\{x\}\) is a singleton.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Pick \(x_n\in C_n\) for each \(n\). Then \(x_n\) is Cauchy. [Indeed, for each given \(\varepsilon>0\), we fix \(N\) with \(\text{diam}(C_N)\lt \varepsilon\), and then 
+            \(n,m\ge N\implies x_n,x_m\in C_N\implies d(x_n,x_m)\le \text{diam}(C_N)\le \varepsilon\).] Since \(M\) is complete, there is some \(x\in M\) with \(x_n\longrightarrow x\).
+            Ergo, for each \(\ell\), we have that \((x_n)_{n\ge \ell}\) converges to \(x\), and as \(C_\ell\) is closed we have \(x\in C_\ell\). 
+            Thus \(x\in\bigcap_{n=1}^\infty C_n\).
+            On the other hand, if \(y\in \bigcap_{n=1}^\infty C_n \) then \(d(x,y)\le \text{diam}(C_n)\) for each \(n\), 
+            so that \( \text{diam}(C_{n})\longrightarrow 0\) implies that \(d(x,y)=0\), i.e \(x=y\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(T\) be a strict contraction of a complete metric space \(M\).
+            Then \(T\) has a unique fixed point \(x^*\). Moreover, for each \(x\in M\) we have 
+            \(T^{n}x\longrightarrow x^*\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Fix \(q\in(0,1)\) where \(T\) is \(q\)-Lipschitz. 
+            So \(\sum_{n\ge 0} d(T^nx,T^{n+1}x)\le \sum_{n\ge 0} q^{n}d(x,Tx)=\frac{d(x,Tx)}{1-q}\lt \infty\),
+            and thus \(T^n x\) is Cauchy and hence convergent to some \(y\in M\). 
+            Now \(T\) is continuous so \(T^nx\longrightarrow y\implies T^{n+1}x\longrightarrow Ty\), 
+            and by uniqueness of limits \(y=Ty\) is a fixed point. However, since \(T\) is a strict 
+            contraction, there can't be two distinct fixed points.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(M\) be a metric space. Then the following are equivalent: <br>
+            i. \(M\) is sequentially compact. <br>
+            ii. \(M\) is complete and totally bounded. <br>
+            iii. \(M\) is compact. <br>
+            iv. Any decreasing chain of non-empty closed sets has a non-empty intersection.
+            <br><br>
+
+            <details>
+            <summary><b>Proof sketch.</b></summary>
+            i \(\implies\) ii and iii \(\implies\) iv are simple. <br>
+            ii \(\implies\) iii: Suppose for the sake of contradiction that \(U_i\) 
+            is an open cover of \(M\) without a finite subcover. By total boundedness, 
+            we may pick \(x_1\in M\) with the property that no finite subfamily of \((U_i)_{i\in I}\)
+            covers \(B_{2^{-1}}(x_1)\). Continuing, we may pick \(x_n\in M\) with 
+            \(B_{2^{-(n-1)}}(x_{n-1})\cap B_{2^{-n}}(x_n)\neq\varnothing\) and with the property that no finite 
+            subfamily of \((U_i)_{i\in I}\) covers \(B_{2^{-n}}(x_n)\).
+            Thus \(d(x_{n-1},x_n)\le \frac{4}{2^n}\) so \(x_n\) is Cauchy and thus converges to some \(x^*\). 
+            Now we have \(B_{\varepsilon^*}(x^*)\subseteq U_{i^*}\), but 
+            for large enough \(n\) we have \(B_{2^{-n}}(x_{n})\subseteq B_{\varepsilon^*}(x^*)\), a contradiction. <br>
+            iv \(\implies\) i: Let \((x_n)_{n\ge 1}\) be given, and set \(C_n = \overline{\{x_{n},x_{n+1},\dots\}} \). 
+            Then \(C_n\) is a decreasing chain of non-empty closed sets, so has a non-empty intersection, and any 
+            \(x\in\bigcap_{n=1}^\infty C_n\) is a limit of some subsequence of \((x_n)\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(M\) be a compact metric space and \(\left(U_i\right)_{i\in I}\) an open cover 
+            of \(M\). Then \(\exists \delta \gt 0\) \(\forall x\in M\) \(\exists i: B_\delta(x)\subseteq U_i\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Suppose for the sake of contradiction there's no such \(\delta\). Then for each \(n\ge 1\) we may pick \(x_n\in M\) with 
+            \(B_{n^{-1}}(x_n)\) not contained in any \(U_i\). Let \(x_{n_k}\longrightarrow x^*\) be a convergent subsequence. 
+            Now let \(B_{\varepsilon^*}(x^*)\subseteq U_{i^*}\). Then for large enough \(k\) we have 
+            \(B_{n_k^{-1}}(x_{n_k})\subseteq B_{\varepsilon^*}(x^*)\), a contradiction.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> In a complete metric space, a countable 
+            intersection of dense open sets is dense.
+            <br><br>
+
+            <details>
+            Let \(U_n\) be open dense subsets, and let \(W\) be non-empty open. We wish to show that 
+            \(W\) intersects \(\bigcap_{n=1}^\infty U_n\). We start by picking 
+            \(\overline{B_{r_1}(x_1)}\subseteq W\cap U_1\). Continuing, we pick 
+            \(\overline{B_{r_n}(x_n)}\subseteq B_{r_{n-1}}(x_{n-1})\cap U_n\).
+            We may assume \(r_n\le n^{-1}\).
+            Now we have \(x_n\in B_{r_m}(x_m)\) for \(n\ge m\) and so 
+            \(x_n\) is Cauchy and hence has a limit \(x\), and \(x\in \overline{B_{r_m}(x_m)}\) 
+            for each \(m\), and thus \(x\in W\cap \bigcap_{m=1}^\infty U_m\).
+            <summary><b>Proof.</b></summary>
+            <div class="qed">◼</div>
+            </details> <br>
+
+        </article>
+
+
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+    </footer>
+
+</body>
+<script>
+document.getElementById('night-mode-toggle').addEventListener('click', function() {
+    document.body.classList.toggle('night-mode');
+});
+</script>
+</html>
