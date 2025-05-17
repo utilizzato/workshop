@@ -1,49 +1,43 @@
-from PyPDF2 import PdfReader, PdfWriter
+#!/usr/bin/env python3
 
 import os
-import re
+import sys
+import argparse
+from PyPDF2 import PdfMerger
 
-# Function to extract prefix and numeric part from filename
-def extract_info(filename):
-    match = re.match(r'([a-zA-Z_]+)(\d+)\.pdf', filename)
-    if match:
-        prefix = match.group(1)
-        number = int(match.group(2))
-        ret = (prefix, number)
-    else:
-        assert 0
+def merge_pdfs(folder_path, output_filename):
+    if not os.path.isdir(folder_path):
+        print(f"Error: '{folder_path}' is not a valid directory.")
+        sys.exit(1)
 
-    print(f"walk: {filename} {ret}")
-    return ret
+    pdf_files = sorted([
+        f for f in os.listdir(folder_path)
+        if f.endswith('.pdf') and os.path.isfile(os.path.join(folder_path, f)) and f != output_filename
+    ])
 
-pdf_files = []
-rootdir = os.getcwd()
+    if not pdf_files:
+        print("No PDF files found in the specified folder.")
+        sys.exit(1)
 
-for subdir, dirs, files in os.walk(rootdir):
-    for file in files:
-        filepath = os.path.join(subdir, file)
-        if filepath.endswith(".pdf") and not filepath.endswith("ooo.pdf"):
-            pdf_files.append(filepath)
+    merger = PdfMerger()
+    for pdf_file in pdf_files:
+        full_path = os.path.join(folder_path, pdf_file)
+        print(f"Adding: {pdf_file}")
+        merger.append(full_path)
 
-# Sort the list of PDF files based on prefix and numeric part
-pdf_files.sort(key=lambda x: extract_info(os.path.basename(x)))
+    output_path = os.path.join(folder_path, output_filename)
+    merger.write(output_path)
+    merger.close()
 
-# Now pdf_files should be sorted as desired
-print(pdf_files)
+    print(f"PDFs merged into: {output_path}")
 
-def pdf_cat(input_files, output_stream):
-    input_streams = []
-    try:
-        for input_file in input_files:
-            input_streams.append(open(input_file, 'rb'))
-        writer = PdfWriter()
-        for reader in map(PdfReader, input_streams):
-            for n in range(len(reader.pages)):
-                writer.add_page(reader.pages[n])
-        writer.write(output_stream)
-    finally:
-        for f in input_streams:
-            f.close()
-        output_stream.close()
+def main():
+    parser = argparse.ArgumentParser(description="Merge all PDFs in a folder into a single PDF.")
+    parser.add_argument("folder", help="Path to the folder containing PDF files")
+    parser.add_argument("-o", "--output", default="merged.pdf", help="Name of the output PDF file")
 
-pdf_cat(pdf_files, open("ooo.pdf", "w+b"))
+    args = parser.parse_args()
+    merge_pdfs(args.folder, args.output)
+
+if __name__ == "__main__":
+    main()
