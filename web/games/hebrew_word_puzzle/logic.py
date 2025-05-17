@@ -104,4 +104,6 @@ def get_all_words_with_last_point_and_cover(board, last_point, covered, cur_word
             ret = ret.union(get_all_words_with_last_point_and_cover(board, new_point, covered + [new_point], cur_word + board[new_point]))
     return ret
 
-print(get_all_words(test_board2, 3))
+x1 = get_all_words(test_board2, 3)
+x2 = ['אובא', 'מדבב', 'דאוב', 'מדובב', 'אבדו', 'אדובב', 'אועבד', 'אעובד', 'דואב', 'אעבוד', 'עבדו', 'עבוד', 'אובע', 'אובד', 'בעבעו', 'מבוע', 'אועב', 'אבוד', 'בעבע', 'אבוא', 'מדוע', 'מבעבע', 'עובד', 'אבעבע', 'דבבו', 'דאבו', 'אעבד', 'אדבב', 'דובב', 'מבוא', 'בעבוע']
+print(set(x1) == set(x2))
