@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>poc</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    #board {
+      display: grid;
+      grid-gap: 15px;
+      margin-top: 20px;
+      max-width: 100vw;
+      touch-action: none;
+    }
+
+    .tile {
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      border-radius: 5px;
+      user-select: none;
+      box-sizing: border-box;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .tile.selected {
+      background: #88c;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 600px) {
+      .tile {
+        width: 80px;
+        height: 80px;
+        font-size: 28px;
+      }
+
+      #board {
+        grid-gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>מילים</h2>
+  <div id="status">
+    <p><span id="wordsRemaining">Words remaining: </span></p>
+  </div>
+  <div id="board"></div>
+  <p>Selected Word: <span id="wordDisplay"></span></p>
+  <script src="script.js"></script>
+
+
+  <footer style="margin-top: 40px; font-size: 14px; color: #666;">
+  Version 0.1
+  </footer>
+
+</body>
+</html>

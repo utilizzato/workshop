@@ -1,4 +1,6 @@
 import pygtrie
+import random
+import time
 
 hebrew_words_file = "hspell_simple.txt" # https://github.com/eyaler/hebrew_wordlists/blob/main/hspell_simple.txt
 test_mode = True
@@ -26,12 +28,12 @@ def validate_words(word_list):
             print(f"failed to validate word {word}")
             assert False
 
-def get_score(word_list):
+def get_word_list_score(word_list):
     if test_mode:
         validate_words(word_list)
     score1 = len(word_list)
     score2 = sum(len(word) for word in word_list)
-    return score1 + score2 # todo: better score function
+    return score1 #+ score2 # todo: better score function
 
 def validate_board(board, size):
     if not size in range(3,11):
@@ -107,3 +109,38 @@ def get_all_words_with_last_point_and_cover(board, last_point, covered, cur_word
 x1 = get_all_words(test_board2, 3)
 x2 = ['אובא', 'מדבב', 'דאוב', 'מדובב', 'אבדו', 'אדובב', 'אועבד', 'אעובד', 'דואב', 'אעבוד', 'עבדו', 'עבוד', 'אובע', 'אובד', 'בעבעו', 'מבוע', 'אועב', 'אבוד', 'בעבע', 'אבוא', 'מדוע', 'מבעבע', 'עובד', 'אבעבע', 'דבבו', 'דאבו', 'אעבד', 'אדבב', 'דובב', 'מבוא', 'בעבוע']
 print(set(x1) == set(x2))
+print(len(x1))
+
+
+def get_board_score(board, size):
+    return get_word_list_score(get_all_words(board, size))
+
+def generate_random_board_with_min_score(size, min_score):
+    count = 0
+    start_time = time.time()
+    while True:
+        count += 1
+        board = {(i,j) : random.choice(hebrew_letters) for i in range(size) for j in range(size)}
+        if get_board_score(board, size) >= min_score:
+            end_time = time.time()
+            if test_mode:
+                print(f"Runtime: {end_time - start_time:.4f} seconds, board count {count}, score {get_board_score(board, size)}")
+            return board
+
+
+def print_board(board, size):
+    s = ""
+    for i in range(size):
+        for j in range(size):
+            s += f"{board[(i,j)]} "
+        s += "\n"
+    print(s)
+
+#temp_board = {(0, 0): 'ה', (0, 1): 'ע', (0, 2): 'ר', (0, 3): 'ך', (1, 0): 'ץ', (1, 1): 'ג', (1, 2): 'ו', (1, 3): 'ל', (2, 0): 'ש', (2, 1): 'נ', (2, 2): 'ג', (2, 3): 'ע', (3, 0): 'ז', (3, 1): 'נ', (3, 2): 'ך', (3, 3): 'א'}
+#print_board(temp_board, 4)
+#print(get_all_words(temp_board, 4))
+#print(get_board_score(temp_board, 4))
+
+brd = generate_random_board_with_min_score(3,20)
+print_board(brd,3)
+print(get_all_words(brd, 3))
