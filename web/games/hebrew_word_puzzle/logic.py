@@ -1,12 +1,14 @@
 import pygtrie
 import random
 import time
+from dataclasses import dataclass
 
 hebrew_words_file = "hspell_simple.txt" # https://github.com/eyaler/hebrew_wordlists/blob/main/hspell_simple.txt
 test_mode = True
 hebrew_letters = "אבגדהוזחטיכלמנסעפצקרשתךםןףץ"
 special_no_letter = "@"
 min_length = 4
+deltas = [(x,y) for x in [-1,0,1] for y in [-1,0,1] if not x == y == 0]
 
 # PREPROCESSING
 trie = pygtrie.CharTrie()
@@ -35,112 +37,136 @@ def get_word_list_score(word_list):
     score2 = sum(len(word) for word in word_list)
     return score1 #+ score2 # todo: better score function
 
-def validate_board(board, size):
-    if not size in range(3,11):
-        print(f"invalid size {size}")
-        assert False
-    if not set(board.keys()) == {(i,j) for i in range(size) for j in range(size)}:
-        print(f"invalid board {board}")
-        assert False
-    for key in board:
-        val = board[key]
-        if not val in hebrew_letters and not val == special_no_letter:
-            print(f"invalid board piece {key, board[key]}")
+@dataclass
+class Board:
+    size: int
+    grid: dict
+    words: set
+    words_to_locations: dict
+    starting_words_count: dict
+    passing_words_count: dict
+
+    def __init__(self, size, string=None):
+        if not size in range(3,11):
+            print(f"invalid size {size}")
             assert False
+        if string and not len(string) == size**2:
+            print(f"invalid string {string} of length {len(string)} for size {size}")
+        if not string:
+            string = ''.join(random.choice(hebrew_letters) for _ in range(size**2))
+        self.size = size
+        self.string = string
+        self.grid = {(i,j) : string[j + size * i] for i in range(size) for j in range(size)}
 
-test_board1 = {
-    (0,0): "@",
-    (0,1): "א",
-    (0,2): "א",
-    (1,0): "ב",
-    (1,1): "ג",
-    (1,2): "ת",
-    (2,0): "ץ",
-    (2,1): "ש",
-    (2,2): "ן"
-}
+    def validate(self):
+        if not self.size in range(3,11):
+            print(f"invalid size {self.size}")
+            assert False
+        if not set(self.grid.keys()) == {(i,j) for i in range(self.size) for j in range(self.size)}:
+            print(f"invalid board {self.grid}")
+            assert False
+        for key in self.grid:
+            val = self.grid[key]
+            if not val in hebrew_letters and not val == special_no_letter:
+                print(f"invalid board piece {key, val}")
+                assert False
 
-test_board2 = {
-    (0,0): "א",
-    (0,1): "ד",
-    (0,2): "מ",
-    (1,0): "ו",
-    (1,1): "ב",
-    (1,2): "ב",
-    (2,0): "ע",
-    (2,1): "ע",
-    (2,2): "א"
-}
+    def find_all_words(self):
+        words_found = set()
+        words_to_locations = {}
+        for i in range(self.size):
+            for j in range(self.size):
+                self.find_all_words_with_starting_point((i, j), words_found, words_to_locations)
 
+        return (words_found, words_to_locations)
 
-# print(get_score(["נשמע", "רק", "מדוע"]))
-# validate_board(board, 3)
+    def find_all_words_with_starting_point(self, point, words_found, words_to_locations):
+        covered = [point]
+        last_point = point
+        cur_word = self.grid[point]
+        cur_locations = [point]
+        self.find_all_words_with_last_point_and_cover(last_point, covered, cur_word, cur_locations, words_found, words_to_locations)
 
-def get_all_words(board, size):
-    if test_mode:
-        validate_board(board, size)
-    ret = set()
-    for i in range(size):
-        for j in range(size):
-            ret = ret.union(get_all_words_with_starting_point(board, (i, j)))
-    return list(ret)
+    def find_all_words_with_last_point_and_cover(self, last_point, covered, cur_word, cur_locations, words_found, words_to_locations):
+        if not trie.has_node(cur_word): # not a valid word or prefix
+            return
+        
+        if trie.has_key(cur_word) and len(cur_word) >= min_length and cur_word not in words_found:
+            words_found.add(cur_word)
+            words_to_locations[cur_word] = cur_locations
 
-def get_all_words_with_starting_point(board, point):
-    covered = [point]
-    last_point = point
-    cur_word = board[point]
-    return get_all_words_with_last_point_and_cover(board, last_point, covered, cur_word)
+        for delta in deltas:
+            new_point = (last_point[0] + delta[0], last_point[1] + delta[1])
+            if new_point not in covered and new_point in self.grid:
+                self.find_all_words_with_last_point_and_cover(new_point, covered + [new_point], cur_word + self.grid[new_point], cur_locations + [new_point], words_found, words_to_locations)
 
-deltas = [(x,y) for x in [-1,0,1] for y in [-1,0,1] if not x == y == 0]
-#print(deltas)
+    def print(self):
+        s = ""
+        for i in range(self.size):
+            for j in range(self.size):
+                s += f"{self.grid[(i,j)]} "
+            s += "\n"
+        print(s)
 
-def get_all_words_with_last_point_and_cover(board, last_point, covered, cur_word):
-    if not trie.has_node(cur_word): # not a valid word or prefix
-        return set()
-    ret = set()
-    if trie.has_key(cur_word) and len(cur_word) >= min_length:
-        ret.add(cur_word)
-    for delta in deltas:
-        new_point = (last_point[0] + delta[0], last_point[1] + delta[1])
-        if new_point not in covered and new_point in board:
-            ret = ret.union(get_all_words_with_last_point_and_cover(board, new_point, covered + [new_point], cur_word + board[new_point]))
-    return ret
+    def do_compute(self):
+        (words, words_to_locations) = self.find_all_words()
+        self.words = words
+        self.words_to_locations = words_to_locations
 
-x1 = get_all_words(test_board2, 3)
-x2 = ['אובא', 'מדבב', 'דאוב', 'מדובב', 'אבדו', 'אדובב', 'אועבד', 'אעובד', 'דואב', 'אעבוד', 'עבדו', 'עבוד', 'אובע', 'אובד', 'בעבעו', 'מבוע', 'אועב', 'אבוד', 'בעבע', 'אבוא', 'מדוע', 'מבעבע', 'עובד', 'אבעבע', 'דבבו', 'דאבו', 'אעבד', 'אדבב', 'דובב', 'מבוא', 'בעבוע']
-print(set(x1) == set(x2))
-print(len(x1))
+        if test_mode:
+            if not words_to_locations.keys() == words:
+                print(f"mismatch: words {words}, words_to_locations {words_to_locations}")
+                assert False
+            for word in words_to_locations:
+                if not len(word) == len(words_to_locations[word]):
+                    print(f"bad word {word} in locations {words_to_locations[word]}")
+                    assert False
 
+        self.starting_words_count = {(i,j) : 0 for i in range(self.size) for j in range(self.size)}
+        self.passing_words_count = {(i,j) : 0 for i in range(self.size) for j in range(self.size)}
+        for word in words:
+            self.starting_words_count[words_to_locations[word][0]] += 1
+            for cell in words_to_locations[word]:
+                self.passing_words_count[cell] += 1
 
-def get_board_score(board, size):
-    return get_word_list_score(get_all_words(board, size))
-
-def generate_random_board_with_min_score(size, min_score):
+def generate_random_board_with_min_num_words_and_all_letters_appearing(size, min_num_words):
     count = 0
     start_time = time.time()
     while True:
         count += 1
-        board = {(i,j) : random.choice(hebrew_letters) for i in range(size) for j in range(size)}
-        if get_board_score(board, size) >= min_score:
+        board = Board(size)
+        board.do_compute()
+        if len(board.words) >= min_num_words and min(board.passing_words_count[cell] for cell in board.grid) > 0:
             end_time = time.time()
             if test_mode:
-                print(f"Runtime: {end_time - start_time:.4f} seconds, board count {count}, score {get_board_score(board, size)}")
+                print(f"Runtime: {end_time - start_time:.4f} seconds, board count {count}, num words {len(board.words)}")
             return board
 
 
-def print_board(board, size):
-    s = ""
-    for i in range(size):
-        for j in range(size):
-            s += f"{board[(i,j)]} "
-        s += "\n"
+
+if __name__ == "__main__":
+    board = Board(3, "אדמובבעעא")
+    board.do_compute()
+    print(board)
+    s = [board.starting_words_count[(i,j)] for i in range(3) for j in range(3)]
     print(s)
+    p = [board.passing_words_count[(i,j)] for i in range(3) for j in range(3)]
+    print(p)
+    #print(generate_random_board_with_min_num_words_and_all_letters_appearing(3, 50))
 
-#temp_board = {(0, 0): 'ה', (0, 1): 'ע', (0, 2): 'ר', (0, 3): 'ך', (1, 0): 'ץ', (1, 1): 'ג', (1, 2): 'ו', (1, 3): 'ל', (2, 0): 'ש', (2, 1): 'נ', (2, 2): 'ג', (2, 3): 'ע', (3, 0): 'ז', (3, 1): 'נ', (3, 2): 'ך', (3, 3): 'א'}
-#print_board(temp_board, 4)
-#print(get_all_words(temp_board, 4))
-#print(get_board_score(temp_board, 4))
 
-brd = generate_random_board_with_min_score(3,20)
-print_board(brd,3)
-print(get_all_words(brd, 3))
+# def get_board_score(board, size):
+#     return get_word_list_score(get_all_words(board, size))
+
+
+
+
+
+# #temp_board = {(0, 0): 'ה', (0, 1): 'ע', (0, 2): 'ר', (0, 3): 'ך', (1, 0): 'ץ', (1, 1): 'ג', (1, 2): 'ו', (1, 3): 'ל', (2, 0): 'ש', (2, 1): 'נ', (2, 2): 'ג', (2, 3): 'ע', (3, 0): 'ז', (3, 1): 'נ', (3, 2): 'ך', (3, 3): 'א'}
+# #print_board(temp_board, 4)
+# #print(get_all_words(temp_board, 4))
+# #print(get_board_score(temp_board, 4))
+
+# brd = generate_random_board_with_min_score(3,20)
+# print_board(brd,3)
+# print(get_all_words(brd, 3))
