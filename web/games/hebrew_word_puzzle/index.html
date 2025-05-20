@@ -24,6 +24,7 @@
     }
 
     .tile {
+      position: relative;
       background: #ddd;
       display: flex;
       align-items: center;
@@ -34,6 +35,10 @@
       user-select: none;
       box-sizing: border-box;
       transition: background 0.2s, transform 0.1s;
+    }
+
+    .tile > div {
+    pointer-events: none;
     }
 
     .tile.selected {
@@ -67,7 +72,7 @@
 
 
   <footer style="margin-top: 40px; font-size: 14px; color: #666;">
-  Version 0.1
+  Version 0.2
   </footer>
 
 </body>
