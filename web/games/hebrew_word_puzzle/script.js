@@ -15,25 +15,49 @@ document.addEventListener('DOMContentLoaded', () => {
   let wordsToLocations = {};
   // 🔁 Auto-load board.json on startup
 
-  fetch('board.json')
+  const today = new Date();
+
+// Format components (pad month and day with leading zero if needed)
+const year = today.getFullYear();
+const month = String(today.getMonth() + 1).padStart(2, '0'); // months are 0-based
+const day = String(today.getDate()).padStart(2, '0');
+
+const savedDate = localStorage.getItem("date_string");
+
+// Build the filename
+const fileName = `board_${year}${month}${day}.json`;
+  fetch(fileName)
     .then(res => res.json())
     .then(data => {
       boardSize = data.size;
       boardLetters = data.board.toUpperCase().split('');
       validWords = new Set(data.words.map(w => w.toUpperCase()));
-      cellPassingWordCounts = data.cellPassingWordCounts;
-      cellStartingWordCounts = data.cellStartingWordCounts;
       wordsToLocations = data.wordsToLocations;
 
-      foundWords.clear();
+      if(savedDate !== today.toDateString())
+      {
+        cellPassingWordCounts = data.cellPassingWordCounts;
+        cellStartingWordCounts = data.cellStartingWordCounts;
+        foundWords.clear();
+      }
+      else
+      {
+        console.log("getting items")
+        cellPassingWordCounts = JSON.parse(localStorage.getItem("cellPassingWordCounts"));
+        cellStartingWordCounts = JSON.parse(localStorage.getItem("cellStartingWordCounts"));
+        foundWords = new Set(JSON.parse(localStorage.getItem("foundWords")));
+        // todo: check containment in validWords for midnight bugs???
+      }
+
 
       if (boardLetters.length !== boardSize * boardSize) {
         alert("Board letter count doesn't match size.");
         return;
       }
 
-      updateWordsRemaining();
       generateBoard();
+      updateWordsRemaining();
+
     })
     .catch(err => {
       alert("Failed to load board.json");
@@ -147,6 +171,24 @@ tile.appendChild(startingCount);
         wordsRemainingDisplay.textContent = "🎉 You found all the words!"
     }
 
+    for(let i = 0; i < boardSize * boardSize; i++)
+    {
+      let tile = document.querySelector(`.tile[data-index="${i}"]`);
+      if(cellStartingWordCounts[i] > 0)
+        tile.children[2].innerHTML = cellStartingWordCounts[i];
+      else
+        tile.children[2].innerHTML = "";
+
+      if(cellPassingWordCounts[i] > 0)
+        tile.children[1].innerHTML = cellPassingWordCounts[i];
+      else
+      {
+        tile.children[1].innerHTML = "";
+        tile.style.opacity = '0.1';
+      }
+    }
+
+
 }
 
   function endSelection() {
@@ -157,34 +199,21 @@ tile.appendChild(startingCount);
 
       if (validWords.has(word) && !foundWords.has(word)) {
         foundWords.add(word);
-        updateWordsRemaining();
-
         locations = wordsToLocations[String(word)]
-        //console.log(locations)
         start_idx = coordToIndex(locations[0])
-        let tile = document.querySelector(`.tile[data-index="${start_idx}"]`);
-        if (tile.children[2].innerHTML !== "1")
-          tile.children[2].innerHTML = tile.children[2].innerHTML - 1;
-        else
-          tile.children[2].innerHTML = "";
-
+        cellStartingWordCounts[start_idx] = cellStartingWordCounts[start_idx] - 1;
         for(ii in locations)
         {
           cell = locations[ii]
           idx = coordToIndex(cell)
-          tile = document.querySelector(`.tile[data-index="${idx}"]`);
-          if (!tile) alert("oops1");
-          if (tile.children.length !== 3) alert("oops2");
-          
-          if (tile.children[1].innerHTML !== "1")
-            tile.children[1].innerHTML = tile.children[1].innerHTML - 1;
-          else
-            {
-              tile.children[1].innerHTML = "";
-              tile.style.opacity = '0.1';
-            }
-          
+          cellPassingWordCounts[idx] = cellPassingWordCounts[idx] - 1;
         }
+        localStorage.setItem("date_string", today.toDateString());
+        localStorage.setItem("foundWords", JSON.stringify([...foundWords]));
+        localStorage.setItem("cellStartingWordCounts", JSON.stringify(cellStartingWordCounts));
+        localStorage.setItem("cellPassingWordCounts", JSON.stringify(cellPassingWordCounts));
+        console.log("saving items")
+        updateWordsRemaining();
 
       }
 
