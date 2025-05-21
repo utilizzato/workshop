@@ -2,6 +2,7 @@ import pygtrie
 import random
 import time
 from dataclasses import dataclass
+import json
 
 hebrew_words_file = "hspell_simple.txt" # https://github.com/eyaler/hebrew_wordlists/blob/main/hspell_simple.txt
 test_mode = True
@@ -129,30 +130,78 @@ class Board:
             for cell in words_to_locations[word]:
                 self.passing_words_count[cell] += 1
 
-def generate_random_board_with_min_num_words_and_all_letters_appearing(size, min_num_words):
+    def to_json(self, filename):
+        data = {
+            "size": self.size,
+            "board": self.string,
+            "words": list(self.words),
+            "wordsToLocations": self.words_to_locations,
+            "cellStartingWordCounts": [self.starting_words_count[(i,j)] for i in range(self.size) for j in range(self.size)],
+            "cellPassingWordCounts": [self.passing_words_count[(i,j)] for i in range(self.size) for j in range(self.size)]
+        }
+        with open(filename, "w") as file:
+            json.dump(data, file, indent=4, ensure_ascii=False)  # indent makes it pretty-printed
+
+    def reach_local_maximum(self):
+        update_count = 0
+        cur_string = self.string
+        cur_num_words = len(self.words)
+        while True:
+            is_local_max = True
+            for idx in range(self.size**2):
+                for letter in hebrew_letters:
+                    if cur_string[idx] != letter:
+                        new_string_list = list(cur_string)
+                        new_string_list[idx] = letter
+                        new_string = "".join(new_string_list)
+                        new_board = Board(self.size, new_string)
+                        new_board.do_compute()
+                        new_num_words = len(new_board.words)
+                        if new_num_words > cur_num_words:
+                            cur_string = new_string
+                            cur_num_words = new_num_words
+                            is_local_max = False
+                            update_count += 1
+            if is_local_max:
+                if test_mode:
+                    print(f"did {update_count} updates to get local max")
+                ret = Board(self.size, cur_string)
+                ret.do_compute()
+                return ret        
+
+
+def generate_random_board_with_min_num_words(size, min_num_words):
     count = 0
     start_time = time.time()
     while True:
-        count += 1
+        #count += 1
         board = Board(size)
         board.do_compute()
-        if len(board.words) >= min_num_words and min(board.passing_words_count[cell] for cell in board.grid) > 0:
+        if len(board.words) >= min_num_words:
             end_time = time.time()
             if test_mode:
-                print(f"Runtime: {end_time - start_time:.4f} seconds, board count {count}, num words {len(board.words)}")
+                print(f"generated {count} random boards, runtime: {end_time - start_time:.4f} seconds, num words {len(board.words)}")
             return board
 
 
 
 if __name__ == "__main__":
-    board = Board(3, "אדמובבעעא")
-    board.do_compute()
-    print(board)
-    s = [board.starting_words_count[(i,j)] for i in range(3) for j in range(3)]
-    print(s)
-    p = [board.passing_words_count[(i,j)] for i in range(3) for j in range(3)]
-    print(p)
-    #print(generate_random_board_with_min_num_words_and_all_letters_appearing(3, 50))
+    # board = Board(3, "אדמובבעעא")
+    # board.do_compute()
+    # print(board)
+    # s = [board.starting_words_count[(i,j)] for i in range(3) for j in range(3)]
+    # print(s)
+    # p = [board.passing_words_count[(i,j)] for i in range(3) for j in range(3)]
+    # print(p)
+    # #print(generate_random_board_with_min_num_words_and_all_letters_appearing(3, 50))
+    # board.to_json("abcde.json")
+
+    board1 = Board(3, "אדמובבעעא")
+    board1.do_compute()
+    board2 = board1.reach_local_maximum()
+    board1.print()
+    board2.print()
+    board2.to_json("board_20250522.json")
 
 
 # def get_board_score(board, size):
