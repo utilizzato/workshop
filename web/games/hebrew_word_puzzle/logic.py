@@ -3,6 +3,8 @@ import random
 import time
 from dataclasses import dataclass
 import json
+from datetime import datetime, timedelta
+
 
 hebrew_words_file = "hspell_simple.txt" # https://github.com/eyaler/hebrew_wordlists/blob/main/hspell_simple.txt
 test_mode = True
@@ -174,10 +176,10 @@ def generate_random_board_with_min_num_words(size, min_num_words):
     count = 0
     start_time = time.time()
     while True:
-        #count += 1
+        count += 1
         board = Board(size)
         board.do_compute()
-        if len(board.words) >= min_num_words:
+        if len(board.words) >= min_num_words and min(board.passing_words_count.values()) > 0:
             end_time = time.time()
             if test_mode:
                 print(f"generated {count} random boards, runtime: {end_time - start_time:.4f} seconds, num words {len(board.words)}")
@@ -196,12 +198,18 @@ if __name__ == "__main__":
     # #print(generate_random_board_with_min_num_words_and_all_letters_appearing(3, 50))
     # board.to_json("abcde.json")
 
-    board1 = Board(3, "אדמובבעעא")
-    board1.do_compute()
-    board2 = board1.reach_local_maximum()
-    board1.print()
-    board2.print()
-    board2.to_json("board_20250522.json")
+    # board1 = Board(3, "אדמובבעעא")
+    # board1.do_compute()
+    # board2 = board1.reach_local_maximum()
+    # board1.print()
+    # board2.print()
+    # board2.to_json("board_20250522.json")
+    today = datetime.today()
+    for i in range(1,366):
+        next_day = today + timedelta(days = i)
+        board = generate_random_board_with_min_num_words(3, 30)
+        filename = next_day.strftime("board_%Y%m%d.json")
+        board.to_json(filename)
 
 
 # def get_board_score(board, size):
