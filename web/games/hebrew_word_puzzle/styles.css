@@ -1,0 +1,79 @@
+/* styles.css */
+
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#board {
+  display: grid;
+  grid-gap: 15px;
+  margin-top: 20px;
+  max-width: 100vw;
+  touch-action: none;
+}
+
+.tile {
+  position: relative;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 5px;
+  user-select: none;
+  box-sizing: border-box;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.tile > div {
+  pointer-events: none;
+}
+
+.tile.selected {
+  background: #88c;
+  color: white;
+  transform: scale(1.05);
+}
+
+.badge {
+  position: absolute;
+  font-size: 10px;
+  opacity: 0.6;
+  z-index: 2;
+  color: #000;
+}
+
+.badge-starting {
+  right: 4px;
+  bottom: 2px;
+  color: #f00;
+}
+
+.badge-passing {
+  left: 4px;
+  bottom: 2px;
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .tile {
+    width: 80px;
+    height: 80px;
+    font-size: 28px;
+  }
+
+  #board {
+    grid-gap: 20px;
+  }
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #666;
+}
