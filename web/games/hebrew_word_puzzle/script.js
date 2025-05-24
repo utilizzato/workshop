@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const boardEl = document.getElementById('board');
-  const wordDisplay = document.getElementById('wordDisplay');
   const wordsRemainingDisplay = document.getElementById('wordsRemaining');
+  const wordDisplay = document.getElementById('wordDisplay');
 
   let boardSize = 4;
   let boardLetters = [];
@@ -25,44 +25,51 @@ const day = String(today.getDate()).padStart(2, '0');
 const savedDate = localStorage.getItem("date_string");
 
 // Build the filename
-const fileName = `board_${year}${month}${day}.json`;
-  fetch(fileName)
-    .then(res => res.json())
-    .then(data => {
-      boardSize = data.size;
-      boardLetters = data.board.toUpperCase().split('');
-      validWords = new Set(data.words.map(w => w.toUpperCase()));
-      wordsToLocations = data.wordsToLocations;
+const fileName = `boards/board_${year}${month}${day}.json`;
+const fallbackFile = 'boards/board_20250522.json';
 
-      if(savedDate !== today.toDateString())
-      {
-        cellPassingWordCounts = data.cellPassingWordCounts;
-        cellStartingWordCounts = data.cellStartingWordCounts;
-        foundWords.clear();
-      }
-      else
-      {
-        console.log("getting items")
-        cellPassingWordCounts = JSON.parse(localStorage.getItem("cellPassingWordCounts"));
-        cellStartingWordCounts = JSON.parse(localStorage.getItem("cellStartingWordCounts"));
-        foundWords = new Set(JSON.parse(localStorage.getItem("foundWords")));
-        // todo: check containment in validWords for midnight bugs???
-      }
-
-
-      if (boardLetters.length !== boardSize * boardSize) {
-        alert("Board letter count doesn't match size.");
-        return;
-      }
-
-      generateBoard();
-      updateWordsRemaining();
-
-    })
-    .catch(err => {
-      alert("Failed to load board.json");
-      console.error(err);
+fetch(fileName)
+  .then(res => {
+    if (!res.ok) throw new Error('Primary board not found');
+    return res.json();
+  })
+  .catch(err => {
+    console.warn(`Failed to load ${fileName}, falling back to ${fallbackFile}`);
+    return fetch(fallbackFile).then(res => {
+      if (!res.ok) throw new Error('Fallback board not found');
+      return res.json();
     });
+  })
+  .then(data => {
+    boardSize = data.size;
+    boardLetters = data.board.toUpperCase().split('');
+    validWords = new Set(data.words.map(w => w.toUpperCase()));
+    wordsToLocations = data.wordsToLocations;
+
+    if (savedDate !== today.toDateString()) { //todo: not check by date but by board string
+      cellPassingWordCounts = data.cellPassingWordCounts;
+      cellStartingWordCounts = data.cellStartingWordCounts;
+      foundWords.clear();
+    } else {
+      console.log("getting items");
+      cellPassingWordCounts = JSON.parse(localStorage.getItem("cellPassingWordCounts"));
+      cellStartingWordCounts = JSON.parse(localStorage.getItem("cellStartingWordCounts"));
+      foundWords = new Set(JSON.parse(localStorage.getItem("foundWords")));
+    }
+
+    if (boardLetters.length !== boardSize * boardSize) {
+      alert("Board letter count doesn't match size.");
+      return;
+    }
+
+    generateBoard();
+    updateWordsRemaining();
+  })
+  .catch(err => {
+    alert("Failed to load both board.json and fallback.");
+    console.error(err);
+  });
+
 
   function generateBoard() {
   boardEl.innerHTML = '';
@@ -85,26 +92,14 @@ const fileName = `board_${year}${month}${day}.json`;
     // Word count badge
 const passingCount = document.createElement('div');
 passingCount.textContent = cellPassingWordCounts[i] ?? '';
-passingCount.style.position = 'absolute';
-passingCount.style.bottom = '2px';
-passingCount.style.left = '4px';
-passingCount.style.fontSize = '10px';
-passingCount.style.color = '#000';
-passingCount.style.opacity = 0.6;
-passingCount.style.zIndex = 2;
+passingCount.classList.add('badge', 'badge-passing');
 
 
 const startingCount = document.createElement('div');
 startingCount.textContent = cellStartingWordCounts[i] ?? '';
 if(startingCount.textContent === "0")
   startingCount.textContent = "";
-startingCount.style.position = 'absolute';
-startingCount.style.bottom = '2px';
-startingCount.style.right = '4px';
-startingCount.style.fontSize = '10px';
-startingCount.style.color = '#ff0000';
-startingCount.style.opacity = 0.6;
-startingCount.style.zIndex = 2;
+startingCount.classList.add('badge', 'badge-starting');
 
 tile.appendChild(passingCount);
 tile.appendChild(startingCount);
@@ -139,6 +134,9 @@ tile.appendChild(startingCount);
     selectedTiles.push(tile);
     selectedPositions.add(index);
     tile.classList.add('selected');
+
+    const word = selectedTiles.map(tile => tile.textContent[0]).join('').toUpperCase();
+    wordDisplay.textContent = word;
   }
 
   function undoLastTile() {
@@ -146,6 +144,8 @@ tile.appendChild(startingCount);
     if (tile) {
       tile.classList.remove('selected');
       selectedPositions.delete(+tile.dataset.index);
+      const word = selectedTiles.map(tile => tile.textContent[0]).join('').toUpperCase();
+      wordDisplay.textContent = word;
     }
   }
 
@@ -187,17 +187,29 @@ tile.appendChild(startingCount);
         tile.style.opacity = '0.1';
       }
     }
-
-
 }
 
   function endSelection() {
     if (isMouseDown) {
       isMouseDown = false;
       const word = selectedTiles.map(tile => tile.textContent[0]).join('').toUpperCase();
-      wordDisplay.textContent = word;
+      if (word.length < 4)
+      {
+        wordDisplay.textContent = word + " (קצר מדי)";
+      }
+      else if (!validWords.has(word))
+      {
+        wordDisplay.textContent = word + " (לא במילון)";
+      }
+
+      if (foundWords.has(word))
+      {
+        wordDisplay.textContent = word + " (כבר נמצא)";
+      }
 
       if (validWords.has(word) && !foundWords.has(word)) {
+        wordDisplay.textContent = word + " ✅";
+
         foundWords.add(word);
         locations = wordsToLocations[String(word)]
         start_idx = coordToIndex(locations[0])
@@ -214,7 +226,6 @@ tile.appendChild(startingCount);
         localStorage.setItem("cellPassingWordCounts", JSON.stringify(cellPassingWordCounts));
         console.log("saving items")
         updateWordsRemaining();
-
       }
 
       clearSelection();
