@@ -27,6 +27,83 @@
     <!-- Main Content Section -->
     <div class="container">
 
+        <article id="fourier">
+            <h2>The Fourier Transform</h2>
+            <b>Nomenclature.</b> The <em>Fourier transform</em> of \(f\in L^1(\mathbf{R}^d)\) is 
+            \( (\mathcal{F}f)(\xi) = \widehat{f}(\xi) = \int_{\mathbf{R}^d} f(x) e^{-2\pi i \xi \cdot x} \text{d}x \)
+            <br><br>
+
+            <b>Examples.</b> 
+            Rectangle: \(\mathcal{F}\left(1_{x\in[-1,1]}\right)(\xi) = \frac{\sin(2\pi\xi)}{\pi \xi}\) <br>
+            Triangle: \(\mathcal{F}\left((1-\lvert x\rvert)\cdot 1_{x\in[-1,1]}\right)(\xi) = \frac{\sin(2\pi\xi)}{\pi \xi}\) <br>
+            \(\widehat{e^{-\lvert x\rvert}} = \frac{2}{1+4\pi^2\xi^2}\) <br>
+            The Gaussian is its own Fourier transform: \(\widehat{e^{-\pi x^2}} = e^{-\pi \xi^2}\).
+            <br><br>
+
+            <b>Facts.</b> For each \(f\in L^1(\mathbf{R}^d)\), we have the following: <br>
+            i. \(\widehat{f}\in\mathscr{C}_0(\mathbf{R}^d)\) is a continuous function vanishing at infinity, 
+            and \(\lVert \widehat{f}\rVert_\infty \le \lVert f \rVert_1\). 
+            That is, \(\mathcal{F}:L^1\longrightarrow \mathscr{C}_0\) is a bounded linear operator. <br>
+            ii. \(\widehat{f}(0) = \int_{\mathbf{R}^d}f(x)\text{d}x\) <br>
+            iii. \(\mathcal{F}\left(f(x+c)\right)(\xi)=e^{2\pi i c\cdot \xi}\cdot\mathcal{F}\left(f\right)(\xi)\) <br>
+            iv. \(\mathcal{F}\left(e^{2\pi i x\cdot c}\cdot f(x)\right)(\xi)=\mathcal{F}\left(f\right)(\xi-c)\) <br>
+            v. \(\widehat{f(\gamma x)}(\xi) = \lvert \gamma \rvert^{-d} \widehat{f}\left(\frac{\xi}{\gamma}\right)\) <br>
+            vi. \(\mathcal{F}(\overline{f(x)}) = \overline{\mathcal{F}(-\xi)}\)
+            <br><br>
+
+            Deriving under the integral sign and integrating by parts, Leibniz would suggest \((\star)\):
+            $$ \partial^\alpha \left(\mathcal{F}(f)\right) = \mathcal{F}\left((-2\pi i x)^\alpha f\right) $$
+            $$ \mathcal{F}(\partial^\alpha f) = \left(2\pi i \xi \right)^\alpha \mathcal{F}(f) $$
+            for each multi-index \(\alpha\). <br>
+            Fubini would suggest \((\diamond)\):
+            $$ \int_{\mathbf{R}^d} \widehat{f}(\xi)g(\xi)\text{d}\xi = \int_{\mathbf{R}^d} f(x)\widehat{g}(x)\text{d}x $$
+            Of course, this only has meaning for a subclass of functions \(f,g\).
+            <br><br>
+
+
+
+            <b>Nomenclature.</b> The <em>Schwartz space</em> \(\mathcal{S}(\mathbf{R}^d)\) is the 
+            space of smooth functions \(f\in\mathscr{C}^{\infty}(\mathbf{R}^d)\) such that \(f\) 
+            and all its derivatives decay at \(\infty\) faster than any polynomial grows to \(\infty\), 
+            namely such that \(x^\alpha (\partial^\beta f)(x)\) is bounded for each pair of multi-indices \(\alpha,\beta\). 
+            <br><br>
+
+            <b>Examples.</b> We have \( p(x)e^{-\pi x^2}\in\mathcal{S}(\mathbf{R^d})\) for each polynomial \(p\). 
+            We also have \(\mathscr{C}^{\infty}_{c}(\mathbf{R}^d)\subset \mathcal{S}(\mathbf{R}^d)\).
+            <br><br>
+
+            <b>Fact.</b> Schwartz space is closed under addition, multiplication, taking derivatives, and 
+            multiplication by polynomials. It is contained in \(L^p\) for each \(p\in[1,\infty]\).
+            <br><br>
+
+            <b>Fact.</b> \((\star,\diamond)\) holds for all Schwartz functions \(f,g\).
+            <br><br>
+
+            <b>Nomenclature.</b> The <em>"inverse" Fourier transform</em> of \(g\in L^1(\mathbf{R}^d)\) 
+            is \((\mathcal{F}^{-1}g)(x)=(\mathcal{F}g)(-x)=\int _{\mathbf{R}^d} g(\xi)e^{2\pi i x\cdot \xi}\text{d}\xi\).
+            <br><br>
+
+            <b>Fact.</b> The Fourier transform is a linear automorphism of Schwartz space, whose inverse is the inverse Fourier transform.
+            $$ f(x) = \int_{\mathbf{R}^d} \widehat{f}(\xi) e^{2\pi i x\cdot \xi}\text{d}\xi $$
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            That \(\mathcal{F}\) takes Schwartz space into itself follows by \((\star)\), as we have 
+            \( \lVert (2\pi i\xi)^\alpha\partial^{\beta} \widehat{f}(\xi) \rVert_{\infty} = \)
+            \( \lVert \mathcal{F}\left(\partial^{\alpha}((-2\pi ix)^\beta f(x)) \right)\rVert_{\infty} \le \)
+            \( \lVert \underset{\in \mathcal{S}}{\dots} \rVert_{1} \lt \infty \). 
+            Now let us fix \(x_0\) and perturb \(e^{2\pi i x_0\cdot \xi}\) as \(\phi_{\varepsilon}(\xi) = e^{2\pi i x_0\cdot \xi - \pi\varepsilon^2 \xi^2} \). We have 
+            \( \int_{\mathbf{R}^d} \widehat{f}(\xi)\phi_{\varepsilon}(\xi) \text{d}\xi = \)
+            \( \int_{\mathbf{R}^d} f(x)\widehat{\phi}_{\varepsilon}(x)\text{d}x = \)
+            \( \int_{\mathbf{R}^d} f(x) \varepsilon^{-d} e^{-\pi (x-x_0)^2/\varepsilon^2}\text{d}x = \)
+            \( (f*K_{\varepsilon})(x_0) \underset{\varepsilon\downarrow 0}{\longrightarrow} f(x_0) \)
+            where \(K_\varepsilon\) is the Gaussian heat kernel. We are done by the dominated convergence theorem.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> The Fourier transform, restricted to Schwartz space, extends to an isometric isomorphism of \(L^2\).
+
+        </article>
 
         <article id="metric-spaces">
             <h2>Metric Spaces - Fundamental Theorems</h2>
