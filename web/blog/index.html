@@ -324,8 +324,21 @@
 
 </body>
 <script>
+// Apply night mode on page load if it's stored in localStorage
+if (localStorage.getItem('nightMode') === 'enabled') {
+    document.body.classList.add('night-mode');
+}
+
+// Toggle night mode on button click
 document.getElementById('night-mode-toggle').addEventListener('click', function() {
     document.body.classList.toggle('night-mode');
+
+    // Save or remove night mode preference in localStorage
+    if (document.body.classList.contains('night-mode')) {
+        localStorage.setItem('nightMode', 'enabled');
+    } else {
+        localStorage.removeItem('nightMode');
+    }
 });
 </script>
 </html>

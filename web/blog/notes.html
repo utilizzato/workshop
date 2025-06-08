@@ -27,6 +27,113 @@
     <!-- Main Content Section -->
     <div class="container">
 
+
+        <article id="fourier">
+            <h2>Ultrafilters</h2> 
+            <b>Nomenclature.</b> Let \(P\) be a poset. An <em>ideal</em> \(I\) of \(P\) is a non-empty subset satisfying: <br>
+            i. \(\forall x\in P\), \(y\in I\), \(x\le y \implies x\in I\), that is \(I\) is <em>closed downwards</em>. <br> 
+            ii. \(\forall x,y\in I\) \(\exists z\in I:\) \(x\le z\) and \(y\le z\), that is \(I\) is an <em>upward directed set</em>.
+            <br><br>
+
+            <b>Fact.</b> \(2^S\) has the same ideals as a poset and as a ring.
+            <br><br>
+
+            We also have a dual notion: <br>
+            <b>Nomenclature.</b> Let \(P\) be a poset. A <em>filter</em> \(F\) of \(P\) is a non-empty subset satisfying: <br>
+            i. \(\forall y\in P\), \(x\in F\), \(x\le y \implies y\in F\), that is \(F\) is <em>closed upwards</em>. <br> 
+            ii. \(\forall x,y\in F\) \(\exists z\in F:\) \(z\le x\) and \(z\le y\), that is \(F\) is a <em>downward directed set</em>.
+            <br><br>
+
+            <b>Nomenclature.</b> A <em>filter</em> on a set \(S\) is a filter of \(2^S\). 
+            Namely it is a family of subsets \(\mathscr{F}\subseteq 2^S\) satisfying: <br>
+            \(S\in\mathscr{F}\). <br>
+            \(\forall A,B\in\mathscr{F}\), \(A\cap B\in\mathscr{F}\). <br>
+            \(\forall A\in\mathscr{F},B\in 2^S\), \(A\subseteq B \implies B\in\mathscr{F}\).
+            <br><br>
+
+            One may think of the sets in the filter \(\mathscr{F}\) as <em>sufficiently large</em>.
+            <br><br>
+
+            <b>Examples.</b> The family of all cofinite sets in \(S\) is a filter. <br>
+            For fixed \(C\subseteq S\), the family of all subsets containing \(C\) is a filter.
+            <br><br>
+
+            Clearly, a filter \(\mathscr{F}\) is proper iff \(\varnothing\not\in\mathscr{F}\).
+            <br><br>
+
+            <b>Nomenclature.</b> An <em>ultrafilter</em> is a maximal proper filter.
+            <br><br>
+
+            <b>Fact.</b> Any proper filter on \(S\) is contained in some ultrafilter.
+            <br><br>
+
+            <b>Fact.</b> A proper filter \(\mathscr{F}\) on \(S\) is an ultrafilter iff it satisfies:
+            \(\forall A\subseteq S\), precisely one of \(A,S\setminus A\) is in \(\mathscr{F}\).
+            <br><br>
+
+            <b>Fact.</b> If \(S\) is infinite, then there exists an ultrafilter on \(S\) containing no finite subsets.
+            <br><br>
+
+            <b>Fact.</b> If \(\mathscr{F}\) is an ultrafilter on \(S\) and 
+            \(\bigsqcup_{i=1}^{n}A_i=S\) is a finite partition of \(S\), 
+            then precisely one of the parts \(A_i\) is in \(\mathscr{F}\).
+            <br><br>
+
+            <b>Fact.</b> Let \(\mathscr{A}\subseteq 2^S\) be a family of subsets. Then the minimal 
+            filter containing \(\mathscr{A}\) is the family of all supersets of all finite intersections of sets in \(\mathscr{A}\).
+            <br><br>
+
+            <b>Nomenclature.</b> Let \(\mathscr{F}\) be a filter on \(X\) and \(f:X\to Y\) a function. 
+            The <em>pushforward</em> of \(\mathscr{F}\) along \(f\) is \(f_*\mathscr{F}=\{B\subseteq Y: f^{-1}(B)\in\mathscr{F}\} \).
+            <br><br>
+
+            <b>Fact.</b> The pushforward of a filter/proper filter/ultrafilter is a filter/proper filter/ultrafilter. 
+            <br><br>
+
+            Recall that for a topological space \(X\), we say that a sequence \(f:\mathbf{N}\to X\) converges to a point \(x\in X\) 
+            if for each neighbourhood \(U\) of \(x\) contains all but finitely many values of \(f\). This can be thought of as a special case of the 
+            following definition.
+            <br><br>
+
+            <b>Nomenclature.</b> Let \(\mathscr{F}\) be a filter on a topological space \(X\). We say that \(\mathscr{F}\) <em>converges</em> to 
+            a point \(x\in X\) and write \(\mathscr{F}\longrightarrow x\) if each neighbourhood \(U\) of \(x\) is in \(\mathscr{F}\).
+            <br><br>
+
+            <b>Fact.</b> For \(A\subseteq X\) and \(x\in X\) we have that \(x\in\overline{A}\) iff \(\mathscr{F}\longrightarrow x\) 
+            for some proper filter \(\mathscr{F}\) containing \(A\).
+            <br><br>
+
+            <b>Fact.</b> A function is continuous iff it preserves ultrafilter convergence.
+            <br><br>
+
+            <b>Fact.</b> A space \(X\) is compact iff each ultrafilter on \(X\) converges to at least one point.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            In the first direction, let \(\mathscr{F}\) be an ultrafilter on a compact space \(X\). 
+            Then \(\bigcap_{A\in\mathscr{F}} \overline{A}\) is non-empty, so fix \(x\) in it. Then each 
+            neighbourhood \(U\) of \(x\) intersects each \(A\in\mathscr{F}\), 
+            and so \(X\setminus U\not\in \mathscr{F}\) giving \(U\in \mathscr{F}\) and \(\mathscr{F}\longrightarrow x\).
+            In the other direction, suppose that \((C_i)_{i\in I}\) is a collection of closed subsets of \(X\) 
+            having no empty finite intersection. We need to show that \(\bigcap_{i\in I}C_i\) is non-empty. 
+            Now, there is an ultrafilter \(\mathscr{F}\) containing all the \(C_i\). 
+            By assumption, \(\mathscr{F}\longrightarrow x\) for some \(x\in X\). Now for each neighbourhood \(U\) of \(x\) 
+            we have that \(U\in \mathscr{F}\implies U\not\subseteq X\setminus C_i\implies U \) intersects \(C_i\) so 
+            \(x\in\overline{C_i}=C_i\) for each \(i\) and \(\bigcap_{i\in I}C_i\) is non-empty, as we wanted.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \((X_i)_i\) be spaces, \(X=\prod_i X_i\) their product, \(x=(x_i)_{i} \in X\) a point, 
+            and \(\mathscr{F}\) a filter on \(X\). 
+            Then \(\mathscr{F}\longrightarrow x\) iff \((\pi_{i})_{*}\mathscr{F}\longrightarrow x_i\) for all \(i\).
+            <br><br>
+            
+            In particular, we have Tychonoff's theorem.
+
+        </article>
+
+
         <article id="fourier">
             <h2>The Fourier Transform</h2>
             <b>Nomenclature.</b> The <em>Fourier transform</em> of \(f\in L^1(\mathbf{R}^d)\) is 
@@ -235,8 +342,21 @@
 
 </body>
 <script>
+// Apply night mode on page load if it's stored in localStorage
+if (localStorage.getItem('nightMode') === 'enabled') {
+    document.body.classList.add('night-mode');
+}
+
+// Toggle night mode on button click
 document.getElementById('night-mode-toggle').addEventListener('click', function() {
     document.body.classList.toggle('night-mode');
+
+    // Save or remove night mode preference in localStorage
+    if (document.body.classList.contains('night-mode')) {
+        localStorage.setItem('nightMode', 'enabled');
+    } else {
+        localStorage.removeItem('nightMode');
+    }
 });
 </script>
 </html>
