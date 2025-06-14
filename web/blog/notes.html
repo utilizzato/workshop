@@ -79,7 +79,7 @@
             <h2>Ultrafilters</h2> 
             <b>Nomenclature.</b> Let \(P\) be a poset. An <em>ideal</em> \(I\) of \(P\) is a non-empty subset satisfying: <br>
             i. \(\forall x\in P\), \(y\in I\), \(x\le y \implies x\in I\), that is \(I\) is <em>closed downwards</em>. <br> 
-            ii. \(\forall x,y\in I\) \(\mathbf{E}xists z\in I:\) \(x\le z\) and \(y\le z\), that is \(I\) is an <em>upward directed set</em>.
+            ii. \(\forall x,y\in I\) \(\exists z\in I:\) \(x\le z\) and \(y\le z\), that is \(I\) is an <em>upward directed set</em>.
             <br><br>
 
             <b>Fact.</b> \(2^S\) has the same ideals as a poset and as a ring.
@@ -88,7 +88,7 @@
             We also have a dual notion: <br>
             <b>Nomenclature.</b> Let \(P\) be a poset. A <em>filter</em> \(F\) of \(P\) is a non-empty subset satisfying: <br>
             i. \(\forall y\in P\), \(x\in F\), \(x\le y \implies y\in F\), that is \(F\) is <em>closed upwards</em>. <br> 
-            ii. \(\forall x,y\in F\) \(\mathbf{E}xists z\in F:\) \(z\le x\) and \(z\le y\), that is \(F\) is a <em>downward directed set</em>.
+            ii. \(\forall x,y\in F\) \(\exists z\in F:\) \(z\le x\) and \(z\le y\), that is \(F\) is a <em>downward directed set</em>.
             <br><br>
 
             <b>Nomenclature.</b> A <em>filter</em> on a set \(S\) is a filter of \(2^S\). 
@@ -276,8 +276,8 @@
             \(n,m\ge N\implies x_n,x_m\in C_N\implies 
             d(x_n,x_m)\le \text{diam}(C_N)\le \varepsilon\).] 
             Since \(M\) is complete, there is some \(x\in M\) with \(x_n\longrightarrow x\).
-            Ergo, for each \(\mathbf{E}ll\), we have that \((x_n)_{n\ge \mathbf{E}ll}\) converges to \(x\), and as 
-            \(C_\mathbf{E}ll\) is closed we have \(x\in C_\mathbf{E}ll\). Thus \(x\in\bigcap_{n=1}^\infty C_n\).
+            Ergo, for each \(\ell\), we have that \((x_n)_{n\ge \ell}\) converges to \(x\), and as 
+            \(C_\ell\) is closed we have \(x\in C_\ell\). Thus \(x\in\bigcap_{n=1}^\infty C_n\).
             On the other hand, if \(y\in \bigcap_{n=1}^\infty C_n \) then 
             \(d(x,y)\le \text{diam}(C_n)\) for each \(n\), so that 
             \( \text{diam}(C_{n})\longrightarrow 0\) implies that \(d(x,y)=0\), i.e \(x=y\).
@@ -330,7 +330,7 @@
 
             <b>Fact.</b> Let \(M\) be a compact metric space and \(\left(U_i\right)_{i\in I}\) an 
             open cover of \(M\). Then 
-            \(\mathbf{E}xists \delta \gt 0\) \(\forall x\in M\) \(\mathbf{E}xists i: B_\delta(x)\subseteq U_i\).
+            \(\exists \delta \gt 0\) \(\forall x\in M\) \(\exists i: B_\delta(x)\subseteq U_i\).
             <br><br>
 
             <details>
