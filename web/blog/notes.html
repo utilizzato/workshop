@@ -379,6 +379,106 @@
             <div class="qed">◼</div>
             </details> <br>
 
+            <b>Fact.</b> Let \(S\) be a set and \(X\) be a topological space. 
+            Then the spaces of (real/complex/any Banach space valued) bounded 
+            functions \(\left(\mathscr{B}(S),\lVert\cdot\rVert_\infty\right)\) 
+            and continuous bounded functions 
+            \(\left(\mathscr{C}_b(X),\lVert\cdot\rVert_\infty\right)\)
+            are Banach spaces. 
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Let \((f_n)\) be Cauchy in \(\left(\mathscr{B}(S),\lVert\cdot\rVert_\infty\right)\). 
+            Ergo, \(\forall \varepsilon \gt 0\) \(\exists N:\) 
+            \(\lVert f_n - f_m \rVert_\infty \le \varepsilon\) \(\forall n,m\ge N\), i.e. 
+            \(\lvert f_n(s) - f_m(s) \rvert \le \varepsilon\) \(\forall n,m\ge N, s\).
+            Hence, for each \(s\in S\) we have that \(f_n(s)\) is a Cauchy sequence of scalars and 
+            so convergent to some scalar \(f(s)\). Since \((f_n)\) is Cauchy, it is bounded, so 
+            there is some bound \(\lVert f_n\rVert_\infty \le C\) \(\forall n\), i.e. 
+            \(\lvert f_n(s)\rvert \le C\) \(\forall n,s\). Taking \(n\longrightarrow\infty\), we have 
+            \(\lvert f(s) \rvert \le C\) \(\forall s\) so \(f\in\mathscr{B}(S)\) is bounded.
+            Now, letting \(m\longrightarrow\infty\) we get 
+            \(\lvert f_n(s) - f(s) \rvert \le \varepsilon\) \(\forall n\ge N, s\), i.e. 
+            \(\lVert f_n - f \rVert_\infty \le \varepsilon\) \(\forall n\ge N\). Thus 
+            \(f_n\longrightarrow f\) uniformly, and 
+            \(\left(\mathscr{B}(S),\lVert\cdot\rVert_\infty\right)\) is complete.
+            Finally, we have that 
+            \(\left(\mathscr{C}_b(X),\lVert\cdot\rVert_\infty\right)\) 
+            is complete because the uniform limit of continuous functions is continuous.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> A pointwise equicontinuous family of functions on a compact metric space 
+            is uniformly equicontinuous. 
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Immediate by Lebesgue's number lemma.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> Let \(X\) be a compact metric space and \((f_n)\) a sequence of 
+            continuous functions \(X\longrightarrow\mathbf{R}^d\) which 
+            is pointwise bounded and equicontinuous. Then it has a uniformly convergent subsequence.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            For each \(\ell \ge 1\) let \(A_\ell\) be a finite set of points such that any 
+            \(x\in X\) has \(\text{dist}(x,A_\ell)\le \ell^{-1}\), and enumerate 
+            \(A=\bigcup_\ell A_\ell\) as \(\{a_1,a_2,a_3,\dots\}\). Now, let \(f_{n}^{0}=f_n\), 
+            and for \(k\ge 1\), using pointwise boundedness, let \(f_{n}^{k}\) be a subsequence of 
+            \(f_{n}^{k-1}\) for which \(f_{n}^{k}(a_k)\) converges. Then \(g_n=f_n^n\) is 
+            eventually a subsequence of each \(f_n^k\) and hence \(g_n(a_k)\) converges for each 
+            \(k\). Since \(X\) is compact, \(\mathscr{C}(X)=\mathscr{C}_b(X)\) is a Banach space 
+            under \(\lVert\cdot\rVert_\infty\), so it remains to show that \(g_n\) is uniformly 
+            Cauchy. Now, since \(X\) is compact, \((f_n)\) and hence \((g_n)\) is uniformly 
+            equicontinuous. So let \(\varepsilon\gt 0\) be given, and using uniform equicontinuity 
+            fix \(\delta\gt 0\) be such that 
+            \(\forall x_1,x_2\in X\) 
+            \(d(x_1,x_2)\le \delta\)
+            \(\implies \lvert g_n(x_1)-g_n(x_2) \rvert \le \varepsilon\) 
+            \(\forall n\).
+            Now fix \(\ell\) with \(\ell^{-1}\le \delta\), so for each \(x\in X\) we may pick 
+            \(a_x\in A_\ell\) with \(d(x,a_x)\le\delta\), and thus we have 
+            \(\lvert g_n(x) - g_m(x)\rvert \le\)
+            \(\lvert g_n(x) - g_n(a_x)\rvert +\)
+            \(\lvert g_n(a_x) - g_m(a_x) \rvert +\)
+            \(\lvert g_m(a_x) - g_m(x)\rvert \). 
+            The first and third summands are \(\le \varepsilon\) for any \(n,m\), and since 
+            \(A_\ell\) is finite, we may find \(N\) for which the second summand is 
+            \(\le \varepsilon\) for any \(n,m\ge N\) and any \(x\). 
+            Thus 
+            \(\lVert g_n-g_m\rVert_\infty \le 3\varepsilon\) \(\forall n,m\ge N\), so \((g_n)\) 
+            is uniformly Cauchy as needed.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> Let \(X\) be a compact topological space, and let \(f,f_n:X\to\mathbf{R}\) 
+            be a real valued continuous functions, and suppose that \(f_n(x)\downarrow f(x)\) for 
+            each \(x\in X\). Then \(f_n\longrightarrow f\) uniformly.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            We may assume \(f=0\). Given \(\varepsilon\gt 0\), we know that 
+            \(\forall x \exists N_x:\) \(f_n(x)\lt \varepsilon\) \(\forall n\ge N_x\). 
+            So letting \(W_n=\{f_n\lt \varepsilon\}\), we have that \(W_n\) is an open cover of \(X\). 
+            However \(X\) is compact, and by monotonicity we have 
+            \(W_1\subseteq W_2\subseteq W_3\subseteq \dots\), and so \(\exists N\) with 
+            \(W_N=X\), and so \(\lVert f_n\rVert_\infty \lt \varepsilon\) for all \(n\ge N\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            
+
+
         </article>
 
     </div>
