@@ -33,21 +33,20 @@
             <b>Problem.</b> Let \(m\) affine hyperplanes in general position be given in Euclidean 
             \(d\)-dimensional space. Determine the number of regions they devide the space into.
             <br><br>
-            
+
             <details>
             <summary><b>Solution.</b></summary>
-            Let \(R_{m,d}\) denote the answer. Clearly \(R_{m,1}=m+1\). To determine 
-            \(R_{m,2}\), we count the number of new regions formed by the \(m\)-th line 
-            \(R_{m,2}-R_{m-1,2}\). Each region we had in the last step either remained intact 
-            or was split in two by the \(m\)-th line. This number of regions is precisely the 
-            number of regions that the \(m\)-th line is now divided into, i.e. 
-            \(R_{m-1,1}=m\). Thus \(R_{m,2}={m\choose 2}+m+1\). The same argument applies in 
-            all dimensions, and we have \(R_{m,d}=\sum_{j=0}^{d}{m\choose j}\).
+            Let \(R_{m,d}\) denote the answer. Clearly \(R_{m,1}=m+1\). To determine \(R_{m,2}\), we count the 
+            number of new regions formed by the \(m\)-th line \(R_{m,2}-R_{m-1,2}\). Each region we had in the last 
+            step either remained intact or was split in two by the \(m\)-th line. This number of regions is 
+            precisely the number of regions that the \(m\)-th line is now divided into, i.e. \(R_{m-1,1}=m\). Thus 
+            \(R_{m,2}={m\choose 2}+m+1\). The same argument applies in all dimensions, and we have 
+            \(R_{m,d}=\sum_{j=0}^{d}{m\choose j}\).
             </details> <br>
 
-            <b>Problem.</b> Let \(p_1,\dots,p_m\) be independent, uniformly random points on the 
-            unit sphere in \(\mathbf{R}^d\). Determine the probability \(p_{m,d}\) of the following 
-            (equivalent) events to occur: <br>
+            <b>Problem.</b> Let \(p_1,\dots,p_m\) be independent, uniformly random points on the unit sphere in 
+            \(\mathbf{R}^d\). Determine the probability \(p_{m,d}\) of the following (equivalent) events to occur: 
+            <br>
             i. The origin does not belong to the convex hull of \(p_1,\dots,p_m\). <br>
             ii. There exists a half-sphere containing \(p_1,\dots,p_m\). <br>
             iii. The half-spheres centered at \(p_1,\dots,p_m\) all intersect. <br>
@@ -57,27 +56,24 @@
         
             <details>
             <summary><b>Solution.</b></summary>
-            For \(d=1\) we clealry have \(p_{m,1}=\frac{1}{2^{m-1}}\). The case \(d=2\) is already 
-            interesting, and may be solved as follows. For each point \(p\) in the unit circle, we 
-            consider the half-circle \(J_p\) going counterclockwise from \(p\) to its antipodal 
-            point. Let \(A_i\) denote the event that \(J_{p_i}\) contains \(p_1,\dots,p_m\). Then 
-            it's easy to see that the \(A_i\) are disjoint and their union is the desired event. 
-            Clearly \(\text{Pr}(A_i)=\frac{1}{2^{m-1}}\), so \(p_{m,2}=\frac{m}{2^{m-1}}\). The 
-            idea for the next dimensions will be not to generate the random points 
-            \(p_1,\dots,p_m\) but instead to first generate random antipodal point pairs 
-            \(\pm p_1,\dots,\pm p_m\), and then count the number of sign combinations contributng 
-            to our event. Now, the point pair \(\pm p\) is equivalent to the splitting of the 
-            sphere into the two half-spheres centered at \(\pm p\), so we have \(m\) random such 
-            splits, and we're interested in the number of choices of half-spheres that all 
-            intersect, i.e. in the number of regions we've devide the sphere into. This number, 
-            \(S_{m,d}\), is independent of the random choices of antipodal pairs, and similarly to 
-            before we have \(S_{m,d}=2R_{m-1,d-1}\). Thus 
+            For \(d=1\) we clealry have \(p_{m,1}=\frac{1}{2^{m-1}}\). The case \(d=2\) is already interesting, and 
+            may be solved as follows. For each point \(p\) in the unit circle, we consider the half-circle \(J_p\) 
+            going counterclockwise from \(p\) to its antipodal point. Let \(A_i\) denote the event that \(J_{p_i}\) 
+            contains \(p_1,\dots,p_m\). Then it's easy to see that the \(A_i\) are disjoint and their union is the 
+            desired event. Clearly \(\text{Pr}(A_i)=\frac{1}{2^{m-1}}\), so \(p_{m,2}=\frac{m}{2^{m-1}}\). The idea 
+            for the next dimensions will be not to generate the random points \(p_1,\dots,p_m\) but instead to 
+            first generate random antipodal point pairs \(\pm p_1,\dots,\pm p_m\), and then count the number of 
+            sign combinations contributng to our event. Now, the point pair \(\pm p\) is equivalent to the 
+            splitting of the sphere into the two half-spheres centered at \(\pm p\), so we have \(m\) random such 
+            splits, and we're interested in the number of choices of half-spheres that all intersect, i.e. in the 
+            number of regions we've devide the sphere into. This number, \(S_{m,d}\), is independent of the random 
+            choices of antipodal pairs, and similarly to before we have \(S_{m,d}=2R_{m-1,d-1}\). Thus 
             \(p_{m,d}=\frac{\sum_{j=0}^{d-1}{m-1\choose j}}{2^{m-1}}\).
             </details> <br>
 
-            <b>Problem.</b> Let \(X\) denote the number of points drawn from a sphere until their 
-            convex hull contains the sphere's center. Determine \(\mathbf{E}[X]\) and 
-            \(\text{Var}[X]\). <br><br>
+            <b>Problem.</b> Let \(X\) denote the number of points drawn from a sphere until their convex hull 
+            contains the sphere's center. Determine \(\mathbf{E}[X]\) and \(\text{Var}[X]\). 
+            <br><br>
 
             <details>
             <summary><b>Solution.</b></summary>
@@ -95,14 +91,15 @@
 
         <article id="bounded-harmonic-functions">
             <h2>Bounded Harmonic Functions</h2>
-            <b>Theorem.</b> Let \( f:\mathbf{R}^d\to \mathbf{R}\) be a bounded harmonic function. 
-            Then \( f\) is constant. <br><br>
+            <b>Theorem.</b> Let \( f:\mathbf{R}^d\to \mathbf{R}\) be a bounded harmonic function. Then \( f\) is 
+            constant. <br><br>
         
             <details>
             <summary><b>Proof.</b></summary>
-            We fix a pair of points \(p, q\) distanced \(\gamma\) apart, and average \(f\) on 
-            balls of radius \(r\) around each of them. As \(r\) tends to infinity, the symmetric 
-            difference of the balls becomes negligble. <br><br>
+            We fix a pair of points \(p, q\) distanced \(\gamma\) apart, and average \(f\) on balls of radius \(r\) 
+            around each of them. As \(r\) tends to infinity, the symmetric difference of the balls becomes 
+            negligble.
+            <br><br>
 
             \( \lvert f(p)-f(q) \rvert = \)
             \( \dfrac{\lvert \int_{B_r(p)} f - \int_{B_r(q)} f\rvert}{\text{vol}(B_r)} \le \)
@@ -112,41 +109,34 @@
             <div class="qed">◼</div>
             </details> <br>
 
-            <b>Theorem.</b> Let \( f:\mathbf{Z}^d\to \mathbf{R}\) be a bounded harmonic function. 
-            Then \( f\) is constant. <br><br>
+            <b>Theorem.</b> Let \( f:\mathbf{Z}^d\to \mathbf{R}\) be a bounded harmonic function. Then \( f\) is 
+            constant. <br><br>
     
             <details>
             <summary><b>Proof 1.</b></summary>
-            Suppose for the sake of contradiction that \( f(0) \lt f(e_1) \), and set 
-            \( g(x) = f(x+e_1) - f(x) \). Then \( g \) is also bounded and harmonic, and 
-            \( S:=\sup g \gt 0\). For given \( \varepsilon \), fix \( x_\varepsilon \) with 
-            \( g(x_\varepsilon) \ge S-\varepsilon \). 
-            Then any neighbour of \( x_\varepsilon \) has value at least \( S-2d\varepsilon\) 
-            under \( g \). More generally, if \( y\) has distance \( k\) from \( x_\varepsilon \) 
-            then \( g(y)\ge S-(2d)^k\varepsilon \). Thus 
+            Suppose for the sake of contradiction that \( f(0) \lt f(e_1) \), and set \( g(x) = f(x+e_1) - f(x) \). 
+            Then \( g \) is also bounded and harmonic, and \( S:=\sup g \gt 0\). For given \( \varepsilon \), fix 
+            \( x_\varepsilon \) with \( g(x_\varepsilon) \ge S-\varepsilon \). Then any neighbour of 
+            \( x_\varepsilon \) has value at least \( S-2d\varepsilon\) under \( g \). More generally, if \( y\) 
+            has distance \( k\) from \( x_\varepsilon \) then \( g(y)\ge S-(2d)^k\varepsilon \). Thus 
             \( f(x_\varepsilon + ke_1) - f(x_\varepsilon) = \)
             \( g(x_\varepsilon) + g(x_\varepsilon + e_1) +\dots+ g(x_\varepsilon + (k-1)e_1) \ge \)
-            \( kS - k(2d)^k\varepsilon \) 
-            can be made arbitrarily large by appropriatly specifing \( k \) and \( \varepsilon \), 
-            a contradiction.
+            \( kS - k(2d)^k\varepsilon \) can be made arbitrarily large by appropriatly specifing \( k \) and 
+            \( \varepsilon \), a contradiction.
             <div class="qed">◼</div>
             </details> <br>
 
             <details>
             <summary><b>Proof 2.</b></summary>
-            Fix \( p,q\in\mathbf{Z}^{d} \). 
-            Consider the lazy symmetric random walks \( X_{n},Y_{n} \) in \( \mathbf{Z}^{d} \) 
-            starting respectively at \( p,q \), and evolving as follows. Each time we draw a 
-            random step \( s=\pm e_{i} \). If \( X_{n},Y_{n}\) agree in the \(i\)-th coordinate, 
-            we draw a coin to decide if whether both walks take the step \(s\), or both stay in 
-            place. If \( X_{n},Y_{n}\) disagree in the \(i\)-th coordinate, we draw a coin to 
-            decide which of the walks takes the step \(s\), with the other staying in place. Since 
-            \(\mathbf{Z}\) is recurrent, we have \(\lim_{n}\Pr(X_{n}=Y_{n})=1\). Thus 
-            \(\lvert f(p)-f(q)\rvert = \)
-            \(\lvert \mathbf{E} f(X_{n})-f(Y_{n})\rvert \le\)
-            \(\mathbf{E}\lvert f(X_{n})-f(Y_{n})\rvert \le\)
-            \(2\lVert f\rVert_{\infty}\Pr(X_{n}\neq Y_{n})\to0\) as desired.
-            Alternatively, using martingale theory we have 
+            Fix \( p,q\in\mathbf{Z}^{d} \). Consider the lazy symmetric random walks \( X_{n},Y_{n} \) in 
+            \( \mathbf{Z}^{d} \) starting respectively at \( p,q \), and evolving as follows. Each time we draw a 
+            random step \( s=\pm e_{i} \). If \( X_{n},Y_{n}\) agree in the \(i\)-th coordinate, we draw a coin to 
+            decide if whether both walks take the step \(s\), or both stay in place. If \( X_{n},Y_{n}\) disagree 
+            in the \(i\)-th coordinate, we draw a coin to decide which of the walks takes the step \(s\), with the 
+            other staying in place. Since \(\mathbf{Z}\) is recurrent, we have \(\lim_{n}\Pr(X_{n}=Y_{n})=1\). Thus 
+            \(\lvert f(p)-f(q)\rvert = \) \(\lvert \mathbf{E} f(X_{n})-f(Y_{n})\rvert \le\)
+            \(\mathbf{E}\lvert f(X_{n})-f(Y_{n})\rvert \le\) \(2\lVert f\rVert_{\infty}\Pr(X_{n}\neq Y_{n})\to0\) 
+            as desired. Alternatively, using martingale theory we have 
             \( f(p)=\mathbf{E} f(X_{T})=\mathbf{E} f(Y_{T})=f(q) \).
             <div class="qed">◼</div>
             </details> <br> 
@@ -176,62 +166,62 @@
 
         <article id="an-overkill-proof-of-the-fta">
             <h2>An Overkill Proof of the FTA</h2>
-            Let \(f(z)=z^{d}+ a_1 z^{d-1} + \dots + a_d\) be a monic non-constant polynomial. We 
-            wish to show that \(f\) has a zero. <br><br>
+            Let \(f(z)=z^{d}+ a_1 z^{d-1} + \dots + a_d\) be a monic non-constant polynomial. We wish to show that 
+            \(f\) has a zero. 
+            <br><br>
             We fix a lattice and its corresponding Weierstrass elliptic function \(\wp\). Then 
-            \(f\circ \wp = \wp^{d}+ a_1 \wp^{d-1} + \dots + a_d\) is clearly elliptic of order 
-            \(2d \gt 0\) and so has a zero. Hence \(f\) has a zero.
+            \(f\circ \wp = \wp^{d}+ a_1 \wp^{d-1} + \dots + a_d\) is clearly elliptic of order \(2d \gt 0\) and so 
+            has a zero. Hence \(f\) has a zero.
         </article>
 
 
 
         <article id="stochastic-dodgeball">
             <h2>Stochastic Dodgeball</h2>
-            Joint with Haran Pilpel. <br><br>
+            Joint with Haran Pilpel. 
+            <br><br>
 
-            We consider the following stochastic model for the game of dodgeball, raised by Yoav 
-            Katz and Reem Waxman: <br><br>
+            We consider the following stochastic model for the game of dodgeball, raised by Yoav Katz and Reem 
+            Waxman: 
+            <br><br>
             
-            <b>Game description.</b> There are \( n \) players, initally all <em>free</em>. 
-            The game ends when only one free player remains. 
-            Untill then, at each turn, two free players \( A \) and \( B \) are chosen at random 
-            and \( A \) <em>captures</em> \( B\), leading to all of \( B \)'s captives to become 
-            free (and rejoin the game). <br><br>
+            <b>Game description.</b> There are \( n \) players, initally all <em>free</em>. The game ends when only 
+            one free player remains. Until then, at each turn, two free players \( A \) and \( B \) are chosen at 
+            random and \( A \) <em>captures</em> \( B\), leading to all of \( B \)'s captives to become free (and 
+            rejoin the game). 
+            <br><br>
             
-            We are interested in the game's expected number of turns. By disregarding the 
-            identities of the players, we may represent a state of the game simply as a partition 
-            of \( n \). Namely, if there are \( \ell \) free players, then the partition has 
-            \( \ell \) parts of sizes corresponding to the number of captives each free player 
-            holds (plus one to account for the free player). To get a feeling for the game, the 
-            reader is instructed to determine the Markov chain representing the game for 
-            \( n= 4\), where there are only five states. <br><br>
+            We are interested in the game's expected number of turns. By disregarding the identities of the 
+            players, we may represent a state of the game simply as a partition of \( n \). Namely, if there are 
+            \( \ell \) free players, then the partition has \( \ell \) parts of sizes corresponding to the number 
+            of captives each free player holds (plus one to account for the free player). To get a feeling for the 
+            game, the reader is instructed to determine the Markov chain representing the game for \( n= 4\), where 
+            there are only five states.
+            <br><br>
 
-            <b>Theorem.</b> For \( \lambda = (\lambda_1,\dots) \)  a partition of \( n\) 
-            representing a starting state of the game, the expected number of turns for the game 
-            to end equals \( 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \). In particular, for the 
-            starting state where all the \( n\)  players are free, the game's expected lifetime is 
-            \( 2^{n-1}-1\)  turns. <br><br>
+            <b>Theorem.</b> For \( \lambda = (\lambda_1,\dots) \)  a partition of \( n\) representing a starting 
+            state of the game, the expected number of turns for the game to end equals 
+            \( 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \). In particular, for the starting state where all the 
+            \( n\)  players are free, the game's expected lifetime is \( 2^{n-1}-1\)  turns. 
+            <br><br>
 
             <details>
             <summary><b>Proof.</b></summary>
             Let \( E(\lambda) \) denote the expected number of turns for the game to end, and 
-            \( F(\lambda) = 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \). As long as \(\lambda\) is 
-            not the terminal state \((n)\), suppose two free players \(a,b\)  are chosen, and let 
-            \(\lambda^{ab}\)  and \(\lambda^{ba}\) be the new states depending on whether \(a\) 
-            captures \(b\)  or \(b\) captures \(a\). Then we have 
-            \(\dfrac{F(\lambda^{ab})+F(\lambda^{ba})}{2}=F(\lambda)-1\). In particular, if 
+            \( F(\lambda) = 2^{n-1}-1-\sum_{j}(2^{\lambda_{j}-1}-1) \). As long as \(\lambda\) is not the terminal 
+            state \((n)\), suppose two free players \(a,b\)  are chosen, and let \(\lambda^{ab}\) and 
+            \(\lambda^{ba}\) be the new states depending on whether \(a\) captures \(b\)  or \(b\) captures \(a\). 
+            Then we have \(\dfrac{F(\lambda^{ab})+F(\lambda^{ba})}{2}=F(\lambda)-1\). In particular, if 
             \(\lambda'\)  represents the (random) state following \(\lambda\), then 
-            \(\mathbf{E}F(\lambda')=F(\lambda)-1\). The only functions satisfying this condition 
-            are those of the form \(F(\lambda)=E(\lambda)+c\), where \(c\)  is some constant. But 
-            \(F(\lambda)\)  and \(E(\lambda)\)  both vanish on the terminal state \((n)\), and so 
-            \(F(\lambda)=E(\lambda)\)  as claimed. <div class="qed">◼</div>
+            \(\mathbf{E}F(\lambda')=F(\lambda)-1\). The only functions satisfying this condition are those of the 
+            form \(F(\lambda)=E(\lambda)+c\), where \(c\)  is some constant. But \(F(\lambda)\) and 
+            \(E(\lambda)\)  both vanish on the terminal state \((n)\), and so \(F(\lambda)=E(\lambda)\) as claimed. <div class="qed">◼</div>
             <br><br>
 
-            The proof shows, in fact, that the distribution with which we choose the pair 
-            \(\{A,B\}\) of free players to compete for each turn has no influence on the expected 
-            number of turns for the game to end (even though it completely changes the Markov 
-            chain describing the game), as long as the odds of \(A\) capturing \(B\) and those of 
-            \(B\) capturing \(A\) are the same. 
+            The proof shows, in fact, that the distribution with which we choose the pair \(\{A,B\}\) of free 
+            players to compete for each turn has no influence on the expected number of turns for the game to end 
+            (even though it completely changes the Markov chain describing the game), as long as the odds of \(A\) 
+            capturing \(B\) and those of \(B\) capturing \(A\) are the same. 
             </details> <br>
         </article>
 
@@ -241,77 +231,71 @@
             <h2>Swapping Labels on a Tree</h2>
             Joint with Nadav Trumer. <br><br>
 
-            The first problem on the second day of Iran's 2014 team selection test for the 
-            international mathematical olympiad 
+            The first problem on the second day of Iran's 2014 team selection test for the international 
+            mathematical olympiad 
             <a href="https://artofproblemsolving.com/community/c6h619482p3697731">read</a>: 
             <br><br>
 
             <b>Problem.</b> Consider a tree with \(n\) vertices labeled \(1,\dots,n\). By 
-            <em>acting</em> on an edge we mean swapping the labels of its endpoints. By acting 
-            once on each edge, in some order of the edges, we create a permutation of the labels. 
-            Show that this permutation is a full \(n\) cycle. <br><br>
+            <em>acting</em> on an edge we mean swapping the labels of its endpoints. By acting once on each edge, 
+            in some order of the edges, we create a permutation of the labels. Show that this permutation is a full 
+            \(n\) cycle. <br><br>
 
             <details>
             <summary><b>Solution.</b></summary> 
             By induction on the tree, for example by considering the last edge acted upon.
             </details> <br>
 
-            We are interested in the number of possible permutations achievable through the above 
-            process. To get a feeling for the problem, the reader is instructed to work out the 
-            cases of a star and some small paths. <br><br>
-            
+            We are interested in the number of possible permutations achievable through the above process. To get a 
+            feeling for the problem, the reader is instructed to work out the cases of a star and some small paths. <br><br>
+
             <b>Theorem.</b> Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). For each 
-            enumeration of the \(n-1\) edges of \(T\), we form a permutation of \(1,\dots,n\) by 
-            sequentially swapping the labels of the endpoints of each edge. The number of distinct 
-            permutations thus formed is equal to \(\prod_v d_v!\), where \(d_v\) is the degree of 
-            vertex \(v\) in \(T\). <br><br>
-
-            <details>
-            <summary><b>Proof.</b></summary> 
-            Suppose that for each vertex \(v\), we are supplied with the order by which we acted 
-            on the \(d_v\) edges meeting \(v\). Then we may construct the output permutation as 
-            follows: for each vertex \(v_1\), let \(v_1v_2\) be the first edge meeting \(v_1\) on 
-            which we acted, let \(v_2v_3\) be the first edge meeting \(v_2\) on which we acted 
-            after acting on \(v_1v_2\), and so on, until \(v_{r-1}v_{r}\) was the last edge 
-            meeting \(v_{r}\) on which we acted. Then \(v_1\) is mapped to \(v_r\) by the 
-            permutation, and since \(v_1\) was generic we may indeed construct the output 
-            permutation. On the other hand, suppose that we are supplied with the output 
-            permutation (for some enumeration of the edges). Then we may determine, for each 
-            vertex \(v\), the order by which we acted on the \(d_v\) edges meeting \(v\). To see 
-            this, let \(r=d_v\), let \(e_1,\dots,e_r\) be the edges meeting \(v\) by the ordering 
-            in which we act on them, let \(T_1,\dots,T_r\) be the trees of \(T-v\), and 
-            \(e_i=vw_i\) with \(w_i\in T_i\). Then \(v\) is mapped by the permutation inside 
-            \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) except for one which maps 
-            to \(T_2\), all of \(T_2\)'s vertices are kept inside \(T_2\), except for one which 
-            maps to \(T_3\) and so on, until lastly all of \(T_r\)'s vertices are kept inside 
-            \(T_r\), except for one which maps to \(v\). So, the order \(e_1,\dots,e_r\) may 
-            indeed be determined by the output permutation. It follows from the above bijection 
-            that the number of feasible outcome permutations is equal to \(\prod_v d_v!\) as 
-            claimed. <div class="qed">◼</div>
-            </details> <br>
-    
-            In fact, we have a criterion for feasibility of a permutation. <br><br>
-
-            <b>Theorem.</b> 
-            Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). Then a permutation of 
-            \(\{1,\dots,n\}\) is feasible (namely can be formed by swapping the labels of the 
-            endpoints of each edge of \(T\) in some order) if, and only if, for each vertex \(v\) 
-            there is an enumeration \(T_1,\dots,T_r\) of the trees of \(T-v\) (for \(r=d_v\)) such 
-            that \(v\) is mapped inside \(T_1\), all of \(T_1\)'s vertices are kept inside \(T_1\) 
-            except for one which maps to \(T_2\), and so on, until lastly all of \(T_r\)'s 
-            vertices are kept inside \(T_r\) except for one which maps to \(v\).
+            enumeration of the \(n-1\) edges of \(T\), we form a permutation of \(1,\dots,n\) by sequentially 
+            swapping the labels of the endpoints of each edge. The number of distinct permutations thus formed is 
+            equal to \(\prod_v d_v!\), where \(d_v\) is the degree of vertex \(v\) in \(T\). 
             <br><br>
 
             <details>
             <summary><b>Proof.</b></summary> 
-            As noted above, necessity follows by considering the order by which we acted on the 
-            edges meeting \(v\). For sufficiency, let \(\pi\) be a permutation which satisfies the 
-            above property. For each vertex \(v\), we consider the first edge in the path from 
-            \(v\) to \(\pi(v)\). By the pigeonhole principle, we have an edge \(vw\) specified by 
-            both \(v\) and \(w\). Finding such an edge, we swap it first. We see that for the two 
-            trees formed by removing this edge, the relabeling that remains to perform on each of 
-            them also satisfies the above property, and so by recursion we may continue and 
-            construct a sequence of edge swaps forming \(\pi\). <div class="qed">◼</div>
+            Suppose that for each vertex \(v\), we are supplied with the order by which we acted on the \(d_v\) 
+            edges meeting \(v\). Then we may construct the output permutation as follows: for each vertex \(v_1\), 
+            let \(v_1v_2\) be the first edge meeting \(v_1\) on which we acted, let \(v_2v_3\) be the first edge 
+            meeting \(v_2\) on which we acted after acting on \(v_1v_2\), and so on, until \(v_{r-1}v_{r}\) was the 
+            last edge meeting \(v_{r}\) on which we acted. Then \(v_1\) is mapped to \(v_r\) by the permutation, 
+            and since \(v_1\) was generic we may indeed construct the output permutation. On the other hand, 
+            suppose that we are supplied with the output permutation (for some enumeration of the edges). Then we 
+            may determine, for each vertex \(v\), the order by which we acted on the \(d_v\) edges meeting \(v\). 
+            To see this, let \(r=d_v\), let \(e_1,\dots,e_r\) be the edges meeting \(v\) by the ordering in which 
+            we act on them, let \(T_1,\dots,T_r\) be the trees of \(T-v\), and \(e_i=vw_i\) with \(w_i\in T_i\). 
+            Then \(v\) is mapped by the permutation inside \(T_1\), all of \(T_1\)'s vertices are kept inside 
+            \(T_1\) except for one which maps to \(T_2\), all of \(T_2\)'s vertices are kept inside \(T_2\), except 
+            for one which maps to \(T_3\) and so on, until lastly all of \(T_r\)'s vertices are kept inside 
+            \(T_r\), except for one which maps to \(v\). So, the order \(e_1,\dots,e_r\) may indeed be determined 
+            by the output permutation. It follows from the above bijection that the number of feasible outcome 
+            permutations is equal to \(\prod_v d_v!\) as claimed. <div class="qed">◼</div>
+            </details> <br>
+
+            In fact, we have a criterion for feasibility of a permutation. <br><br>
+
+            <b>Theorem.</b> 
+            Let \(T\) be a tree on \(n\) vertices labeled \(1,\dots,n\). Then a permutation of \(\{1,\dots,n\}\) is 
+            feasible (namely can be formed by swapping the labels of the endpoints of each edge of \(T\) in some 
+            order) if, and only if, for each vertex \(v\) there is an enumeration \(T_1,\dots,T_r\) of the trees of 
+            \(T-v\) (for \(r=d_v\)) such that \(v\) is mapped inside \(T_1\), all of \(T_1\)'s vertices are kept 
+            inside \(T_1\) except for one which maps to \(T_2\), and so on, until lastly all of \(T_r\)'s vertices 
+            are kept inside \(T_r\) except for one which maps to \(v\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary> 
+            As noted above, necessity follows by considering the order by which we acted on the edges meeting 
+            \(v\). For sufficiency, let \(\pi\) be a permutation which satisfies the above property. For each 
+            vertex \(v\), we consider the first edge in the path from \(v\) to \(\pi(v)\). By the pigeonhole 
+            principle, we have an edge \(vw\) specified by both \(v\) and \(w\). Finding such an edge, we swap it 
+            first. We see that for the two trees formed by removing this edge, the relabeling that remains to 
+            perform on each of them also satisfies the above property, and so by recursion we may continue and 
+            construct a sequence of edge swaps forming \(\pi\). 
+            <div class="qed">◼</div>
             </details> <br>
         </article>
 
