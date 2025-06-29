@@ -95,16 +95,84 @@
 
             <b>Fact.</b> Let \(g\in L^{\infty}(\mathbf{R})\) have \(\lim_{x\to\infty} (f*g)(x)=a\) where 
             \(f\in L^1(\mathbf{R})\) has \(\int_{\mathbf{R}}f=1\) and \(\widehat{f}(\xi)\) not vanishing. Then 
-            \(\forall \delta \) we have \(\lim_{x\to\infty} \frac{1}{\delta}\int_{x}^{x+\delta}g = a\). In particular, if \(g\) is uniformly continuous then \(\lim_{x\to\infty} g(x) = a\).
+            \(\forall \varphi\in L^1(\mathbf{R})\) we have 
+            \(\lim_{x\to\infty} (\varphi * g)(x)=a \int_{\mathbf{R}}\varphi\). 
+            <br>
+            In particular, \(\forall \delta \) we have 
+            \(\lim_{x\to\infty} \frac{1}{\delta}\int_{x}^{x+\delta}g = a\), so if \(g\) is uniformly continuous 
+            then \(\lim_{x\to\infty} g(x) = a\).
             <br><br>
 
             <details>
             <summary><b>Proof.</b></summary> 
-            Since \(\widehat{f}(\xi)\) doesn't vanish, we have that \(\text{span}\left(f_t\right)_{t\in\mathbf{R}}\) is dense in \(L^1(\mathbf{R})\), and note that \((f_t*g)=(f*g)_t\) also approaches \(a\) at infinity. Now let \(\varphi=\frac{1}{\delta}1_{[-\delta,0]},\) so that \(\int\varphi=1\) and \((\varphi*g)(x)=\frac{1}{\delta}\int_{x}^{x+\delta}g\). Given \(\varepsilon\), we may find \(\lVert \sum_{1}^{k}\alpha_{j}f_{t_j} - \varphi\rVert_1 \le \varepsilon\) with \(\sum \alpha_{j}=1\). Ergo \(\lVert \sum_{1}^{k}\alpha_{j}f_{t_j}*g- \varphi*g \rVert_{\infty}\le \lVert g\rVert_{\infty}\varepsilon \) so \(\varphi * g\) is arbitrarily close to functions approaching \(a\) at infinity, and hence approaches \(a\) at infinity itself.
+            Since \(\widehat{f}(\xi)\) doesn't vanish, we have that 
+            \(\text{span}\left(f_t\right)_{t\in\mathbf{R}}\) is dense in \(L^1(\mathbf{R})\), and note that 
+            \((f_t*g)=(f*g)_t\) also approaches \(a\) at infinity. Now let 
+            Given \(\varepsilon\), we may find 
+            \(\lVert \sum_{1}^{k}\alpha_{j}f_{t_j} - \varphi\rVert_1 \le \varepsilon\) with 
+            \(\sum \alpha_{j}=\int_{\mathbf{R}}\varphi\). Ergo 
+            \(\lVert \sum_{1}^{k}\alpha_{j}f_{t_j}*g- \varphi*g \rVert_{\infty}\le\)
+            \(\lVert g\rVert_{\infty}\varepsilon \) so \(\varphi * g\) is arbitrarily close to functions approaching 
+            \(a\int_{\mathbf{R}}\varphi\) at infinity, and hence approaches \(a\int_{\mathbf{R}}\varphi\) at infinity itself.
             <div class="qed">◼</div>
             </details> <br>
 
 
+            <b>Fact.</b> Let \( g:[0,\infty)\longrightarrow [0,\infty) \) be weakly increasing, supported on 
+            \([1,\infty)\), and suppose \(G(x)=\sum_{n\ge 1}g(\frac{x}{n})\) satisfies \(G(x)=Ax\log x+Bx+o(x)\). Then 
+            \(g(x)\sim Ax\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof Sketch.</b></summary> 
+            Before we start, recall that \(\left(\mathbf{R},\text{d}x\right) \cong ((0,\infty), \frac{\text{d}t}{t})\) 
+            via \(t=e^x\). Via this isomorphism, convolution becomes 
+            \((f*g)(u)=\int_{0}^{\infty}f(t)g(\frac{u}{t})\frac{\text{d}t}{t}\), and the Fourier transform becomes the 
+            <em>Mellin transform</em> \((Mf)(s)=\int_{0}^{\infty}f(t)t^{-is}\frac{\text{d}t}{t} \).
+            <br>
+            Starting, we have that 
+            \(A\log(2)x+o(x)=G(x)-2G(\frac{x}{2})=\sum_{m\ge1}g(\frac{x}{2m-1})-g(\frac{x}{2m})\ge g(x)-g(\frac{x}{2})\) 
+            and so \(g(x)=O(x)\). Let \(h(x)=\frac{g(x)}{x}\in L^\infty((0,\infty), \frac{\text{d}t}{t})\). Now let 
+            \(\phi(t)=\frac{\lfloor t\rfloor}{t}\). Notice that \(\phi(t)=1+O(t^{-1})\) as \(t\longrightarrow\infty\) 
+            and so \(\phi(t)\not\in L^1((0,\infty), \frac{\text{d}t}{t})\). Forgetting this for the moment, we have 
+            \( (\phi*h)(u) =\)
+            \(\frac{1}{u}\int_{0}^{\infty}\lfloor t\rfloor g(u/t) \text{d}t/t  =\)
+            \(\frac{1}{u}\sum_{n\ge 1} \int_{n}^{\infty} g(u/t)\text{d}t/t = \)
+            \(\frac{1}{u}\sum_{n\ge 1} \int_{1}^{u} g(u/nt)\text{d}t/t = \)
+            \(\frac{1}{u}\int_{1}^{u} G(u/t)\text{d}t/t = \)
+            \(\frac{1}{u}\int_{1}^{u} G(t)\text{d}t/t =: R(u) =\)
+            \(A\log u - A + B + o(1)\).
+            Also, "we have" 
+            \((M\phi)(s)=\int_{0}^{\infty}\lfloor t\rfloor t^{-2-is}\text{d}t = \)
+            \(\sum_{n\ge 1}\int_{n}^{\infty} t^{-2-is} = \)
+            \(\sum_{n\ge 1} \frac{n^{-1-is}}{1+is}=\frac{\zeta(1+is)}{1+is}\) 
+            (the convergence requires \(\Im s \lt 0\)). However, for some \(a,b\gt 0\) to be chosen later let 
+            \(\tilde\phi(t)=2\phi(t)-\phi(at)-\phi(bt)\). Then \(\tilde\phi\in L^1((0,\infty), \frac{\text{d}t}{t})\) 
+            and \((M\tilde\phi)(s)=(2-a^{is}-b^{is})\frac{\zeta(1+is)}{1+is}\). Now recall that \(\zeta\) has a 
+            meromorphic continuation to \(\mathbf{C}\) with a single simple pole at \(1\) of residue \(1\), and 
+            \(\zeta(z)\) does not vanish on \(\Re z = 1\). A generic choice of \(a,b\) has 
+            \(\log(a)/\log(b)\not\in \mathbf{Q}\) so that \(2-a^{is}-b^{is}\) doesn't vanish on \(s\in\mathbf{R}\), and 
+            so \((M\tilde\phi)(s)\) doesn't vanish for \(s\in\mathbf{R}\).
+            We have \(\int_{0}^{\infty}\tilde\phi(t) \text{d}t/t=(M\tilde\phi)(0)=-\log(ab)\), and 
+            \((\tilde\phi * h)(u) = 2R(u)-R(au)-R(bu) = -A\log(ab) + o(1)\) so \( (\tilde\phi * h)(u) \longrightarrow A\int_{0}^{\infty}\tilde\phi(t) \text{d}t/t\). Thus for any 
+            \(\varphi\in L^1((0,\infty), \frac{\text{d}t}{t}) \) with \(\int_0^\infty \varphi(t) \text{d}t/t=1\) we 
+            have \((\varphi * h)(u)\longrightarrow A\). Let us fix \(r\gt 1\), and set 
+            \(\varphi^{+} = \frac{1}{\log(r)} 1_{[1,r]}\), \(\varphi^{-} = \frac{1}{\log(r)} 1_{[r^{-1},1]}\).
+            Then \(\int_0^\infty \varphi^{\pm}(t)\text{d}t/t = 1\), and 
+            \((\varphi^{+} * h)(u) = \int_1^r h(u/t) \frac{\text{d}t}{\log(r)t}\),
+            \((\varphi^{-} * h)(u) = \int_{r^{-1}}^1 h(u/t) \frac{\text{d}t}{\log(r)t}\). In the first case, we have 
+            \(h(u/t) = g(u/t)t/u \le g(u)t/u\le g(u)r/u = h(u)r\), and in the second we have 
+            \(h(u/t) = g(u/t)t/u \ge g(u)t/u\ge g(u)r^{-1}/u = h(u)r^{-1}\), thus in total \(r^{-1}(\varphi^{+} * h)(u) \le h(u) \le r(\varphi^{-} * h)(u) \), hence \([\liminf h, \limsup h]\subseteq [r^{-1}A,rA]\). Taking 
+            \(r\downarrow 1\), we have \(\lim h=A\) as we wanted.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Example.</b> Let \(\psi(x)=\sum_{p^k \le x} \log p\). Then 
+            \(\sum_{m\ge 1} \psi(\frac{x}{m}) = \)
+            \(\sum_{mp^k\le x}\log p = \)
+            \(\sum_{n\le x}\log n = \)
+            \(\log(\lfloor x\rfloor !) = x\log x - x + o(x) \).
+            Thus \(\psi(x)\sim x\), giving us the prime number theorem.
         </article>
 
 
