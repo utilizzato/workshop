@@ -25,7 +25,7 @@ const day = String(today.getDate()).padStart(2, '0');
 const savedDate = localStorage.getItem("date_string");
 
 // Build the filename
-const fileName = `boards/board_${year}${month}${day}.json`;
+const fileName = `boards/${year}${month}${day}_easy.json`;
 const fallbackFile = 'boards/board_20250522.json';
 
 fetch(fileName)
