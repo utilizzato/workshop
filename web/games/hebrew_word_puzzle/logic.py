@@ -4,10 +4,11 @@ import time
 from dataclasses import dataclass
 import json
 from datetime import datetime, timedelta
+import numpy as np
 
-test_mode = True
+test_mode = False
 hebrew_words_file = "hspell_simple.txt" # https://github.com/eyaler/hebrew_wordlists/blob/main/hspell_simple.txt
-hebrew_letters = "אבגדהוזחטיכלמנסעפצקרשתךםןףץ"
+hebrew_letters = "אבגדהוזחטיכלמנסעפצקרשת"
 special_no_letter = "@"
 min_word_length = 4
 deltas = [(x,y) for x in [-1,0,1] for y in [-1,0,1] if not x == y == 0]
@@ -151,17 +152,53 @@ class Board:
                 ret = Board(self.size, cur_string)
                 return ret        
 
-def generate_random_board_with_min_num_words(size, min_num_words):
+def generate_random_board_with_min_num_words(size, min_num_words, max_num_words, min_num_long_words = 2, long_word_min_length = 6):
     count = 0
     start_time = time.time()
     while True:
         count += 1
         board = Board(size)
-        if len(board.words) >= min_num_words and min(board.passing_words_count.values()) > 0:
+        num_long_words = len([x for x in board.words if len(x) >= long_word_min_length])
+        num_words = len(board.words)
+        if num_words >= min_num_words and num_words <= max_num_words and min(board.passing_words_count.values()) > 0 and num_long_words >= min_num_long_words:
             end_time = time.time()
             if test_mode:
                 print(f"generated {count} random boards, runtime: {end_time - start_time:.4f} seconds, num words {len(board.words)}")
             return board
+
+
+def get_some_stats():
+    arr = []
+    while len(arr) < 1000:
+        gb = generate_random_board_with_min_num_words(3, 0, float('inf'))
+        arr.append(len(gb.words))
+    arr = np.array(arr)
+    quantiles = np.quantile(arr, [0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 0.9])
+    print(quantiles)
+
+
+def generate_boards_for_many_dates(cutoff_1 = 25, cutoff_2 = 40, start_date = datetime.today().date(), end_date = datetime(2030, 1, 1).date()):
+    cnt_wasted = 0
+
+    current_date = {"easy": start_date,
+                    "med": start_date,
+                    "hard": start_date}
+
+    while(min(current_date["easy"], current_date["med"], current_date["hard"])  < end_date):
+        gb = generate_random_board_with_min_num_words(3, 0, float('inf'))
+        num_words = len(gb.words)
+        level = "easy" if num_words <= cutoff_1 else "med" if num_words <= cutoff_2 else "hard"
+        if current_date[level] < end_date:
+            date_str = current_date[level].strftime("%Y%m%d")
+            gb.to_json(f"boards/{date_str}_{level}.json")
+            current_date[level] += timedelta(days=1)
+            print(f"generated level = {level} for date = {current_date[level]}")
+        else:
+            cnt_wasted += 1
+    
+    print(f"wasted cnt = {cnt_wasted}")
+
+generate_boards_for_many_dates()
 
 def validate_words(word_list):
     for word in word_list:
