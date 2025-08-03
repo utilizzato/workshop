@@ -1,17 +1,21 @@
 
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:wght@400;700&family=STIX+Two+Math&display=swap');
+
 body {
     font-family: 'STIX Two Text', serif;
     line-height: 1.8;
     background-color: #f4f4f4;
+    color: #333;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 header {
-    background-color: #333;
+    background-color: #2f66a1; 
     color: white;
     text-align: center;
-    padding: 12px 0;
+    padding: 1rem 0;
 }
 
 header h1 {
@@ -20,22 +24,25 @@ header h1 {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
 }
 
 article {
     background-color: white;
+    font-size: 1.2rem;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 article h2 {
     font-size: 2.5rem;
-    color: #333;
+    color: #2f66a1; /* Matches the header color */
+    margin-top: 0;
 }
 
 article p {
@@ -43,33 +50,76 @@ article p {
     color: #555;
 }
 
-.math-equation {
-    background-color: #fafafa;
-    padding: 15px;
-    border-left: 5px solid #333;
-    margin: 20px 0;
-    font-family: 'Courier New', monospace;
-    font-size: 1.3rem;
-    color: #333;
+
+.MathJax, .katex {
+    font-family: 'STIX Two Math', 'STIX Two Text', serif !important;
+}
+
+a {
+    color: #2f66a1; 
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2980b9;
 }
 
 footer {
     text-align: center;
-    padding: 10px;
-    background-color: #333;
+    padding: 1rem;
+    background-color: #2f66a1;
     color: white;
 }
 
-footer a {
-    color: #ffd700;
-    text-decoration: none;
+.qed {
+    float: right;
+    display: inline;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #555;
 }
 
-footer a:hover {
-    text-decoration: underline;
+.night-mode {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
 }
 
-/* Responsive Design */
+.night-mode header {
+    background-color: #0d0d0d;
+}
+
+.night-mode article {
+    background-color: #1f1f1f;
+    color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+}
+
+.night-mode article h2 {
+    color: #fff;
+}
+
+.night-mode article p {
+    color: #ccc;
+}
+
+.night-mode footer {
+    background-color: #0d0d0d;
+}
+
+.night-mode a {
+    color: #61afef;
+}
+
+.night-mode a:hover {
+    color: #3a8fe9;
+}
+
+.night-mode .qed {
+    color: #aaa;
+}
+
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
@@ -82,37 +132,36 @@ footer a:hover {
     article p {
         font-size: 1rem;
     }
+
+    .container {
+        padding: 10px;
+    }
 }
 
-a {
-    color: #1E90FF; /* Blue link color */
-    text-decoration: none; /* Optional: removes underline */
+summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
 }
 
-a:visited {
-    color: #1E90FF; /* Ensure visited links remain blue */
+summary::marker {
+  display: none;
 }
 
-a:hover {
-    color: #1E90FF; /* Optional: keeps blue color on hover */
+summary::before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10.4px solid currentColor;
+  transition: transform 0.2s ease;
+  display: inline-block;
+  transform: translateY(-1px) rotate(0deg); /* lift it slightly */
 }
 
-a:active {
-    color: #1E90FF; /* Optional: keeps blue color when clicked */
-}
-
-.qed{float: right; display: inline;}
-
-/* Night mode styles */
-.night-mode{
-    background-color: #0b0b0b; /* Dark background */
-}
-
-.night-mode article{
-    background-color: black; /* Dark background */
-    color: #ffffff; /* Light text */
-}
-
-.night-mode article h2{
-    color: white;
+details[open] summary::before {
+  transform: translateY(-1px) rotate(180deg);
 }
