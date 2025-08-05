@@ -165,3 +165,9 @@ summary::before {
 details[open] summary::before {
   transform: translateY(-1px) rotate(180deg);
 }
+
+th, td {
+  border: 1px solid black;
+  padding: 10px;
+  text-align: left;
+}
