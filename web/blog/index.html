@@ -26,6 +26,57 @@
 
     <!-- Main Content Section -->
     <div class="container">
+        <article id="random-points-on-the-sphere">
+            <h2>One Sided Random Walk</h2>
+            <b>Problem.</b> Consider a random walk which starts at the origin and takes steps according to (i.i.d fair six sided) die tosses. Let \(p_n\) be the probability that the walk will ever hit \(n\). Find \(\underset{n\to\infty}{\lim} p_n\).
+            <br><br>
+
+            <details>
+            <summary><b>Solution 1.</b></summary>
+            The answer is \(3.5^{-1}\). Here's a heuristic. After \(N\) steps, we've hit \(N\) points out of \(X_N\sim 3.5N\) possible ones.
+            </details> <br>
+
+            <details>
+            <summary><b>Solution 2.</b></summary>
+            Let us stop the walk as soon as we cross (hit or skip) \(N\). So we stop somewhere in \([N,N+5]\). The probability of stopping at \(N\) is \(p_N\), of stopping at \(N+1\) is \(\dfrac{1}{6}(p_{N-5}+p_{N-4}+\dots+p_{N-1})\), and so on,
+            <table>
+              <tr>
+                <td>\(x\)</td>
+                <td>The probability of stopping at \(x\)</td>
+              </tr>
+              <tr>
+                <td>\(N\)</td>
+                <td>\(p_N\)</td>
+              </tr>
+              <tr>
+                <td>\(N+1\)</td>
+                <td>\(\dfrac{1}{6}(p_{N-1}+p_{N-2}+\dots+p_{N-5})\)</td>
+              </tr>
+              <tr>
+                <td>\(N+2\)</td>
+                <td>\(\dfrac{1}{6}(p_{N-1}+p_{N-2}+\dots+p_{N-4})\)</td>
+              </tr>
+              <tr>
+                <td>\(N+3\)</td>
+                <td>\(\dfrac{1}{6}(p_{N-1}+p_{N-2}+p_{N-3})\)</td>
+              </tr>
+              <tr>
+                <td>\(N+4\)</td>
+                <td>\(\dfrac{1}{6}(p_{N-1}+p_{N-2})\)</td>
+              </tr>
+              <tr>
+                <td>\(N+5\)</td>
+                <td>\(\dfrac{1}{6}p_{N-1}\)</td>
+              </tr>
+            </table>
+            So in total, letting \(p\) denote the limit, we have \(1=\dfrac{6+5+\dots+1}{6}p \implies p=3.5^{-1}\).
+            </details> <br>
+
+            <details>
+            <summary><b>Solution 3.</b></summary>
+            We have \(p_n = \dfrac{1}{6}(p_{n-1}+\dots+p_{n-6})\). Ergo, \(p_n=\alpha_0\zeta_0^n + \alpha_1\zeta_1^n+\dots+\alpha_5\zeta_5^n\) for some constants \(\alpha_j\), where \(\zeta_j\) are the roots of \(1=\dfrac{\zeta^{-1}+\dots+\zeta^{-6}}{6}\). Clearly \(\zeta_0=1\) is a simple root, and the other roots have \(\lvert\zeta_j\rvert\lt 1\) by the triangle inequality. So \(\lim p_n=\alpha_0\). Now \(q(z)=\dfrac{6z^6-z^5-\dots-1}{z-1}=Az^5+Bz^4+\dots+F\) is a polynomial whose roots are the \(\zeta_j\), and so \(A\zeta_j^{m+5}+B\zeta_j^{m+4}+\dots+F\zeta_j^{m}=0\). Thus we have \(6=A=Ap_0+Bp_{-1}+\dots+Fp_{-5}=(A+B+\dots+F)(\alpha_0+0\cdot 5)=\alpha_0 q(1)\). By L'Hôpital, we have \(q(1)=\dfrac{6\cdot 6-5-\dots-0}{1}\). So in total \(\lim p_n = \alpha_0= \dfrac{1}{6-\frac{0+\dots+5}{6}}=3.5^{-1}\).
+            </details> <br>
+        </article>
 
 
         <article id="random-points-on-the-sphere">
