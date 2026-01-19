@@ -340,7 +340,6 @@ int tree_calc_main()
     tree_destroy(NOT_T);
     tree_destroy(NOT_F);
 
-
     tree_destroy(DII);
 
     return 0;
