@@ -350,6 +350,591 @@
             </details> <br>
         </article>
 
+        
+        <article id="Tauber">
+            <h2>Tauberian Theorems</h2> 
+
+            <b>Nomenclature.</b> A sequence \((a_n)\) is <em>Cesàro convergent</em> if its sequence of partial means 
+            \(\frac{a_1+\dots+a_n}{n}\) is convergent. <br>A series \(\sum a_n\) is <em>Cesàro summable</em> if its 
+            sequence of partial sums is Cesàro convergent. <br>A series \(\sum a_n\) is <em>Abel summable</em> if 
+            \(\lim_{r\uparrow 1} \sum a_nr^n\) exists. 
+            <br><br>
+
+            <b>Fact.</b> Regular convergence \(\implies\) Cesàro convergence (to the same limit). 
+            <br> 
+            Regular summability \(\implies\) Cesàro summability \(\implies\) Abel summability (to the same limit).
+            <br><br> 
+            <details>
+            <summary><b>Proof.</b></summary> Regular convergence \(\implies\) Cesàro convergence: Let 
+            \(a_n\longrightarrow\ell\),  and we want to show that 
+            \(\sigma_n=\dfrac{a_1+\dots+a_n}{n}\longrightarrow\ell\). We may assume \(\ell=0\). Fix \(C\) with 
+            \(\lvert a_n\rvert \le C\) for all \(n\). Given \(\varepsilon\), fix  \(N\) with 
+            \(n\ge N\implies \lvert a_n\rvert \le \varepsilon\). Then 
+            \(\lvert\sigma_n\rvert \le \dfrac{NC}{n}+\varepsilon \le 2\varepsilon\) for all large enough \(n\).
+            <div class="qed">◼</div>
+            <br>
+            Cesàro summability \(\implies\) Abel summability: Let \(\sum a_n\) be Cesàro summable to \(s\), namely let  
+            \(s_n=a_1+\dots+a_n\), and \(\sigma_n=\dfrac{s_1+\dots+s_n}{n}\) with \(\sigma_n\longrightarrow s\).  We 
+            want to show that \(\sum a_n\) is Abel summable to \(s\). We may assume \(s=0\). Now, we have 
+            $$ \sum_{n=1}^{\infty}a_n r^n = (1-r)^2\sum_{n=1}^{\infty}n\sigma_n r^n$$ and 
+            \((1-r)^2 \sum_{n=1}^{\infty} n r^n = r\) for \(\lvert r \rvert \lt 1\).  Now, given \(\varepsilon\), fix 
+            \(N\) with \(\lvert \sigma_n\rvert\le \varepsilon\) for all \(n\ge N\). Then we have 
+            \(\lvert \sum_{n=1}^{\infty}a_n r^n \rvert =\)
+            \(\lvert (1-r)^2\sum_{n=1}^{\infty}n\sigma_n r^n \rvert \le\)
+            \((1-r)^2\sum_{k=1}^{N} k\lvert\sigma_k\rvert r^k + \varepsilon r \le 2\varepsilon\) as \(r\uparrow 1\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(\sum a_n\) be Cesàro summable, and assume \(a_n = O(1/n)\). Then \(\sum a_n\) exists.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary> Let \(s_n=a_1+\dots+a_n\), and \(\sigma_n=\dfrac{s_1+\dots+s_n}{n}\). 
+            <!-- We have $$ s_n - \sigma_n = \dfrac{1}{n}\sum_{k=1}^{n} (k-1)a_k $$ --> For \(m\lt n\) we have 
+            $$ s_n-\sigma_n = \dfrac{m}{n-m}(\sigma_n-\sigma_m) + \dfrac{1}{n-m}\sum_{i=m+1}^{n}(s_n-s_i) $$ now since 
+            \(\lvert na_n\rvert \le C\), we have for the above \(i\)'s that 
+            $$ \lvert s_n - s_i \rvert \le \dfrac{C(n-i)}{i+1}\le \dfrac{C(n-m-1)}{m+2} $$ Now let 
+            \(\varepsilon\) be given. Take \(m = \left\lfloor \frac{n-\varepsilon}{1+\varepsilon} \right\rfloor \). 
+            Then \(\frac{n-m-1}{m+2}\le\varepsilon \implies \lvert s_n-s_i\rvert\le C\varepsilon \implies \) 
+            \(\left\lvert \dfrac{1}{n-m}\sum_{i=m+1}^{n}(s_n-s_i) \right\rvert \le C\varepsilon \). Also 
+            \(\frac{m}{n-m}\le\frac{1}{\varepsilon}\), and \(m_n\longrightarrow\infty\) as \(n\longrightarrow\infty\), 
+            and so \(\left \lvert \dfrac{m}{n-m}(\sigma_n-\sigma_m) \right\rvert\longrightarrow 0\) so finally 
+            \(s_n-\sigma_n\longrightarrow 0 \) as \(n\longrightarrow \infty\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> Let \(g\in L^{\infty}(\mathbf{R})\) have \(\lim_{x\to\infty}g(x)=a\), and let 
+            \(f\in L^1(\mathbf{R})\) have \(\int_{\mathbf{R}}f=1\). Then \(\lim_{x\to\infty}(f*g)(x)=a\). 
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary> 
+            We have \(\left\lvert (f*g)(x) - g(x) \right\rvert = \) 
+            \( \left\lvert \int_{\mathbf{R}} f(y) (g(x-y) - g(x))\text{d}y \right\rvert \le \)
+            \( \int_{\mathbf{R}} \lvert f(y)\rvert \lvert g(x-y) - g(x) \rvert \text{d}y \) 
+            \( \underset{x\to\infty}{\longrightarrow} 0 \) by the DCT.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(g\in L^{\infty}(\mathbf{R})\) have \(\lim_{x\to\infty} (f*g)(x)=a\) where 
+            \(f\in L^1(\mathbf{R})\) has \(\int_{\mathbf{R}}f=1\) and \(\widehat{f}(\xi)\) not vanishing. Then 
+            \(\forall \varphi\in L^1(\mathbf{R})\) we have 
+            \(\lim_{x\to\infty} (\varphi * g)(x)=a \int_{\mathbf{R}}\varphi\). 
+            <br>
+            In particular, \(\forall \delta \) we have 
+            \(\lim_{x\to\infty} \frac{1}{\delta}\int_{x}^{x+\delta}g = a\), so if \(g\) is uniformly continuous 
+            then \(\lim_{x\to\infty} g(x) = a\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary> 
+            Since \(\widehat{f}(\xi)\) doesn't vanish, we have that 
+            \(\text{span}\left(f_t\right)_{t\in\mathbf{R}}\) is dense in \(L^1(\mathbf{R})\), and note that 
+            \((f_t*g)=(f*g)_t\) also approaches \(a\) at infinity. Now let 
+            Given \(\varepsilon\), we may find 
+            \(\lVert \sum_{1}^{k}\alpha_{j}f_{t_j} - \varphi\rVert_1 \le \varepsilon\) with 
+            \(\sum \alpha_{j}=\int_{\mathbf{R}}\varphi\). Ergo 
+            \(\lVert \sum_{1}^{k}\alpha_{j}f_{t_j}*g- \varphi*g \rVert_{\infty}\le\)
+            \(\lVert g\rVert_{\infty}\varepsilon \) so \(\varphi * g\) is arbitrarily close to functions approaching 
+            \(a\int_{\mathbf{R}}\varphi\) at infinity, and hence approaches \(a\int_{\mathbf{R}}\varphi\) at infinity itself.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> Let \( g:[0,\infty)\longrightarrow [0,\infty) \) be weakly increasing, supported on 
+            \([1,\infty)\), and suppose \(G(x)=\sum_{n\ge 1}g(\frac{x}{n})\) satisfies \(G(x)=Ax\log x+Bx+o(x)\). Then 
+            \(g(x)\sim Ax\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof Sketch.</b></summary> 
+            Before we start, recall that \(\left(\mathbf{R},\text{d}x\right) \cong ((0,\infty), \frac{\text{d}t}{t})\) 
+            via \(t=e^x\). Via this isomorphism, convolution becomes 
+            \((f*g)(u)=\int_{0}^{\infty}f(t)g(\frac{u}{t})\frac{\text{d}t}{t}\), and the Fourier transform becomes the 
+            <em>Mellin transform</em> \((Mf)(s)=\int_{0}^{\infty}f(t)t^{-is}\frac{\text{d}t}{t} \).
+            <br>
+            Starting, we have that 
+            \(A\log(2)x+o(x)=G(x)-2G(\frac{x}{2})=\sum_{m\ge1}g(\frac{x}{2m-1})-g(\frac{x}{2m})\ge g(x)-g(\frac{x}{2})\) 
+            and so \(g(x)=O(x)\). Let \(h(x)=\frac{g(x)}{x}\in L^\infty((0,\infty), \frac{\text{d}t}{t})\). Now let 
+            \(\phi(t)=\frac{\lfloor t\rfloor}{t}\). Notice that \(\phi(t)=1+O(t^{-1})\) as \(t\longrightarrow\infty\) 
+            and so \(\phi(t)\not\in L^1((0,\infty), \frac{\text{d}t}{t})\). Forgetting this for the moment, we have 
+            \( (\phi*h)(u) =\)
+            \(\frac{1}{u}\int_{0}^{\infty}\lfloor t\rfloor g(u/t) \text{d}t/t  =\)
+            \(\frac{1}{u}\sum_{n\ge 1} \int_{n}^{\infty} g(u/t)\text{d}t/t = \)
+            \(\frac{1}{u}\sum_{n\ge 1} \int_{1}^{u} g(u/nt)\text{d}t/t = \)
+            \(\frac{1}{u}\int_{1}^{u} G(u/t)\text{d}t/t = \)
+            \(\frac{1}{u}\int_{1}^{u} G(t)\text{d}t/t =: R(u) =\)
+            \(A\log u - A + B + o(1)\).
+            Also, "we have" 
+            \((M\phi)(s)=\int_{0}^{\infty}\lfloor t\rfloor t^{-2-is}\text{d}t = \)
+            \(\sum_{n\ge 1}\int_{n}^{\infty} t^{-2-is} = \)
+            \(\sum_{n\ge 1} \frac{n^{-1-is}}{1+is}=\frac{\zeta(1+is)}{1+is}\) 
+            (the convergence requires \(\Im s \lt 0\)). However, for some \(a,b\gt 0\) to be chosen later let 
+            \(\tilde\phi(t)=2\phi(t)-\phi(at)-\phi(bt)\). Then \(\tilde\phi\in L^1((0,\infty), \frac{\text{d}t}{t})\) 
+            and \((M\tilde\phi)(s)=(2-a^{is}-b^{is})\frac{\zeta(1+is)}{1+is}\). Now recall that \(\zeta\) has a 
+            meromorphic continuation to \(\mathbf{C}\) with a single simple pole at \(1\) of residue \(1\), and 
+            \(\zeta(z)\) does not vanish on \(\Re z = 1\). A generic choice of \(a,b\) has 
+            \(\log(a)/\log(b)\not\in \mathbf{Q}\) so that \(2-a^{is}-b^{is}\) doesn't vanish on \(s\in\mathbf{R}\), and 
+            so \((M\tilde\phi)(s)\) doesn't vanish for \(s\in\mathbf{R}\).
+            We have \(\int_{0}^{\infty}\tilde\phi(t) \text{d}t/t=(M\tilde\phi)(0)=-\log(ab)\), and 
+            \((\tilde\phi * h)(u) = 2R(u)-R(au)-R(bu) = -A\log(ab) + o(1)\) so \( (\tilde\phi * h)(u) \longrightarrow A\int_{0}^{\infty}\tilde\phi(t) \text{d}t/t\). Thus for any 
+            \(\varphi\in L^1((0,\infty), \frac{\text{d}t}{t}) \) with \(\int_0^\infty \varphi(t) \text{d}t/t=1\) we 
+            have \((\varphi * h)(u)\longrightarrow A\). Let us fix \(r\gt 1\), and set 
+            \(\varphi^{+} = \frac{1}{\log(r)} 1_{[1,r]}\), \(\varphi^{-} = \frac{1}{\log(r)} 1_{[r^{-1},1]}\).
+            Then \(\int_0^\infty \varphi^{\pm}(t)\text{d}t/t = 1\), and 
+            \((\varphi^{+} * h)(u) = \int_1^r h(u/t) \frac{\text{d}t}{\log(r)t}\),
+            \((\varphi^{-} * h)(u) = \int_{r^{-1}}^1 h(u/t) \frac{\text{d}t}{\log(r)t}\). In the first case, we have 
+            \(h(u/t) = g(u/t)t/u \le g(u)t/u\le g(u)r/u = h(u)r\), and in the second we have 
+            \(h(u/t) = g(u/t)t/u \ge g(u)t/u\ge g(u)r^{-1}/u = h(u)r^{-1}\), thus in total \(r^{-1}(\varphi^{+} * h)(u) \le h(u) \le r(\varphi^{-} * h)(u) \), hence \([\liminf h, \limsup h]\subseteq [r^{-1}A,rA]\). Taking 
+            \(r\downarrow 1\), we have \(\lim h=A\) as we wanted.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Example.</b> Let \(\psi(x)=\sum_{p^k \le x} \log p\). Then 
+            \(\sum_{m\ge 1} \psi(\frac{x}{m}) = \)
+            \(\sum_{mp^k\le x}\log p = \)
+            \(\sum_{n\le x}\log n = \)
+            \(\log(\lfloor x\rfloor !) = x\log x - x + o(x) \).
+            Thus \(\psi(x)\sim x\), giving us the prime number theorem.
+        </article>
+
+
+        <article id="ultrafilters">
+            <h2>Stone Weierstrass</h2> 
+
+            <b>Fact.</b> The polynomials are dense in \( \mathscr{C}([0,1]) \). 
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Let \( f\in \mathscr{C}([0,1]) \), and write 
+            \( f_{n}(p)=\sum_{k=0}^{n}{n \choose k}p^{k}(1-p)^{n-k}f\left(\frac{k}{n}\right) \). These are 
+            polynomials, and we have \( f_n(p) = \mathbf{E}[f(Y)] \) where \( Y=\frac{X_1+\dots+X_n}{n} \)  with 
+            \( X_i \sim B(p) \) independent Bernoulli variables. We shall show that \( f_n \longrightarrow f \) 
+            uniformly. Firstly, we have 
+            \( \lvert f_{n}(p)-f(p) \rvert = \)
+            \(\lvert \mathbf{E} [f(Y)-f(p)] \rvert\le\mathbf{E} \lvert f(Y)-f(p) \rvert \).
+            Now we fix \( \varepsilon \), and, using uniform continuity, pick \( \delta \) with 
+            \( \lvert x-y \rvert \lt \delta\implies \lvert f(x)-f(y) \rvert \lt \varepsilon \). We have 
+            \( \Pr\left(\delta\le\lvert Y-p\rvert \right)\le\)
+            \(\dfrac{\text{var}[Y]}{\delta^{2}}=\dfrac{p(1-p)}{n\delta^{2}}\le \dfrac{1}{4n\delta^{2}} \), and thus 
+            \( \lVert f_{n}-f \rVert_{\infty} \le \varepsilon + \frac{2\lVert f\rVert_{\infty}}{4n\delta^2} \) 
+            \( \le 2\varepsilon \) for all large enough \( n \). 
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(X\) be compact Hausdorff. Then any \(\mathbf{R}\)-subalgebra 
+            \(\mathscr{A}\le\mathscr{C}_{\mathbf{R}}(X)\) which separates points is dense. 
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Without loss of generality let \(\mathscr{A}=\overline{\mathscr{A}}\) be closed. We first claim that 
+            \(\mathscr{A}\) is closed under absolute value. Indeed, let \(f\in\mathscr{A}\) and fix a sequence of 
+            polynomials \( C_{n}(t)\in\mathscr{R}[t] \) with \( C_{n}(t)\to\lvert t \rvert \) uniformly on 
+            \( [-\lVert f \rVert_{\infty}, \lVert f \rVert_{\infty}] \) , so 
+            \( \mathscr{A}\ni C_{n}\circ f\to\lvert f \rvert \) uniformly on \(X\). Thus \( \mathscr{A} \) is closed 
+            under \( \min \) and \( \max \). Now fix \( F\in\mathscr{C}_{\mathscr{R}}(X) \) and \( \varepsilon \). By 
+            separation, for each \( x,y\in X \) we may find \( g_{x,y}\in\mathscr{A} \) with \( g_{x,y}(x)=F(x) \), 
+            \( g_{x,y}(y)=F(y) \). We consider the neighborhoods 
+            \( U_{x,y}=\left\{ g_{x,y} \lt F+\varepsilon\right\} \). Now, for each \(x\), we may find a finite subcover 
+            \( X=U_{x,y_{1}}\cup\dots\cup U_{x,y_{n(x)}} \) and set \( f_{x}=\min(g_{x,y_{1}},\dots,g_{x,y_{n(x)}}) \) 
+            so that \( f_{x}\in\mathscr{A}, f_{x} \lt F+\varepsilon \), and \( f_{x}(x)=F(x) \). Now we consider the 
+            neighborhoods \( V_{x}=\left\{ F-\varepsilon \lt f_{x}\right\} \), and find a finite subcover 
+            \( X=V_{x_{1}}\cup\dots\cup V_{x_{m}} \). Then \( f=\max(f_{x_{1}},\dots,f_{x_{m}})\in\mathscr{A} \) has 
+            \(\lVert {f-F}\rVert_{\infty}\le\varepsilon\). 
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(X\) be compact Hausdorff. Then any \(\mathbf{C}\)-subalgebra 
+            \(\mathscr{A}\le\mathscr{C}_{\mathbf{C}}(X)\) which separates points and is closed under conjugation is dense. 
+            <br>
+        </article>
+
+
+        <article id="ultrafilters">
+            <h2>Ultrafilters</h2> 
+            <b>Nomenclature.</b> Let \(P\) be a poset. An <em>ideal</em> \(I\) of \(P\) is a non-empty subset satisfying: <br>
+            i. \(\forall x\in P\), \(y\in I\), \(x\le y \implies x\in I\), that is \(I\) is <em>closed downwards</em>. <br> 
+            ii. \(\forall x,y\in I\) \(\exists z\in I:\) \(x\le z\) and \(y\le z\), that is \(I\) is an 
+            <em>upward directed set</em>. 
+            <br><br>
+
+            <b>Fact.</b> \(2^S\) has the same ideals as a poset and as a ring. 
+            <br><br>
+
+            We also have a dual notion: <br>
+            <b>Nomenclature.</b> Let \(P\) be a poset. A <em>filter</em> \(F\) of \(P\) is a non-empty subset satisfying: <br>
+            i. \(\forall y\in P\), \(x\in F\), \(x\le y \implies y\in F\), that is \(F\) is <em>closed upwards</em>. <br> 
+            ii. \(\forall x,y\in F\) \(\exists z\in F:\) \(z\le x\) and \(z\le y\), that is \(F\) is a 
+            <em>downward directed set</em>. 
+            <br><br>
+
+            <b>Nomenclature.</b> A <em>filter</em> on a set \(S\) is a filter of \(2^S\). Namely it is a family of 
+            subsets \(\mathscr{F}\subseteq 2^S\) satisfying: <br>
+            \(S\in\mathscr{F}\). <br>
+            \(\forall A,B\in\mathscr{F}\), \(A\cap B\in\mathscr{F}\). <br>
+            \(\forall A\in\mathscr{F},B\in 2^S\), \(A\subseteq B \implies B\in\mathscr{F}\). 
+            <br><br>
+
+            One may think of the sets in the filter \(\mathscr{F}\) as <em>sufficiently large</em>. 
+            <br><br>
+
+            <b>Examples.</b> The family of all cofinite sets in \(S\) is a filter. <br>
+            For fixed \(C\subseteq S\), the family of all subsets containing \(C\) is a filter. 
+            <br><br>
+
+            Clearly, a filter \(\mathscr{F}\) is proper iff \(\varnothing\not\in\mathscr{F}\). 
+            <br><br>
+
+            <b>Nomenclature.</b> An <em>ultrafilter</em> is a maximal proper filter. 
+            <br><br>
+
+            <b>Fact.</b> Any proper filter on \(S\) is contained in some ultrafilter. 
+            <br><br>
+
+            <b>Fact.</b> A proper filter \(\mathscr{F}\) on \(S\) is an ultrafilter iff it satisfies: 
+            \(\forall A\subseteq S\), precisely one of \(A,S\setminus A\) is in \(\mathscr{F}\). 
+            <br><br>
+
+            <b>Fact.</b> If \(S\) is infinite, then there exists an ultrafilter on \(S\) containing no finite subsets.
+            <br><br>
+
+            <b>Fact.</b> If \(\mathscr{F}\) is an ultrafilter on \(S\) and \(\bigsqcup_{i=1}^{n}A_i=S\) is a finite 
+            partition of \(S\), then precisely one of the parts \(A_i\) is in \(\mathscr{F}\). 
+            <br><br>
+
+            <b>Fact.</b> Let \(\mathscr{A}\subseteq 2^S\) be a family of subsets. Then the minimal filter containing 
+            \(\mathscr{A}\) is the family of all supersets of all finite intersections of sets in \(\mathscr{A}\). 
+            <br><br>
+
+            <b>Nomenclature.</b> Let \(\mathscr{F}\) be a filter on \(X\) and \(f:X\to Y\) a function. The 
+            <em>pushforward</em> of \(\mathscr{F}\) along \(f\) is 
+            \(f_*\mathscr{F}=\{B\subseteq Y: f^{-1}(B)\in\mathscr{F}\} \). 
+            <br><br>
+
+            <b>Fact.</b> The pushforward of a filter/proper filter/ultrafilter is a filter/proper filter/ultrafilter. 
+            <br><br>
+
+            Recall that for a topological space \(X\), we say that a sequence \(f:\mathbf{N}\to X\) converges to a 
+            point \(x\in X\) if for each neighbourhood \(U\) of \(x\) contains all but finitely many values of \(f\). 
+            This can be thought of as a special case of the following definition.
+            <br><br>
+
+            <b>Nomenclature.</b> Let \(\mathscr{F}\) be a filter on a topological space \(X\). We say that 
+            \(\mathscr{F}\) <em>converges</em> to a point \(x\in X\) and write \(\mathscr{F}\longrightarrow x\) if each 
+            neighbourhood \(U\) of \(x\) is in \(\mathscr{F}\).
+            <br><br>
+
+            <b>Fact.</b> For \(A\subseteq X\) and \(x\in X\) we have that \(x\in\overline{A}\) iff 
+            \(\mathscr{F}\longrightarrow x\) for some proper filter \(\mathscr{F}\) containing \(A\).
+            <br><br>
+
+            <b>Fact.</b> A function is continuous iff it preserves ultrafilter convergence.
+            <br><br>
+
+            <b>Fact.</b> A space \(X\) is compact iff each ultrafilter on \(X\) converges to at least one point.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            In the first direction, let \(\mathscr{F}\) be an ultrafilter on a compact space \(X\). Then 
+            \(\bigcap_{A\in\mathscr{F}} \overline{A}\) is non-empty, so fix \(x\) in it. Then each neighbourhood \(U\) 
+            of \(x\) intersects each \(A\in\mathscr{F}\), and so \(X\setminus U\not\in \mathscr{F}\) giving 
+            \(U\in \mathscr{F}\) and \(\mathscr{F}\longrightarrow x\). In the other direction, suppose that 
+            \((C_i)_{i\in I}\) is a collection of closed subsets of \(X\) having no empty finite intersection. We need 
+            to show that \(\bigcap_{i\in I}C_i\) is non-empty. Now, there is an ultrafilter \(\mathscr{F}\) containing 
+            all the \(C_i\). By assumption, \(\mathscr{F}\longrightarrow x\) for some \(x\in X\). Now for each 
+            neighbourhood \(U\) of \(x\) we have that 
+            \(U\in \mathscr{F}\implies U\not\subseteq X\setminus C_i\implies U \) intersects \(C_i\) so 
+            \(x\in\overline{C_i}=C_i\) for each \(i\) and \(\bigcap_{i\in I}C_i\) is non-empty, as we wanted.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \((X_i)_i\) be spaces, \(X=\prod_i X_i\) their product, \(x=(x_i)_{i} \in X\) a point, and 
+            \(\mathscr{F}\) a filter on \(X\). Then \(\mathscr{F}\longrightarrow x\) iff 
+            \((\pi_{i})_{*}\mathscr{F}\longrightarrow x_i\) for all \(i\).
+            <br><br>
+            
+            In particular, we have Tychonoff's theorem.
+
+        </article>
+
+
+        <article id="fourier">
+            <h2>The Fourier Transform</h2>
+            <b>Nomenclature.</b> The <em>Fourier transform</em> of \(f\in L^1(\mathbf{R}^d)\) is 
+            \( (\mathcal{F}f)(\xi) = \widehat{f}(\xi) = \int_{\mathbf{R}^d} f(x) e^{-2\pi i \xi \cdot x} \text{d}x \)
+            <br><br>
+
+            <b>Examples.</b> 
+            Rectangle: \(\mathcal{F}\left(1_{x\in[-1,1]}\right)(\xi) = \frac{\sin(2\pi\xi)}{\pi \xi}\) <br>
+            Triangle: \(\mathcal{F}\left((1-\lvert x\rvert)\cdot 1_{x\in[-1,1]}\right)(\xi) = \frac{1-\cos(2\pi\xi)}{2\pi^2 \xi^2}\) <br>
+            \(\widehat{e^{-\lvert x\rvert}} = \frac{2}{1+4\pi^2\xi^2}\) <br>
+            The Gaussian is its own Fourier transform: \(\widehat{e^{-\pi x^2}} = e^{-\pi \xi^2}\).
+            <br><br>
+
+            <b>Facts.</b> For each \(f\in L^1(\mathbf{R}^d)\), we have the following: <br>
+            i. \(\widehat{f}\in\mathscr{C}_0(\mathbf{R}^d)\) is a continuous function vanishing at infinity, 
+            and \(\lVert \widehat{f}\rVert_\infty \le \lVert f \rVert_1\). 
+            That is, \(\mathcal{F}:L^1\longrightarrow \mathscr{C}_0\) is a bounded linear operator. <br>
+            ii. \(\widehat{f}(0) = \int_{\mathbf{R}^d}f(x)\text{d}x\) <br>
+            iii. \(\mathcal{F}\left(f(x+c)\right)(\xi)=e^{2\pi i c\cdot \xi}\cdot\mathcal{F}\left(f\right)(\xi)\) <br>
+            iv. \(\mathcal{F}\left(e^{2\pi i x\cdot c}\cdot f(x)\right)(\xi)=\mathcal{F}\left(f\right)(\xi-c)\) <br>
+            v. \(\widehat{f(\gamma x)}(\xi) = \lvert \gamma \rvert^{-d} \widehat{f}\left(\frac{\xi}{\gamma}\right)\) <br>
+            vi. \(\mathcal{F}(\overline{f})(\xi) = \overline{(\mathcal{F}f)(-\xi)}\)
+            <br><br>
+
+            Deriving under the integral sign and integrating by parts, Leibniz would suggest \((\star)\):
+            $$ \partial^\alpha \left(\mathcal{F}(f)\right) = \mathcal{F}\left((-2\pi i x)^\alpha f\right) $$
+            $$ \mathcal{F}(\partial^\alpha f) = \left(2\pi i \xi \right)^\alpha \mathcal{F}(f) $$
+            for each multi-index \(\alpha\). <br>
+            Fubini would suggest \((\diamond)\):
+            $$ \int_{\mathbf{R}^d} \widehat{f}(\xi)g(\xi)\text{d}\xi = \int_{\mathbf{R}^d} f(x)\widehat{g}(x)\text{d}x $$
+            Of course, this only has meaning for a subclass of functions \(f,g\).
+            <br><br>
+
+
+
+            <b>Nomenclature.</b> The <em>Schwartz space</em> \(\mathcal{S}(\mathbf{R}^d)\) is the space of smooth 
+            functions \(f\in\mathscr{C}^{\infty}(\mathbf{R}^d)\) such that \(f\) and all its derivatives decay at 
+            \(\infty\) faster than any polynomial grows to \(\infty\), namely such that 
+            \(x^\alpha (\partial^\beta f)(x)\) is bounded for each pair of multi-indices \(\alpha,\beta\). 
+            <br><br>
+
+            <b>Examples.</b> We have \( p(x)e^{-\pi x^2}\in\mathcal{S}(\mathbf{R^d})\) for each polynomial \(p\). We 
+            also have \(\mathscr{C}^{\infty}_{c}(\mathbf{R}^d)\subset \mathcal{S}(\mathbf{R}^d)\).
+            <br><br>
+
+            <b>Fact.</b> Schwartz space is closed under addition, multiplication, taking derivatives, and 
+            multiplication by polynomials. It is contained in \(L^p\) for each \(p\in[1,\infty]\).
+            <br><br>
+
+            <b>Fact.</b> \((\star,\diamond)\) holds for all Schwartz functions \(f,g\).
+            <br><br>
+
+            <b>Nomenclature.</b> The <em>"inverse" Fourier transform</em> of \(g\in L^1(\mathbf{R}^d)\) is 
+            \((\mathcal{F}^{-1}g)(x)=(\mathcal{F}g)(-x)=\int _{\mathbf{R}^d} g(\xi)e^{2\pi i x\cdot \xi}\text{d}\xi\).
+            <br><br>
+
+            <b>Fact.</b> The Fourier transform is a linear automorphism of Schwartz space, whose inverse is the 
+            inverse Fourier transform. 
+            $$ f(x) = \int_{\mathbf{R}^d} \widehat{f}(\xi) e^{2\pi i x\cdot \xi}\text{d}\xi $$
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            That \(\mathcal{F}\) takes Schwartz space into itself follows by \((\star)\), as we have 
+            \( \lVert (2\pi i\xi)^\alpha\partial^{\beta} \widehat{f}(\xi) \rVert_{\infty} = \)
+            \( \lVert \mathcal{F}\left(\partial^{\alpha}((-2\pi ix)^\beta f(x)) \right)\rVert_{\infty} \le \)
+            \( \lVert \underset{\in \mathcal{S}}{\dots} \rVert_{1} \lt \infty \). 
+            Now let us fix \(x_0\) and perturb \(e^{2\pi i x_0\cdot \xi}\) as 
+            \(\phi_{\varepsilon}(\xi) = e^{2\pi i x_0\cdot \xi - \pi\varepsilon^2 \xi^2} \). We have 
+            \( \int_{\mathbf{R}^d} \widehat{f}(\xi)\phi_{\varepsilon}(\xi) \text{d}\xi = \)
+            \( \int_{\mathbf{R}^d} f(x)\widehat{\phi}_{\varepsilon}(x)\text{d}x = \)
+            \( \int_{\mathbf{R}^d} f(x) \varepsilon^{-d} e^{-\pi (x-x_0)^2/\varepsilon^2}\text{d}x = \)
+            \( (f*K_{\varepsilon})(x_0) \underset{\varepsilon\downarrow 0}{\longrightarrow} f(x_0) \)
+            where \(K_\varepsilon\) is the Gaussian heat kernel. We are done by the dominated convergence theorem.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> The Fourier transform, restricted to Schwartz space, extends to an isometric 
+            isomorphism of \(L^2\).
+
+        </article>
+
+
+        <article id="metric-spaces">
+            <h2>Metric Spaces - Fundamental Theorems</h2>
+
+            <b>Fact.</b> Let \(M\) be a complete metric space, and let 
+            \(C_{1}\supseteq C_{2}\supseteq C_{3}\supseteq\dots\) be a decreasing chain of non-empty closed 
+            subsets of \(M\) with 
+            \( \text{diam}(C_{n})\longrightarrow 0\). Then \(\bigcap_{n=1}^{\infty}C_{n}=\{x\}\) is a singleton.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Pick \(x_n\in C_n\) for each \(n\). Then \(x_n\) is Cauchy. [Indeed, for each given \(\varepsilon>0\), we 
+            fix \(N\) with \(\text{diam}(C_N)\lt \varepsilon\), and then 
+            \(n,m\ge N\implies x_n,x_m\in C_N\implies d(x_n,x_m)\le \text{diam}(C_N)\le \varepsilon\).] Since \(M\) is 
+            complete, there is some \(x\in M\) with \(x_n\longrightarrow x\). Ergo, for each \(\ell\), we have that 
+            \((x_n)_{n\ge \ell}\) converges to \(x\), and as \(C_\ell\) is closed we have \(x\in C_\ell\). Thus 
+            \(x\in\bigcap_{n=1}^\infty C_n\). On the other hand, if \(y\in \bigcap_{n=1}^\infty C_n \) then 
+            \(d(x,y)\le \text{diam}(C_n)\) for each \(n\), so that \( \text{diam}(C_{n})\longrightarrow 0\) implies 
+            that \(d(x,y)=0\), i.e \(x=y\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(T\) be a strict contraction of a complete metric space \(M\). Then \(T\) has a unique 
+            fixed point \(x^*\). Moreover, for each \(x\in M\) we have \(T^{n}x\longrightarrow x^*\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Fix \(q\in(0,1)\) where \(T\) is \(q\)-Lipschitz. So 
+            \(\sum_{n\ge 0} d(T^nx,T^{n+1}x)\le \sum_{n\ge 0} q^{n}d(x,Tx)=\frac{d(x,Tx)}{1-q}\lt \infty\), and thus 
+            \(T^n x\) is Cauchy and hence convergent to some \(y\in M\). Now \(T\) is continuous so 
+            \(T^nx\longrightarrow y\implies T^{n+1}x\longrightarrow Ty\), and by uniqueness of limits \(y=Ty\) is a 
+            fixed point. However, since \(T\) is a strict contraction, there can't be two distinct fixed points.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(M\) be a metric space. Then the following are equivalent: <br>
+            i. \(M\) is sequentially compact. <br>
+            ii. \(M\) is complete and totally bounded. <br>
+            iii. \(M\) is compact. <br>
+            iv. Any decreasing chain of non-empty closed sets has a non-empty intersection.
+            <br><br>
+
+            <details>
+            <summary><b>Proof sketch.</b></summary>
+            i \(\implies\) ii and iii \(\implies\) iv are simple. 
+            <br>
+            ii \(\implies\) iii: Suppose for the sake of contradiction that \(U_i\) is an open cover of \(M\) 
+            without a finite subcover. By total boundedness, we may pick \(x_1\in M\) with the property that no 
+            finite subfamily of \((U_i)_{i\in I}\) covers \(B_{2^{-1}}(x_1)\). Continuing, we may pick \(x_n\in M\) 
+            with \(B_{2^{-(n-1)}}(x_{n-1})\cap B_{2^{-n}}(x_n)\neq\varnothing\) and with the property that no 
+            finite subfamily of \((U_i)_{i\in I}\) covers \(B_{2^{-n}}(x_n)\). Thus 
+            \(d(x_{n-1},x_n)\le \frac{4}{2^n}\) so \(x_n\) is Cauchy and thus converges to some \(x^*\). Now we 
+            have \(B_{\varepsilon^*}(x^*)\subseteq U_{i^*}\), but for large enough \(n\) we have 
+            \(B_{2^{-n}}(x_{n})\subseteq B_{\varepsilon^*}(x^*)\), a contradiction. 
+            <br>
+            iv \(\implies\) i: Let \((x_n)_{n\ge 1}\) be given, and set \(C_n = \overline{\{x_{n},x_{n+1},\dots\}} \). 
+            Then \(C_n\) is a decreasing chain of non-empty closed sets, so has a non-empty intersection, and any 
+            \(x\in\bigcap_{n=1}^\infty C_n\) is a limit of some subsequence of \((x_n)\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(M\) be a compact metric space and \(\left(U_i\right)_{i\in I}\) an open cover of 
+            \(M\). Then \(\exists \delta \gt 0\) \(\forall x\in M\) \(\exists i: B_\delta(x)\subseteq U_i\).
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Suppose for the sake of contradiction there's no such \(\delta\). Then for each \(n\ge 1\) we may pick 
+            \(x_n\in M\) with \(B_{n^{-1}}(x_n)\) not contained in any \(U_i\). Let \(x_{n_k}\longrightarrow x^*\) 
+            be a convergent subsequence. Now let \(B_{\varepsilon^*}(x^*)\subseteq U_{i^*}\). Then for large enough 
+            \(k\) we have \(B_{n_k^{-1}}(x_{n_k})\subseteq B_{\varepsilon^*}(x^*)\), a contradiction.
+            <div class="qed">◼</div>
+            </details> <br>
+
+            
+            <b>Fact.</b> A continuous map between metric spaces with compact domain is uniformly continuous.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Let \(f:M\to M'\) be a continuous map between metric spaces and suppose \(M\) is compact. We wish to 
+            show that \(f\) is uniformly continuous. Indeed, suppose for the sake of contradiction that 
+            \(\varepsilon^* \gt 0\) is such that \(\forall n\ge 1\) there are \(x_n, y_n\in M\) with 
+            \(d(x_n,y_n)\le n^{-1}\) and \(d'(f(x_n), f(y_n))\ge \varepsilon^*\). Since \(M\) is compact, there is 
+            a convergent subsequence \(x_{n_k}\longrightarrow x^*\). Clearly then \(y_{n_k}\longrightarrow x^*\) 
+            and by continuity of \(f\) at \(x^*\) we have that \(d'(f(x_{n_k}), f(y_{n_k}))\longrightarrow 0\), a 
+            contradiction.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> In a complete metric space, a countable intersection of dense open sets is dense.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Let \(U_n\) be open dense subsets, and let \(W\) be non-empty open. We wish to show that \(W\) 
+            intersects \(\bigcap_{n=1}^\infty U_n\). We start by picking 
+            \(\overline{B_{r_1}(x_1)}\subseteq W\cap U_1\). Continuing, we pick 
+            \(\overline{B_{r_n}(x_n)}\subseteq B_{r_{n-1}}(x_{n-1})\cap U_n\). We may assume \(r_n\le n^{-1}\). Now 
+            we have \(x_n\in B_{r_m}(x_m)\) for \(n\ge m\) and so \(x_n\) is Cauchy and hence has a limit \(x\), 
+            and \(x\in \overline{B_{r_m}(x_m)}\) for each \(m\), and thus \(x\in W\cap \bigcap_{m=1}^\infty U_m\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+            <b>Fact.</b> Let \(S\) be a set and \(X\) be a topological space. Then the spaces of (real/complex/any 
+            Banach space valued) bounded functions \(\left(\mathscr{B}(S),\lVert\cdot\rVert_\infty\right)\) and 
+            continuous bounded functions \(\left(\mathscr{C}_b(X),\lVert\cdot\rVert_\infty\right)\) are Banach 
+            spaces. 
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Let \((f_n)\) be Cauchy in \(\left(\mathscr{B}(S),\lVert\cdot\rVert_\infty\right)\). Ergo, 
+            \(\forall \varepsilon \gt 0\) \(\exists N:\) \(\lVert f_n - f_m \rVert_\infty \le \varepsilon\) 
+            \(\forall n,m\ge N\), i.e. \(\lvert f_n(s) - f_m(s) \rvert \le \varepsilon\) \(\forall n,m\ge N, s\). 
+            Hence, for each \(s\in S\) we have that \(f_n(s)\) is a Cauchy sequence of scalars and so convergent to 
+            some scalar \(f(s)\). Since \((f_n)\) is Cauchy, it is bounded, so there is some bound 
+            \(\lVert f_n\rVert_\infty \le C\) \(\forall n\), i.e. \(\lvert f_n(s)\rvert \le C\) \(\forall n,s\). 
+            Taking \(n\longrightarrow\infty\), we have \(\lvert f(s) \rvert \le C\) \(\forall s\) so 
+            \(f\in\mathscr{B}(S)\) is bounded. Now, letting \(m\longrightarrow\infty\) we get 
+            \(\lvert f_n(s) - f(s) \rvert \le \varepsilon\) \(\forall n\ge N, s\), i.e. 
+            \(\lVert f_n - f \rVert_\infty \le \varepsilon\) \(\forall n\ge N\). Thus \(f_n\longrightarrow f\) 
+            uniformly, and \(\left(\mathscr{B}(S),\lVert\cdot\rVert_\infty\right)\) is complete. Finally, we have 
+            that \(\left(\mathscr{C}_b(X),\lVert\cdot\rVert_\infty\right)\) is complete because the uniform limit 
+            of continuous functions is continuous.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> A pointwise equicontinuous family of functions on a compact metric space is uniformly 
+            equicontinuous. 
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            Immediate by Lebesgue's number lemma.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> Let \(X\) be a compact metric space and \((f_n)\) a sequence of continuous functions 
+            \(X\longrightarrow\mathbf{R}^d\) which is pointwise bounded and equicontinuous. Then it has a uniformly 
+            convergent subsequence.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            For each \(\ell \ge 1\) let \(A_\ell\) be a finite set of points such that any \(x\in X\) has 
+            \(\text{dist}(x,A_\ell)\le \ell^{-1}\), and enumerate \(A=\bigcup_\ell A_\ell\) as 
+            \(\{a_1,a_2,a_3,\dots\}\). Now, let \(f_{n}^{0}=f_n\), and for \(k\ge 1\), using pointwise boundedness, 
+            let \(f_{n}^{k}\) be a subsequence of \(f_{n}^{k-1}\) for which \(f_{n}^{k}(a_k)\) converges. Then 
+            \(g_n=f_n^n\) is eventually a subsequence of each \(f_n^k\) and hence \(g_n(a_k)\) converges for each 
+            \(k\). Since \(X\) is compact, \(\mathscr{C}(X)=\mathscr{C}_b(X)\) is a Banach space under 
+            \(\lVert\cdot\rVert_\infty\), so it remains to show that \(g_n\) is uniformly Cauchy. Now, since \(X\) 
+            is compact, \((f_n)\) and hence \((g_n)\) is uniformly equicontinuous. So let \(\varepsilon\gt 0\) be 
+            given, and using uniform equicontinuity fix \(\delta\gt 0\) be such that \(\forall x_1,x_2\in X\) 
+            \(d(x_1,x_2)\le \delta\) \(\implies \lvert g_n(x_1)-g_n(x_2) \rvert \le \varepsilon\) \(\forall n\). 
+            Now fix \(\ell\) with \(\ell^{-1}\le \delta\), so for each \(x\in X\) we may pick \(a_x\in A_\ell\) 
+            with \(d(x,a_x)\le\delta\), and thus we have \(\lvert g_n(x) - g_m(x)\rvert \le\) 
+            \(\lvert g_n(x) - g_n(a_x)\rvert +\) \(\lvert g_n(a_x) - g_m(a_x) \rvert +\) 
+            \(\lvert g_m(a_x) - g_m(x)\rvert \). The first and third summands are \(\le \varepsilon\) for any 
+            \(n,m\), and since \(A_\ell\) is finite, we may find \(N\) for which the second summand is 
+            \(\le \varepsilon\) for any \(n,m\ge N\) and any \(x\). Thus 
+            \(\lVert g_n-g_m\rVert_\infty \le 3\varepsilon\) \(\forall n,m\ge N\), so \((g_n)\) is uniformly Cauchy 
+            as needed.
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            <b>Fact.</b> Let \(X\) be a compact topological space, and let \(f,f_n:X\to\mathbf{R}\) be a real 
+            valued continuous functions, and suppose that \(f_n(x)\downarrow f(x)\) for each \(x\in X\). Then 
+            \(f_n\longrightarrow f\) uniformly.
+            <br><br>
+
+            <details>
+            <summary><b>Proof.</b></summary>
+            We may assume \(f=0\). Given \(\varepsilon\gt 0\), we know that \(\forall x \exists N_x:\) 
+            \(f_n(x)\lt \varepsilon\) \(\forall n\ge N_x\). So letting \(W_n=\{f_n\lt \varepsilon\}\), we have that 
+            \(W_n\) is an open cover of \(X\). However \(X\) is compact, and by monotonicity we have 
+            \(W_1\subseteq W_2\subseteq W_3\subseteq \dots\), and so \(\exists N\) with \(W_N=X\), and so 
+            \(\lVert f_n\rVert_\infty \lt \varepsilon\) for all \(n\ge N\).
+            <div class="qed">◼</div>
+            </details> <br>
+
+
+            
+
+
+        </article>
 
     </div>
 

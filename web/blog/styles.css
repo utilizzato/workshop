@@ -76,7 +76,6 @@ footer {
 .qed {
     float: right;
     display: inline;
-    font-style: italic;
     font-size: 1.2rem;
     color: #555;
 }
