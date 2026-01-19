@@ -7,4 +7,4 @@ def weird_draw():
     return np.pow(x*y,z)
     
 arr = [weird_draw() for _ in range(100000)]
-print(np.quantile(arr, q=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]))
+print(np.quantile(arr, q=[i/10 for i in range(1,10)]))
