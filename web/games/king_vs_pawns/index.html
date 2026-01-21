@@ -1,0 +1,39 @@
+<head>
+	<title> king vs pawns </title>
+	<link rel="stylesheet" href="styles.css">
+
+</head>
+
+	<canvas id="kingEatsPawnsCanvas"  width="350" height="350" class="idk"></canvas>
+	<div id="output" style="text-align: center;"></div>
+
+	<span class="btn" onclick="SeeRules();">see game rules</span> <br>
+	<span class="btn" onclick="NextLevel()">next level</span> &nbsp&nbsp <br>
+	<span class="btn" onclick="ReverseLastMove()">undo last move</span> <br>
+	<span class="btn" onclick="Restart()">restart level</span> <br>
+	<span class="btn" onclick="ShowMoves()">see the moves you made</span> <br>
+	change level &nbsp&nbsp 
+	<input type="number" onchange="ChangeLevel()" id="KEP level" min="0" max="46" value="0"><br>
+
+	<span class="btn" onclick="toggle_show_and_hide('KEP colors')">change colors</span> <br>
+	<div id="KEP colors" style="display: none;">
+	&nbsp king &nbsp <input type="color" id="king" value="#6b8764" onchange="changeColor('king')"> <br>
+	&nbsp pawn &nbsp <input type="color" id="pawn" value="#056b9e" onchange="changeColor('pawn')"> <br>
+	&nbsp vacant &nbsp <input type="color" id="vacant" value="#808080" onchange="changeColor('vacant')"> <br>
+	&nbsp clicked &nbsp <input type="color" id="clicked" value="#ffd500" onchange="changeColor('clicked')"> <br>
+	</div>
+
+
+	
+<br>
+<div id="rules">
+	game rules : <br>
+	1. each game starts with one king and several pawns <br>
+	2. the goal of the game is to eliminate the pawns one by one so eventually only the king will remain <br>
+	3. the kings and pawns live on the 13 cells a 5x5 grid, those colored black on a chessboard coloring <br>
+	4. a move consists of making one piece (a pawn or the king) jump over and eat a pawn. <br>
+	[just like in checkers, except horizontal and vertical jumps are also allowed]
+	</div>
+
+	<script src="script.js"></script>
+	
